@@ -117,8 +117,9 @@ export function Logo({
           CHOURMAS
         </span>
         {hienSlogan && (
+          // Ẩn trên màn hình rất hẹp để dòng chữ không bị xuống hàng
           <span
-            className={`mt-1 text-[8.5px] font-medium tracking-[0.22em] ${
+            className={`mt-1 hidden whitespace-nowrap text-[8.5px] font-medium tracking-[0.22em] min-[400px]:block ${
               toi ? "text-dong-400" : "text-dong-600"
             }`}
           >
