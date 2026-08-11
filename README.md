@@ -1,36 +1,145 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Chourmas — Khuôn bánh trung thu hoa văn độc quyền
 
-## Getting Started
+Website bán hàng của Chourmas, đối tác phân phối chính thức các mẫu khuôn bánh
+trung thu độc quyền do Thạch Lan thiết kế.
 
-First, run the development server:
+**Địa chỉ:** https://chourmasviet.com · **Quản trị:** https://chourmasviet.com/admin
+
+---
+
+## Tài liệu
+
+| Bạn muốn | Đọc file |
+|---|---|
+| Dùng website hằng ngày: xử lý đơn, sửa giá, báo hết hàng | **[HUONG-DAN-VAN-HANH.md](HUONG-DAN-VAN-HANH.md)** |
+| Đưa website lên máy chủ Hostinger | **[DEPLOY-HOSTINGER.md](DEPLOY-HOSTINGER.md)** |
+| Xem còn thiếu nội dung gì | **[TODO-NOI-DUNG.md](TODO-NOI-DUNG.md)** |
+
+---
+
+## Tính năng
+
+**Phía khách hàng**
+- Song ngữ Việt – Anh (`/vi` và `/en`), tự chọn theo ngôn ngữ trình duyệt
+- Danh sách và trang chi tiết sản phẩm, nhiều cỡ giá cho mỗi mẫu
+- Giỏ hàng lưu trong trình duyệt, đồng bộ giữa nhiều tab
+- Đặt hàng COD, không yêu cầu chuyển khoản trước, không cần đăng ký tài khoản
+- Tối ưu SEO: dữ liệu có cấu trúc `Product`, thẻ `canonical`, `hreflang`, sitemap ảnh
+- Trang tĩnh dựng sẵn cho mọi sản phẩm nên mở rất nhanh
+
+**Phía quản trị** (`/admin`)
+- Đăng nhập bằng phiên có ký, hạn 7 ngày
+- Quản lý đơn hàng theo 5 trạng thái, có ghi chú nội bộ
+- Thêm, sửa, xoá sản phẩm; sửa giá và các cỡ ngay trên một màn hình
+- Công tắc nhanh: hiện trên web / còn hàng / nổi bật
+- Tải ảnh lên, tự động cắt vuông và nén WebP
+- Danh mục nhiều cấp, dựng sẵn cho việc bán thêm mặt hàng khác
+- Sửa thông tin liên hệ, đổi mật khẩu
+- Thông báo đơn mới qua Telegram
+
+---
+
+## Công nghệ
+
+| Thành phần | Lựa chọn |
+|---|---|
+| Framework | Next.js 16 (App Router, Turbopack) |
+| Ngôn ngữ | TypeScript |
+| Giao diện | Tailwind CSS v4 |
+| Cơ sở dữ liệu | SQLite qua Prisma 7 |
+| Xử lý ảnh | sharp |
+| Chữ | Playfair Display + Be Vietnam Pro |
+
+Toàn bộ tên hàm, biến và chú thích trong code viết bằng **tiếng Việt** để người
+tiếp quản dự án đọc được ngay.
+
+---
+
+## Chạy trên máy cá nhân
+
+```bash
+npm install
+```
+
+Tạo file `.env` từ mẫu:
+
+```bash
+cp .env.example .env
+```
+
+Sinh chuỗi bí mật cho phiên đăng nhập và dán vào `ADMIN_SESSION_SECRET`:
+
+```bash
+node -e "console.log(require('crypto').randomBytes(48).toString('base64url'))"
+```
+
+Tạo cơ sở dữ liệu và nạp 13 sản phẩm ban đầu:
+
+```bash
+npx prisma migrate deploy && npm run nap-du-lieu
+```
+
+Lệnh trên in ra mật khẩu quản trị — chép lại ngay, chỉ hiện một lần.
+
+Khởi động:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Mở http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Các lệnh có sẵn
 
-## Learn More
+| Lệnh | Việc |
+|---|---|
+| `npm run dev` | Chạy ở chế độ phát triển |
+| `npm run build` | Build bản chạy thật |
+| `npm start` | Chạy bản đã build |
+| `npm run anh` | Xử lý lại ảnh gốc từ thư mục `Ảnh sản phẩm` |
+| `npm run nap-du-lieu` | Nạp lại 13 sản phẩm gốc (ghi đè sửa đổi trong admin) |
+| `npm run doi-mat-khau` | Đặt lại mật khẩu quản trị khi quên |
+| `npm run db:studio` | Mở giao diện xem cơ sở dữ liệu |
+| `npm run lint` | Kiểm tra code |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Cấu trúc thư mục
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/
+│   ├── (site)/[lang]/        Website khách xem, song ngữ
+│   ├── (admin)/admin/        Trang quản trị, chỉ tiếng Việt
+│   └── actions/              Xử lý đặt hàng và các thao tác quản trị
+├── components/
+│   ├── site/                 Thành phần giao diện phía khách
+│   ├── admin/                Thành phần giao diện quản trị
+│   └── logo.tsx              Logo và biểu tượng mặt khuôn
+├── i18n/                     Bản dịch Việt và Anh
+├── lib/                      Kết nối dữ liệu, giỏ hàng, xác thực, định dạng
+├── noi-dung/                 Nội dung các trang chính sách
+└── proxy.ts                  Tự thêm mã ngôn ngữ vào đường dẫn
 
-## Deploy on Vercel
+prisma/
+├── schema.prisma             Cấu trúc cơ sở dữ liệu
+├── du-lieu-san-pham.ts       13 sản phẩm ban đầu
+└── seed.ts                   Script nạp dữ liệu
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+scripts/
+├── xu-ly-anh.mjs             Chuẩn hoá ảnh sản phẩm sang WebP vuông
+└── doi-mat-khau.ts           Đặt lại mật khẩu quản trị
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Hai điều quan trọng về bảo mật
+
+1. **`ADMIN_SESSION_SECRET` phải là chuỗi ngẫu nhiên dài.** Ai biết chuỗi này
+   đều tự tạo được vé đăng nhập vào trang quản trị. Không dùng lại chuỗi mẫu.
+
+2. **Giá tiền luôn được đọc lại từ cơ sở dữ liệu khi đặt hàng.** Hệ thống không
+   bao giờ tin giá do trình duyệt gửi lên, nên không ai sửa giá trong trình
+   duyệt rồi đặt hàng giá 0 đồng được.

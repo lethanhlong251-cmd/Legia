@@ -1,0 +1,124 @@
+{
+  "sen-tu-quy": [
+    {
+      "url": "/images/products/sen-tu-quy-1.webp",
+      "isMain": true
+    }
+  ],
+  "lx-002-4": [
+    {
+      "url": "/images/products/lx-002-4-1.webp",
+      "isMain": true
+    },
+    {
+      "url": "/images/products/lx-002-4-2.webp",
+      "isMain": false
+    },
+    {
+      "url": "/images/products/lx-002-4-3.webp",
+      "isMain": false
+    },
+    {
+      "url": "/images/products/lx-002-4-4.webp",
+      "isMain": false
+    },
+    {
+      "url": "/images/products/lx-002-4-5.webp",
+      "isMain": false
+    }
+  ],
+  "ca-doi-vuong": [
+    {
+      "url": "/images/products/ca-doi-vuong-1.webp",
+      "isMain": true
+    },
+    {
+      "url": "/images/products/ca-doi-vuong-2.webp",
+      "isMain": false
+    },
+    {
+      "url": "/images/products/ca-doi-vuong-3.webp",
+      "isMain": false
+    },
+    {
+      "url": "/images/products/ca-doi-vuong-4.webp",
+      "isMain": false
+    },
+    {
+      "url": "/images/products/ca-doi-vuong-5.webp",
+      "isMain": false
+    }
+  ],
+  "heo-cute": [
+    {
+      "url": "/images/products/heo-cute-1.webp",
+      "isMain": true
+    }
+  ],
+  "vuong-sen": [
+    {
+      "url": "/images/products/vuong-sen-1.webp",
+      "isMain": true
+    },
+    {
+      "url": "/images/products/vuong-sen-2.webp",
+      "isMain": false
+    },
+    {
+      "url": "/images/products/vuong-sen-3.webp",
+      "isMain": false
+    }
+  ],
+  "mau-don-sen-cuc": [
+    {
+      "url": "/images/products/mau-don-sen-cuc-1.webp",
+      "isMain": true
+    },
+    {
+      "url": "/images/products/mau-don-sen-cuc-2.webp",
+      "isMain": false
+    }
+  ],
+  "lx-007-4": [
+    {
+      "url": "/images/products/lx-007-4-1.webp",
+      "isMain": true
+    }
+  ],
+  "thach-lan": [
+    {
+      "url": "/images/products/thach-lan-1.webp",
+      "isMain": true
+    }
+  ],
+  "lx-009-5": [
+    {
+      "url": "/images/products/lx-009-5-1.webp",
+      "isMain": true
+    }
+  ],
+  "bo-than-tai": [
+    {
+      "url": "/images/products/bo-than-tai-1.webp",
+      "isMain": true
+    }
+  ],
+  "lx-011-7": [
+    {
+      "url": "/images/products/lx-011-7-1.webp",
+      "isMain": true
+    }
+  ],
+  "bo-ngu-hoa": [
+    {
+      "url": "/images/products/bo-ngu-hoa-1.webp",
+      "isMain": true
+    }
+  ],
+  "pho-viet-nam": [
+    {
+      "url": "/images/products/pho-viet-nam-1.webp",
+      "isMain": true
+    }
+  ]
+}

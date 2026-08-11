@@ -1,26 +1,226 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   CHOURMAS — HỆ THỐNG THIẾT KẾ
+   Muốn đổi màu toàn bộ website: sửa các giá trị trong khối
+   @theme bên dưới. Không cần sửa chỗ nào khác.
+   ============================================================ */
+
+@theme {
+  /* --- Đỏ son: màu chủ đạo, dùng cho nút bấm, tiêu đề, viền --- */
+  --color-son-50: #fdf4f3;
+  --color-son-100: #fbe6e4;
+  --color-son-200: #f6d0cd;
+  --color-son-300: #eeaeaa;
+  --color-son-400: #e17f79;
+  --color-son-500: #cf554e;
+  --color-son-600: #b93a34;
+  --color-son-700: #9e2b25; /* MÀU CHÍNH */
+  --color-son-800: #7a1f1b;
+  --color-son-900: #611c19;
+  --color-son-950: #350c0a;
+
+  /* --- Vàng đồng: màu nhấn, huy hiệu độc quyền, đường viền trang trí --- */
+  --color-dong-50: #fdfaf1;
+  --color-dong-100: #faf3dc;
+  --color-dong-200: #f4e5b6;
+  --color-dong-300: #ebd085;
+  --color-dong-400: #e0b85c;
+  --color-dong-500: #c8a24a; /* MÀU NHẤN */
+  --color-dong-600: #ad8438;
+  --color-dong-700: #8a6630;
+  --color-dong-800: #71522e;
+  --color-dong-900: #5f452a;
+  --color-dong-950: #362414;
+
+  /* --- Kem & mực: nền và chữ --- */
+  --color-kem-50: #fefdfb;
+  --color-kem-100: #faf6ef; /* NỀN CHÍNH */
+  --color-kem-200: #f4ede1;
+  --color-kem-300: #e9dccb;
+  --color-kem-400: #d8c5ac;
+  --color-kem-500: #c0a888;
+
+  --color-muc-400: #9c8b7e;
+  --color-muc-500: #7a6a5f;
+  --color-muc-600: #5a4c43;
+  --color-muc-700: #3f342d;
+  --color-muc-800: #2b211c; /* CHỮ CHÍNH */
+  --color-muc-900: #1a1310;
+
+  /* --- Chữ --- */
+  --font-display: var(--font-playfair), "Times New Roman", serif;
+  --font-sans: var(--font-be-vietnam), system-ui, sans-serif;
+
+  /* --- Bo góc --- */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  /* --- Đổ bóng ấm, hợp tông kem --- */
+  --shadow-nhe: 0 1px 2px rgba(43, 33, 28, 0.06);
+  --shadow-vua: 0 4px 16px -4px rgba(43, 33, 28, 0.12);
+  --shadow-manh: 0 12px 32px -8px rgba(43, 33, 28, 0.18);
+
+  /* --- Chuyển động --- */
+  --ease-muot: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ============================================================
+   NỀN TẢNG
+   ============================================================ */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-kem-100);
+    color: var(--color-muc-800);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--color-muc-900);
+  }
+
+  /* Bỏ nút tăng/giảm mặc định của ô nhập số */
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  ::selection {
+    background-color: var(--color-dong-200);
+    color: var(--color-muc-900);
+  }
+
+  /* Viền khi dùng bàn phím — cần cho người khiếm thị dùng phím Tab */
+  :focus-visible {
+    outline: 2px solid var(--color-son-700);
+    outline-offset: 2px;
+    border-radius: 2px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================================
+   HOA VĂN TRANG TRÍ
+   ============================================================ */
+
+@utility hoa-van-luoi {
+  /* Hoa văn ô vuông kiểu chấn song gỗ Việt, rất mờ, dùng làm nền */
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%239e2b25' stroke-width='1' stroke-opacity='0.07'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z'/%3E%3Cpath d='M30 12 L48 30 L30 48 L12 30 Z'/%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+@utility duong-vien-dong {
+  /* Đường kẻ mảnh màu vàng đồng, mờ dần hai đầu */
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    var(--color-dong-500),
+    transparent
+  );
+}
+
+/* ============================================================
+   THÀNH PHẦN DÙNG LẠI NHIỀU NƠI
+   ============================================================ */
+
+@layer components {
+  /* Nút chính — đỏ son */
+  .nut-chinh {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-son-700 px-6 py-3
+           text-sm font-semibold tracking-wide text-kem-50 transition-all duration-200
+           hover:bg-son-800 active:scale-[0.98]
+           disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100;
+  }
+
+  /* Nút phụ — viền đỏ, nền trong */
+  .nut-phu {
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-son-700/30
+           bg-transparent px-6 py-3 text-sm font-semibold tracking-wide text-son-700
+           transition-all duration-200 hover:border-son-700 hover:bg-son-50
+           active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  /* Nút vàng đồng — dùng cho hành động nổi bật trên nền tối */
+  .nut-dong {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-dong-500 px-6 py-3
+           text-sm font-semibold tracking-wide text-muc-900 transition-all duration-200
+           hover:bg-dong-400 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  /* Ô nhập liệu */
+  .o-nhap {
+    @apply w-full rounded-md border border-kem-400 bg-white px-4 py-3 text-[15px] text-muc-800
+           placeholder:text-muc-400 transition-colors
+           focus:border-son-700 focus:outline-none focus:ring-1 focus:ring-son-700;
+  }
+
+  /* Nhãn của ô nhập liệu */
+  .nhan-o-nhap {
+    @apply mb-1.5 block text-sm font-medium text-muc-700;
+  }
+
+  /* Thẻ (card) nền trắng */
+  .the {
+    @apply rounded-lg border border-kem-300 bg-white shadow-nhe;
+  }
+
+  /* Huy hiệu nhỏ */
+  .huy-hieu {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-semibold
+           uppercase tracking-wider;
+  }
+
+  /* Chiều rộng nội dung tối đa, có lề hai bên trên điện thoại */
+  .khung {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* ============================================================
+   CHUYỂN ĐỘNG
+   ============================================================ */
+
+@keyframes hien-len {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility hien-len {
+  animation: hien-len 0.5s var(--ease-muot) both;
+}
+
+/* Tôn trọng cài đặt "giảm chuyển động" của người dùng */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
