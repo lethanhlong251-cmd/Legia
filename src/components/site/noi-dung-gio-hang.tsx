@@ -40,7 +40,7 @@ export function NoiDungGioHang({
   }
 
   return (
-    <div className="mt-8 grid gap-8 lg:grid-cols-[1.6fr_1fr] lg:gap-12">
+    <div className="mt-8 grid gap-8 pb-24 lg:grid-cols-[1.6fr_1fr] lg:gap-12 lg:pb-0">
       {/* Danh sách món hàng */}
       <ul className="divide-y divide-kem-300 overflow-hidden rounded-lg border border-kem-300 bg-white">
         {danhSach.map((mon) => (
@@ -156,6 +156,22 @@ export function NoiDungGioHang({
           className="mt-4 block text-center text-sm font-medium text-son-700 underline-offset-4 hover:underline"
         >
           ← {t.gioHang.tiepTucMua}
+        </Link>
+      </div>
+
+      {/* Thanh tổng tiền cố định dưới cùng — chỉ hiện trên điện thoại */}
+      <div className="fixed inset-x-0 bottom-0 z-30 flex items-center gap-4 border-t border-kem-300 bg-white/95 px-4 py-3 backdrop-blur pb-[calc(0.75rem+env(safe-area-inset-bottom))] lg:hidden">
+        <div className="min-w-0 flex-1">
+          <p className="text-xs text-muc-500">{t.gioHang.tongCong}</p>
+          <p className="truncate font-display text-lg font-semibold text-son-700">
+            {dinhDangTien(tongTien, ngonNgu)}
+          </p>
+        </div>
+        <Link
+          href={`/${ngonNgu}/thanh-toan`}
+          className="nut-chinh h-12 shrink-0 px-6"
+        >
+          {t.gioHang.datHang}
         </Link>
       </div>
     </div>

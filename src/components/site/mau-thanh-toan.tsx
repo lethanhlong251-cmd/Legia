@@ -80,7 +80,10 @@ export function MauThanhToan({
   }
 
   return (
-    <form action={guiDon} className="mt-8 grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
+    <form
+      action={guiDon}
+      className="mt-8 grid gap-8 pb-24 lg:grid-cols-[1.4fr_1fr] lg:gap-12 lg:pb-0"
+    >
       {/* ---------- Thông tin nhận hàng ---------- */}
       <div>
         <div className="rounded-lg border border-kem-300 bg-white p-6">
@@ -259,7 +262,11 @@ export function MauThanhToan({
             </div>
           )}
 
-          <button type="submit" disabled={dangGui} className="nut-chinh mt-5 w-full">
+          <button
+            type="submit"
+            disabled={dangGui}
+            className="nut-chinh mt-5 hidden w-full lg:inline-flex"
+          >
             {dangGui ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
@@ -280,6 +287,27 @@ export function MauThanhToan({
             </a>
           </p>
         </div>
+      </div>
+
+      {/* Thanh xác nhận đặt hàng cố định dưới cùng — chỉ hiện trên điện thoại */}
+      <div className="fixed inset-x-0 bottom-0 z-30 flex items-center gap-4 border-t border-kem-300 bg-white/95 px-4 py-3 backdrop-blur pb-[calc(0.75rem+env(safe-area-inset-bottom))] lg:hidden">
+        <div className="min-w-0 flex-1">
+          <p className="text-xs text-muc-500">{t.gioHang.tongCong}</p>
+          <p className="truncate font-display text-lg font-semibold text-son-700">
+            {dinhDangTien(tongTien, ngonNgu)}
+          </p>
+        </div>
+        <button
+          type="submit"
+          disabled={dangGui}
+          className="nut-chinh h-12 shrink-0 px-6"
+        >
+          {dangGui ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            t.datHang.xacNhanDatHang
+          )}
+        </button>
       </div>
     </form>
   );

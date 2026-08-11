@@ -247,8 +247,8 @@ export function ChonMua({
           </div>
         </div>
 
-        {/* Nút mua */}
-        <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+        {/* Nút mua — chỉ hiện trên máy tính, điện thoại dùng thanh cố định dưới cùng */}
+        <div className="mt-7 hidden gap-3 lg:flex">
           <button
             type="button"
             onClick={themVaoGio}
@@ -284,6 +284,33 @@ export function ChonMua({
               : "This design is out of stock. Message us on Zalo and we will let you know when it returns."}
           </p>
         )}
+      </div>
+
+      {/* Thanh mua cố định dưới cùng — chỉ hiện trên điện thoại, luôn trong tầm tay dù cuộn tới đâu */}
+      <div className="fixed inset-x-0 bottom-0 z-30 flex items-center gap-3 border-t border-kem-300 bg-white/95 px-4 py-3 backdrop-blur pb-[calc(0.75rem+env(safe-area-inset-bottom))] lg:hidden">
+        <button
+          type="button"
+          onClick={themVaoGio}
+          disabled={!conBan}
+          aria-label={t.sanPham.themVaoGio}
+          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-son-700/30 text-son-700 transition-colors hover:bg-son-50 disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          {vuaThem ? (
+            <Check className="h-5 w-5" />
+          ) : (
+            <ShoppingBag className="h-5 w-5" />
+          )}
+        </button>
+        <button
+          type="button"
+          onClick={muaNgay}
+          disabled={!conBan}
+          className="nut-chinh h-12 flex-1"
+        >
+          {conBan
+            ? `${t.sanPham.muaNgay} · ${dinhDangTien(dangChon?.price ?? 0, ngonNgu)}`
+            : t.sanPham.hetHang}
+        </button>
       </div>
     </div>
   );
