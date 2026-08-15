@@ -3,11 +3,12 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Check, Minus, Plus, ShoppingBag } from "lucide-react";
+import { Check, Minus, Plus, ShoppingBag, ZoomIn } from "lucide-react";
 
 import { dinhDangTien, phanTramGiam } from "@/lib/dinh-dang";
 import { useGioHang } from "@/lib/gio-hang";
 import { theoNgonNgu, type BanDich, type NgonNgu } from "@/i18n";
+import { XemAnhLon } from "./xem-anh-lon";
 
 type BienThe = {
   id: string;
@@ -59,6 +60,7 @@ export function ChonMua({
   const [soLuong, setSoLuong] = useState(1);
   const [anhDangXem, setAnhDangXem] = useState(0);
   const [vuaThem, setVuaThem] = useState(false);
+  const [moKhungXemAnh, setMoKhungXemAnh] = useState(false);
 
   const dangChon = bienThe.find((b) => b.id === idDangChon) ?? bienTheDauTien;
   const tenSanPham = theoNgonNgu(ngonNgu, sanPham.nameVi, sanPham.nameEn);
@@ -97,7 +99,16 @@ export function ChonMua({
     <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
       {/* ---------- Bộ xem ảnh ---------- */}
       <div>
-        <div className="relative aspect-square overflow-hidden rounded-lg border border-kem-300 bg-kem-200">
+        <button
+          type="button"
+          onClick={() => anh.length > 0 && setMoKhungXemAnh(true)}
+          aria-label={
+            ngonNgu === "vi"
+              ? "Phóng to ảnh để xem rõ hoa văn"
+              : "Enlarge the photo to see the pattern"
+          }
+          className="group relative block aspect-square w-full cursor-zoom-in overflow-hidden rounded-lg border border-kem-300 bg-kem-200"
+        >
           {anh[anhDangXem] ? (
             <Image
               src={anh[anhDangXem].url}
@@ -120,7 +131,13 @@ export function ChonMua({
               −{giamGia}%
             </span>
           )}
-        </div>
+
+          {/* Gợi ý bấm để xem rõ hoa văn */}
+          <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-muc-900/70 px-3 py-1.5 text-[11px] font-medium text-kem-100 backdrop-blur-sm transition-opacity group-hover:bg-muc-900/85">
+            <ZoomIn className="h-3.5 w-3.5" />
+            {ngonNgu === "vi" ? "Xem rõ hoa văn" : "See the detail"}
+          </span>
+        </button>
 
         {anh.length > 1 && (
           <div className="mt-3 grid grid-cols-5 gap-2.5">
@@ -312,6 +329,19 @@ export function ChonMua({
             : t.sanPham.hetHang}
         </button>
       </div>
+
+      {/* Khung xem ảnh phóng to */}
+      {moKhungXemAnh && anh.length > 0 && (
+        <XemAnhLon
+          viTriBanDau={anhDangXem}
+          khiDong={() => setMoKhungXemAnh(false)}
+          danhSachAnh={anh.map((a) => ({
+            id: a.id,
+            url: a.url,
+            alt: theoNgonNgu(ngonNgu, a.altVi, a.altEn) || tenSanPham,
+          }))}
+        />
+      )}
     </div>
   );
 }

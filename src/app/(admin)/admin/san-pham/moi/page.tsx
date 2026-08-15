@@ -57,6 +57,7 @@ export default async function TrangThemSanPham() {
               noteVi: "",
               noteEn: "",
               inStock: true,
+              isAccessory: false,
             },
           ],
           images: [],

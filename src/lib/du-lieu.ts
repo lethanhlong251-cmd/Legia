@@ -12,16 +12,84 @@ const KEM_ANH_VA_GIA = {
   category: true,
 } as const;
 
-/** Danh sách sản phẩm đang bán, có thể lọc theo danh mục */
-export async function laySanPham(slugDanhMuc?: string) {
-  return prisma.product.findMany({
+export type BoLoc = {
+  /** Số mặt hoa văn: 2, 3, 4, 5, 7… */
+  soMat?: number;
+  /** Cỡ khuôn theo gam: "75g", "150g", "200g", "300g" */
+  co?: string;
+  /** Cách sắp xếp */
+  sapXep?: "mac-dinh" | "gia-tang" | "gia-giam";
+  slugDanhMuc?: string;
+};
+
+/** Danh sách sản phẩm đang bán, kèm lọc và sắp xếp */
+export async function laySanPham(loc: BoLoc = {}) {
+  const danhSach = await prisma.product.findMany({
     where: {
       isActive: true,
-      ...(slugDanhMuc ? { category: { slug: slugDanhMuc } } : {}),
+      ...(loc.slugDanhMuc ? { category: { slug: loc.slugDanhMuc } } : {}),
+      ...(loc.soMat ? { faceCount: loc.soMat } : {}),
+      // Cỡ nằm trong tên biến thể, ví dụ "Cỡ 150g" hay "Bộ đầy đủ — cỡ 300g"
+      ...(loc.co ? { variants: { some: { labelVi: { contains: loc.co } } } } : {}),
     },
     include: KEM_ANH_VA_GIA,
     orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
   });
+
+  if (loc.sapXep === "gia-tang" || loc.sapXep === "gia-giam") {
+    // Sắp xếp theo đúng giá đang hiện trên thẻ sản phẩm, tức là bỏ qua
+    // các món mua lẻ, để thứ tự khớp với con số khách nhìn thấy
+    const giaThapNhat = (sp: (typeof danhSach)[number]) => {
+      const chinh = sp.variants.filter((b) => !b.isAccessory);
+      const dung = chinh.length > 0 ? chinh : sp.variants;
+      return dung.length ? Math.min(...dung.map((b) => b.price)) : 0;
+    };
+
+    danhSach.sort((a, b) =>
+      loc.sapXep === "gia-tang"
+        ? giaThapNhat(a) - giaThapNhat(b)
+        : giaThapNhat(b) - giaThapNhat(a),
+    );
+  }
+
+  return danhSach;
+}
+
+/**
+ * Đếm số sản phẩm cho từng lựa chọn lọc, để hiện số ngay trên nút.
+ * Khách thấy trước là bấm vào có bao nhiêu mẫu, đỡ bấm vào chỗ trống.
+ */
+export async function demTheoBoLoc() {
+  const tatCa = await prisma.product.findMany({
+    where: { isActive: true },
+    select: { faceCount: true, variants: { select: { labelVi: true } } },
+  });
+
+  const theoSoMat = new Map<number, number>();
+  const theoCo = new Map<string, number>();
+  const CAC_CO = ["75g", "150g", "200g", "300g"];
+
+  for (const sp of tatCa) {
+    if (sp.faceCount) {
+      theoSoMat.set(sp.faceCount, (theoSoMat.get(sp.faceCount) ?? 0) + 1);
+    }
+    for (const co of CAC_CO) {
+      if (sp.variants.some((b) => b.labelVi.includes(co))) {
+        theoCo.set(co, (theoCo.get(co) ?? 0) + 1);
+      }
+    }
+  }
+
+  return {
+    tong: tatCa.length,
+    soMat: [...theoSoMat.entries()]
+      .sort((a, b) => a[0] - b[0])
+      .map(([giaTri, soLuong]) => ({ giaTri, soLuong })),
+    co: CAC_CO.filter((c) => theoCo.has(c)).map((giaTri) => ({
+      giaTri,
+      soLuong: theoCo.get(giaTri)!,
+    })),
+  };
 }
 
 /** Sản phẩm nổi bật hiện ở trang chủ */

@@ -16,6 +16,8 @@ export type BienTheNap = {
   comparePrice?: number;
   noteVi?: string;
   noteEn?: string;
+  /** Món mua lẻ, không lấy làm giá hiển thị ngoài trang danh sách */
+  laMonMuaLe?: boolean;
 };
 
 export type SanPhamNap = {
@@ -247,6 +249,7 @@ ${MO_TA_CHUNG_EN}`,
         labelVi: "Mua lẻ mặt cúc",
         labelEn: "Chrysanthemum face only",
         price: 73000,
+        laMonMuaLe: true,
         noteVi: "Chỉ dành cho khách đã có bộ 2 mặt",
         noteEn: "Only for customers who own the two-face set",
       },
@@ -416,6 +419,7 @@ ${MO_TA_CHUNG_EN}`,
         labelVi: "Chỉ 5 mặt rời",
         labelEn: "Five faces only",
         price: 300000,
+        laMonMuaLe: true,
         noteVi: "Không kèm thùng khuôn — dành cho khách đã có sẵn thân khuôn",
         noteEn: "No body included — for customers who already own one",
       },

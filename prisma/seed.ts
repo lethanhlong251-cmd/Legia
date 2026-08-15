@@ -197,6 +197,7 @@ async function main() {
           comparePrice: bt.comparePrice ?? null,
           noteVi: bt.noteVi ?? null,
           noteEn: bt.noteEn ?? null,
+          isAccessory: bt.laMonMuaLe ?? false,
           sortOrder: v + 1,
         },
       });

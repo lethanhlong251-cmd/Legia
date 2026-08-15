@@ -27,10 +27,15 @@ export function TheSanPham({
   const anhChinh =
     sanPham.images.find((a) => a.isMain) ?? sanPham.images[0] ?? null;
 
-  // Giá thấp nhất trong các cỡ, để hiện "Từ 159.000₫"
-  const giaCacCo = sanPham.variants.map((b) => b.price);
+  // Giá thấp nhất để hiện "Từ 159.000₫".
+  // Bỏ qua các món mua lẻ như "mặt cúc lẻ", vì lấy giá đó làm giá hiển thị
+  // sẽ khiến khách tưởng cả bộ khuôn chỉ có ngần ấy tiền.
+  const cacCoBanChinh = sanPham.variants.filter((b) => !b.isAccessory);
+  const cacCo = cacCoBanChinh.length > 0 ? cacCoBanChinh : sanPham.variants;
+
+  const giaCacCo = cacCo.map((b) => b.price);
   const giaThapNhat = giaCacCo.length ? Math.min(...giaCacCo) : 0;
-  const bienTheReNhat = sanPham.variants.find((b) => b.price === giaThapNhat);
+  const bienTheReNhat = cacCo.find((b) => b.price === giaThapNhat);
   const giamGia = phanTramGiam(giaThapNhat, bienTheReNhat?.comparePrice);
   const nhieuCo = new Set(giaCacCo).size > 1;
 

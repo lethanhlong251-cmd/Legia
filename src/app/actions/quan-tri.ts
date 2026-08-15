@@ -152,6 +152,7 @@ const BienTheGui = z.object({
   noteVi: z.string().trim().optional(),
   noteEn: z.string().trim().optional(),
   inStock: z.boolean().default(true),
+  isAccessory: z.boolean().default(false),
 });
 
 const SanPhamGui = z.object({
@@ -258,6 +259,7 @@ export async function luuSanPham(duLieuTho: unknown): Promise<KetQua> {
       noteVi: b.noteVi || null,
       noteEn: b.noteEn || null,
       inStock: b.inStock,
+      isAccessory: b.isAccessory,
       sortOrder: i + 1,
     };
     if (b.id) {

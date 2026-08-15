@@ -31,6 +31,7 @@ type BienThe = {
   noteVi: string;
   noteEn: string;
   inStock: boolean;
+  isAccessory: boolean;
 };
 
 type Anh = { id: string; url: string; isMain: boolean };
@@ -70,6 +71,7 @@ const BIEN_THE_TRONG: BienThe = {
   noteVi: "",
   noteEn: "",
   inStock: true,
+  isAccessory: false,
 };
 
 export function SoanSanPham({
@@ -363,18 +365,35 @@ export function SoanSanPham({
                   </div>
                 </div>
 
-                <div className="mt-4 flex items-center justify-between gap-3">
-                  <label className="flex items-center gap-2 text-sm text-muc-700">
-                    <input
-                      type="checkbox"
-                      checked={b.inStock}
-                      onChange={(e) =>
-                        suaBienThe(i, "inStock", e.target.checked)
-                      }
-                      className="h-4 w-4 accent-emerald-600"
-                    />
-                    Cỡ này còn hàng
-                  </label>
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+                  <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+                    <label className="flex items-center gap-2 text-sm text-muc-700">
+                      <input
+                        type="checkbox"
+                        checked={b.inStock}
+                        onChange={(e) =>
+                          suaBienThe(i, "inStock", e.target.checked)
+                        }
+                        className="h-4 w-4 accent-emerald-600"
+                      />
+                      Cỡ này còn hàng
+                    </label>
+
+                    <label
+                      className="flex items-center gap-2 text-sm text-muc-700"
+                      title="Ví dụ: mặt khuôn bán lẻ, phụ kiện rời. Bật lên thì giá này không bị lấy làm giá hiển thị ngoài trang danh sách."
+                    >
+                      <input
+                        type="checkbox"
+                        checked={b.isAccessory}
+                        onChange={(e) =>
+                          suaBienThe(i, "isAccessory", e.target.checked)
+                        }
+                        className="h-4 w-4 accent-dong-600"
+                      />
+                      Là món mua lẻ
+                    </label>
+                  </div>
 
                   {sp.variants.length > 1 && (
                     <button

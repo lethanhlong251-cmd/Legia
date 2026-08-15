@@ -119,6 +119,11 @@ model ProductVariant {
   sku     String? // Mã riêng của biến thể, không bắt buộc
   inStock Boolean @default(true)
 
+  // Món mua lẻ / phụ kiện, ví dụ "Mua lẻ mặt cúc" hay "Chỉ 5 mặt rời".
+  // Bật lên thì giá này KHÔNG được lấy làm giá hiển thị ngoài trang danh sách,
+  // tránh việc khách thấy giá rẻ rồi bấm vào mới biết đó là món bán lẻ.
+  isAccessory Boolean @default(false)
+
   // Ghi chú nhỏ hiện cạnh biến thể, vd: "Đựng vừa khay 9"
   noteVi String?
   noteEn String?

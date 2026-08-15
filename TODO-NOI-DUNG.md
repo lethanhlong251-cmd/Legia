@@ -48,6 +48,11 @@ Hiện đang hiển thị tên tạm theo mã sản phẩm. Tên có ý nghĩa b
 Đây là câu khách hỏi **nhiều nhất**. Điền vào sẽ giảm hẳn tin nhắn hỏi lặp và
 tăng tỷ lệ chốt đơn.
 
+> **Kèm theo:** hiện mới có 1 trên 13 sản phẩm ghi khuôn đó vừa **khay số mấy**
+> (khay 9, khay 10). Khi bạn điền đủ thông tin khay cho các mẫu còn lại, tôi sẽ
+> thêm được bộ lọc *"khuôn vừa khay số 9"* — đây là câu khách hay hỏi thứ hai.
+> Hiện tại trang danh sách mới lọc được theo số mặt và theo cỡ gam.
+
 **Sửa ở:** trang quản trị → **Sản phẩm** → từng sản phẩm → ô **Hoa văn từng mặt**
 
 Mỗi dòng một mặt, ví dụ:
