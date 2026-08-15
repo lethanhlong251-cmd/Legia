@@ -2,123 +2,147 @@
   "sen-tu-quy": [
     {
       "url": "/images/products/sen-tu-quy-1.webp",
-      "isMain": true
+      "isMain": true,
+      "anhMo": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAADQAQCdASoMAAsAAwBSJbACdAD5bcm+QAD+6jjk179ma8/PVnHL+hhySD2IY3Sr9QAR2YP5kSOi2l78M+gKRm+DmLyIWzUhgDWxdTZ2LqPdfp5vc51mcoeC28vgAXmCzwAAAA=="
     }
   ],
   "lx-002-4": [
     {
       "url": "/images/products/lx-002-4-1.webp",
-      "isMain": true
+      "isMain": true,
+      "anhMo": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADwAQCdASoMAAkAAwBSJbACdADbpYR2YkAA/u9m/JE2ARpbEMvXG3oF/7KOgXNyQHg4CxrJ5lCZcAXADxphl3MkE9Z7+ItMOt04t3xdW8ecWcixQAA="
     },
     {
       "url": "/images/products/lx-002-4-2.webp",
-      "isMain": false
+      "isMain": false,
+      "anhMo": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAACwAQCdASoJAAwAAwBSJbACdADyciQAAP7SfSHfefARBhebfSXk+0wJEFnzWOrPH7FdSSd4X63WIrDTfvAeNTDP2D4o0+SNSf9/Hx6acXsAAA=="
     },
     {
       "url": "/images/products/lx-002-4-3.webp",
-      "isMain": false
+      "isMain": false,
+      "anhMo": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoJAAwAAwBSJbACdAEUoJJ8wAAA/sEiXGabtMPJ7xUD+ZtnQv7e0sxW2getY5CHozKIhb5fTLT7NQVbyIUch2H6TdlvTfihn7xewAAA"
     },
     {
       "url": "/images/products/lx-002-4-4.webp",
-      "isMain": false
+      "isMain": false,
+      "anhMo": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAAAQAgCdASoJAAwAAwBSJbACdLoAArl944P8AP7eEgbazSpPJqw4A0HvwxuC9qi58oOK8FGg27sVRrd2iDMcBdyZhWL/Xh/Kxb86rxbFIKgAAA=="
     },
     {
       "url": "/images/products/lx-002-4-5.webp",
-      "isMain": false
+      "isMain": false,
+      "anhMo": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAwAgCdASoJAAwAAwBSJagCdLoAAwdEKVv/YAD+0oCtCV6cDIProHiPlY/CAnFRjDYz0MmaHWY/KN6yKljgXCxyIoh3/NjnrgvwUSX8WGhDAAAA"
     }
   ],
   "ca-doi-vuong": [
     {
       "url": "/images/products/ca-doi-vuong-1.webp",
-      "isMain": true
+      "isMain": true,
+      "anhMo": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAACQAgCdASoJAAwAAwBSJZgCdH8IwBb/4HzjUEuZEAD+lQhRB+kKAVhj4BrAMTE/QpSU+Kk87AdgmtpUz/AGA3IuS0fAwrJFQdLjrl1jrwZAAAAA"
     },
     {
       "url": "/images/products/ca-doi-vuong-2.webp",
-      "isMain": false
+      "isMain": false,
+      "anhMo": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAACQAQCdASoJAAwAAwBSJQBOgCKc6YAA/jEjD7mkc7F9Kq7v2bp74wn/km2DVE0Z0WL6G4AH0WlgWDdl+BAAAA=="
     },
     {
       "url": "/images/products/ca-doi-vuong-3.webp",
-      "isMain": false
+      "isMain": false,
+      "anhMo": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAQCdASoJAAwAAwBSJQBOgBusXd+IiEAA/nTzgGI/lV33cXQ5BwmT+GLRhLttn+VW4MeNb0AIRKlI1553L/wBUAA="
     },
     {
       "url": "/images/products/ca-doi-vuong-4.webp",
-      "isMain": false
+      "isMain": false,
+      "anhMo": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAABwAQCdASoJAAwAAwBSJQBOgBsPaAD+M2EzCW0epUW4Q78G2hPMuS8Ya8vyTbPW5OsRKQUUH0J24z6r2BoKSUAA"
     },
     {
       "url": "/images/products/ca-doi-vuong-5.webp",
-      "isMain": false
+      "isMain": false,
+      "anhMo": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADQAQCdASoJAAwAAwBSJYgCdADb6reEwAD+M3VXakMhtsEEttUg78ctAcnMPZXv07LnVGpqNIzC8EQQGsAAAA=="
     }
   ],
   "heo-cute": [
     {
       "url": "/images/products/heo-cute-1.webp",
-      "isMain": true
+      "isMain": true,
+      "anhMo": "data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAACQAgCdASoLAAwAAwBSJbACdLoAEJMZX4FC7kmw4AD+5soay07A27IgCKf0LE3Wf5J6gRiGtXgCAqeuj5iggv8rj2yByAUnyvBnK6+grdogyhTSCFv5x5n6/UXBxTKAi+gl8ffF4FBXX5KdLgAAAA=="
     }
   ],
   "vuong-sen": [
     {
       "url": "/images/products/vuong-sen-1.webp",
-      "isMain": true
+      "isMain": true,
+      "anhMo": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADwAQCdASoMAAwAAwBSJbACdADZrA5bGcAA/u+GEXr8iNWnJXA2zU1/yxUdfprka6L5PNk4s5u2gx+C4UaXeJopG3ppeYrzRh1anLPP5Q+Ap5q/fkaKvVMTgAA="
     },
     {
       "url": "/images/products/vuong-sen-2.webp",
-      "isMain": false
+      "isMain": false,
+      "anhMo": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAADwAQCdASoMAAwAAwBSJbACdAD0t4BuGwAA/opwCtcpnIoUgtNppmnCPcFRAfVqGk+H5hw6bsmpxbTUHvsIVvhqWgHlVQHbvPg/UT2yZ/pg1o9V0s5s3ea8OtuJZEMAAAA="
     },
     {
       "url": "/images/products/vuong-sen-3.webp",
-      "isMain": false
+      "isMain": false,
+      "anhMo": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoMAAsAAwBSJbACdAEKk3mixAAA/tdu75RB9JJia8DyNzTcANW4aqa/dTlm5vf+KxwrUGisNvkLC2f/k5hH+b8vp0r8u/RfLouA7EAA"
     }
   ],
   "mau-don-sen-cuc": [
     {
       "url": "/images/products/mau-don-sen-cuc-1.webp",
-      "isMain": true
+      "isMain": true,
+      "anhMo": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADwAQCdASoJAAwAAwBSJbACdAD0pp2XqwAA/qjnEFNk8jSutEub/RquUUzWZNaQOljJQMJqSpEBLO6mbGhZVLwXr1p5fE5QNwP6HYfbgAA="
     },
     {
       "url": "/images/products/mau-don-sen-cuc-2.webp",
-      "isMain": false
+      "isMain": false,
+      "anhMo": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAADwAQCdASoMAAoAAwBSJbACdADZtWvomgAA4BrFByoDkWol7DRvhc7tB19ngWnz+KQ8YA91qwMW4MQkyR3gVNxPGWsHpWM8TkkQUYDgfe17Bi1iDYCs0pR/HyDnUnaaYAAAAA=="
     }
   ],
   "lx-007-4": [
     {
       "url": "/images/products/lx-007-4-1.webp",
-      "isMain": true
+      "isMain": true,
+      "anhMo": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAwAgCdASoMAAwAAwBSJbACdLoAAwkSjRywAAD+B4agDSRm20Nm7rFqjpMCOFSK7TMEM33jHBJ3LM1sGAzj9TACGUV8Md/PRn5dsFgzkwk59HnEfcQBkDshgo/XbtUsnfwFcL+V96gAAA=="
     }
   ],
   "thach-lan": [
     {
       "url": "/images/products/thach-lan-1.webp",
-      "isMain": true
+      "isMain": true,
+      "anhMo": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADQAQCdASoJAAwAAwBSJbACdADZKRiQAAD+tAtD2FYyVxBc441veKTx4w/EKw+en3QdZ1lkXcGAa+sNPgbRVl79xvU1KG+3b3Yvk/Z+U9L7kXAAAAA="
     }
   ],
   "lx-009-5": [
     {
       "url": "/images/products/lx-009-5-1.webp",
-      "isMain": true
+      "isMain": true,
+      "anhMo": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAABwAgCdASoJAAwAAwBSJbACdLoAyv8DHInUoxAAAPzf3FAIDiZF2KNE7H9HwvEs+rEG2EodYbWK9qNVUvqJfLD59hdtFo/1ssw3O0iqX1Fnx8jX9x2YAAAA"
     }
   ],
   "bo-than-tai": [
     {
       "url": "/images/products/bo-than-tai-1.webp",
-      "isMain": true
+      "isMain": true,
+      "anhMo": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAQAgCdASoMAAwAAwBSJbACdAYtBWT33FCAAMtAHVkTgS1x99d/gCZ8YxtMRDMiWQCl48FQa2L1pl7tfHJEhRhJJuCuwfGeERTjOE/jAOmhef5zEW5vazKDcwJoTLaZ/gAAAA=="
     }
   ],
   "lx-011-7": [
     {
       "url": "/images/products/lx-011-7-1.webp",
-      "isMain": true
+      "isMain": true,
+      "anhMo": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAACwAQCdASoMAAkAAwBSJZACdADYC1QAAP3vpEG4Bm0jzJHffe4rvje52tDT6sCYhFa80OOKZf+U823H/6n0/XsDIXOA8GHgUDNH9mAAAAA="
     }
   ],
   "bo-ngu-hoa": [
     {
       "url": "/images/products/bo-ngu-hoa-1.webp",
-      "isMain": true
+      "isMain": true,
+      "anhMo": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQAgCdASoMAAoAAwBSJbACdLoAAyJPMjAAAP5Yf4ZSC4Q+hb4ovsmbVb0Fwdy2jyuZC9t+Lr/qYK1ifj1W3LyRuM3gJDuD38j3sJrTbh0IqK927M2w+AAA"
     }
   ],
   "pho-viet-nam": [
     {
       "url": "/images/products/pho-viet-nam-1.webp",
-      "isMain": true
+      "isMain": true,
+      "anhMo": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAQAgCdASoMAAkAAwBSJaACdADdrgMrwgAAAP7YGtg+uin6tpqZ2xiDZqxUcehNLIt5ysJZGUwYovunyHvILKcO69aWixV1+fKklxIAAAA="
     }
   ]
 }

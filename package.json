@@ -7,7 +7,7 @@
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint",
-    "anh": "node scripts/xu-ly-anh.mjs",
+    "anh": "tsx scripts/xu-ly-anh.ts",
     "nap-du-lieu": "tsx prisma/seed.ts",
     "doi-mat-khau": "tsx scripts/doi-mat-khau.ts",
     "db:migrate": "prisma migrate deploy",

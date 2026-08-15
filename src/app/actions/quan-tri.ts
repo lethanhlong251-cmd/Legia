@@ -12,6 +12,7 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { taoSlug } from "@/lib/dinh-dang";
 import { batBuocDangNhap, taoPhienDangNhap, xoaPhienDangNhap } from "@/lib/xac-thuc";
+import { taoAnhMo } from "@/lib/anh-mo";
 import type { OrderStatus } from "@/generated/prisma/enums";
 
 /**
@@ -362,11 +363,15 @@ export async function taiAnhLen(formData: FormData): Promise<KetQua> {
     const tenFile = `${sanPham.slug}-${randomUUID().slice(0, 8)}.webp`;
     await writeFile(path.join(thuMuc, tenFile), ketQua);
 
+    // Bản xem trước tí hon để khách không phải nhìn ô trống lúc ảnh đang tải
+    const anhMo = await taoAnhMo(ketQua);
+
     soThuTu++;
     await prisma.productImage.create({
       data: {
         productId: sanPham.id,
         url: `/uploads/${tenFile}`,
+        blurData: anhMo,
         altVi: `${sanPham.nameVi} — ảnh ${soThuTu}`,
         altEn: `${sanPham.nameEn} — photo ${soThuTu}`,
         isMain: sanPham.images.length === 0 && soThuTu === 1,

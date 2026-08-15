@@ -27,6 +27,7 @@ type Anh = {
   altVi: string | null;
   altEn: string | null;
   isMain: boolean;
+  blurData: string | null;
 };
 
 /**
@@ -122,6 +123,12 @@ export function ChonMua({
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 560px"
+              {...(anh[anhDangXem].blurData
+                ? {
+                    placeholder: "blur" as const,
+                    blurDataURL: anh[anhDangXem].blurData,
+                  }
+                : {})}
               className="object-cover"
             />
           ) : null}

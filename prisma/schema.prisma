@@ -148,6 +148,11 @@ model ProductImage {
   altEn  String?
   isMain Boolean @default(false)
 
+  // Bản xem trước tí hon (khoảng 12 pixel) nhúng thẳng vào trang.
+  // Khách thấy ngay một mảng màu mờ đúng tông rồi ảnh thật hiện đè lên,
+  // thay vì nhìn ô trống trong lúc chờ. Rất đáng giá với khách dùng 3G.
+  blurData String?
+
   sortOrder Int @default(0)
 
   @@index([productId, sortOrder])

@@ -11,6 +11,7 @@
  */
 
 import sharp from "sharp";
+import { taoAnhMo } from "../src/lib/anh-mo.js";
 import { mkdir, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -29,7 +30,7 @@ const CHAT_LUONG = 82; // 1-100, càng cao càng nét và càng nặng
  * Muốn thêm ảnh cho sản phẩm nào: bỏ file vào "Ảnh sản phẩm",
  * thêm tên file vào mảng tương ứng bên dưới, rồi chạy lại `npm run anh`.
  */
-export const BAN_DO_ANH = {
+export const BAN_DO_ANH: Record<string, string[]> = {
   "sen-tu-quy": ["LX 001:4.jpg"],
   "lx-002-4": [
     "LX 002:4.jpg",
@@ -60,9 +61,10 @@ export const BAN_DO_ANH = {
 /** Ảnh chưa xác định thuộc sản phẩm nào — xuất vào thư mục riêng để dùng sau */
 const ANH_CHUA_PHAN_LOAI = "chua-phan-loai";
 
-async function taoAnhVuong(duongDanGoc, duongDanDich) {
+async function taoAnhVuong(duongDanGoc: string, duongDanDich: string) {
   const anh = sharp(duongDanGoc, { failOn: "none" });
   const { width, height } = await anh.metadata();
+  const anhMo = await taoAnhMo(duongDanGoc);
 
   // Ảnh đã vuông sẵn -> chỉ resize, không cần đệm nền
   const tiLe = width / height;
@@ -73,7 +75,7 @@ async function taoAnhVuong(duongDanGoc, duongDanDich) {
       .resize(KICH_THUOC, KICH_THUOC, { fit: "cover" })
       .webp({ quality: CHAT_LUONG })
       .toFile(duongDanDich);
-    return { width, height, daVuong: true };
+    return { width, height, daVuong: true, anhMo };
   }
 
   // Nền: chính ảnh đó phủ kín khung vuông rồi làm mờ mạnh
@@ -93,7 +95,7 @@ async function taoAnhVuong(duongDanGoc, duongDanDich) {
     .webp({ quality: CHAT_LUONG })
     .toFile(duongDanDich);
 
-  return { width, height, daVuong: false };
+  return { width, height, daVuong: false, anhMo };
 }
 
 async function main() {
@@ -109,7 +111,10 @@ async function main() {
   const traTenFile = new Map(tatCaFile.map((f) => [f.normalize("NFC"), f]));
 
   const daDung = new Set();
-  const ketQua = {};
+  const ketQua: Record<
+    string,
+    { url: string; isMain: boolean; anhMo: string }[]
+  > = {};
 
   for (const [slug, danhSachFile] of Object.entries(BAN_DO_ANH)) {
     ketQua[slug] = [];
@@ -130,7 +135,11 @@ async function main() {
       const duongDanDich = path.join(THU_MUC_DICH, tenDich);
       const info = await taoAnhVuong(duongDanGoc, duongDanDich);
 
-      ketQua[slug].push({ url: `/images/products/${tenDich}`, isMain: i === 0 });
+      ketQua[slug].push({
+        url: `/images/products/${tenDich}`,
+        isMain: i === 0,
+        anhMo: info.anhMo,
+      });
       console.log(
         `  ✓ ${tenDich}  ←  ${tenFile}  (${info.width}×${info.height}${info.daVuong ? "" : " → đệm nền mờ"})`,
       );

@@ -139,7 +139,10 @@ async function main() {
   console.log(`  ✓ ${banDoDanhMuc.size} danh mục`);
 
   // ---------- 2. Ảnh đã xử lý ----------
-  let banDoAnh: Record<string, { url: string; isMain: boolean }[]> = {};
+  let banDoAnh: Record<
+    string,
+    { url: string; isMain: boolean; anhMo?: string }[]
+  > = {};
   try {
     banDoAnh = JSON.parse(
       await readFile(path.join(__dirname, "../scripts/anh-da-xu-ly.json"), "utf8"),
@@ -212,6 +215,7 @@ async function main() {
         data: {
           productId: sanPham.id,
           url: anh[a].url,
+          blurData: anh[a].anhMo ?? null,
           altVi: `${sp.nameVi} — ảnh ${a + 1}`,
           altEn: `${sp.nameEn} — photo ${a + 1}`,
           isMain: anh[a].isMain,
