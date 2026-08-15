@@ -53,9 +53,21 @@ export async function generateMetadata({
     description: moTa,
     alternates: { canonical: `/${lang}/san-pham/${slug}` },
     openGraph: {
+      type: "website",
+      siteName: "Chourmas",
       title: ten,
       description: moTa,
-      images: anh ? [{ url: anh.url, width: 1400, height: 1400 }] : undefined,
+      // Chia sẻ trang sản phẩm thì hiện đúng ảnh mẫu khuôn đó.
+      // Không có ảnh thì dùng ảnh chung của shop để không bị trống trơn.
+      images: anh
+        ? [{ url: anh.url, width: 1400, height: 1400, alt: ten }]
+        : [{ url: "/anh-chia-se.jpg", width: 1200, height: 630, alt: ten }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: ten,
+      description: moTa,
+      images: [anh?.url ?? "/anh-chia-se.jpg"],
     },
   };
 }

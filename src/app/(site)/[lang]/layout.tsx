@@ -70,6 +70,23 @@ export async function generateMetadata({
       siteName: t.chung.tenShop,
       title: tieuDe,
       description: moTa,
+      // Ảnh hiện ra khi dán link vào Messenger, Zalo, Facebook
+      images: [
+        {
+          url: "/anh-chia-se.jpg",
+          width: 1200,
+          height: 630,
+          alt: laViet
+            ? "Khuôn bánh trung thu Chourmas — Độc quyền hoa văn Việt"
+            : "Chourmas Mooncake Molds — Exclusive Vietnamese patterns",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: tieuDe,
+      description: moTa,
+      images: ["/anh-chia-se.jpg"],
     },
     robots: { index: true, follow: true },
   };

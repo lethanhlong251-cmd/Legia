@@ -101,8 +101,13 @@ node -e "console.log(require('crypto').randomBytes(48).toString('base64url'))"
 
 Copy kết quả và dán vào file. Lưu file: bấm `Ctrl+O`, `Enter`, rồi `Ctrl+X`.
 
-> **Cảnh báo:** Đừng để trống `ADMIN_SESSION_SECRET` và đừng dùng chuỗi mẫu
+> **Cảnh báo 1:** Đừng để trống `ADMIN_SESSION_SECRET` và đừng dùng chuỗi mẫu
 > trong `.env.example`. Ai biết chuỗi này đều đăng nhập được vào trang quản trị.
+
+> **Cảnh báo 2:** `NEXT_PUBLIC_SITE_URL` phải là địa chỉ thật
+> `https://chourmasviet.com`. Nếu để `localhost` thì khi dán link website vào
+> Messenger hay Zalo sẽ **không hiện ảnh preview**, vì Facebook đi tìm ảnh ở
+> địa chỉ localhost của chính nó và không thấy gì.
 
 ---
 

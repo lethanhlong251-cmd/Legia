@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Dựng ảnh chia sẻ Chourmas</title>
+<style>
+  /* Font lấy ngay từ website, không phụ thuộc mạng ngoài */
+  @font-face { font-family:"Playfair Display"; font-weight:600; font-style:normal;
+               src:url("/fonts/playfair-600.ttf") format("truetype"); font-display:block; }
+  @font-face { font-family:"Be Vietnam Pro"; font-weight:500; font-style:normal;
+               src:url("/fonts/bevietnam-500.ttf") format("truetype"); font-display:block; }
+  @font-face { font-family:"Be Vietnam Pro"; font-weight:600; font-style:normal;
+               src:url("/fonts/bevietnam-600.ttf") format("truetype"); font-display:block; }
+</style>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#333; }
+
+  /* Khung đúng bằng kích thước ảnh chia sẻ chuẩn của Facebook, Zalo, Messenger */
+  .khung {
+    width: 1200px; height: 630px;
+    display: grid; grid-template-columns: 700px 500px;
+    overflow: hidden; background:#9E2B25;
+    font-family: "Be Vietnam Pro", system-ui, sans-serif;
+  }
+
+  .anh { position:relative; }
+  .anh img { width:100%; height:100%; object-fit:cover; display:block; }
+  /* Làm tối nhẹ mép phải để đường giao với nền đỏ không bị gắt */
+  .anh::after {
+    content:""; position:absolute; inset:0;
+    background: linear-gradient(to right, transparent 78%, rgba(53,12,10,.28));
+  }
+
+  .bang {
+    position:relative;
+    display:flex; flex-direction:column; justify-content:center;
+    padding: 0 52px;
+    background:#9E2B25;
+    border-left: 3px solid #C8A24A;
+  }
+  /* Hoa văn chấn song mờ trên nền đỏ */
+  .bang::before {
+    content:""; position:absolute; inset:0; opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23FAF6EF' stroke-width='1' stroke-opacity='0.09'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z'/%3E%3Cpath d='M30 12 L48 30 L30 48 L12 30 Z'/%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  .noi-dung { position:relative; }
+
+  .bieu-tuong { width:74px; height:74px; display:block; }
+
+  .ten {
+    margin-top: 22px;
+    font-family:"Playfair Display", serif; font-weight:600;
+    font-size: 62px; line-height:1; letter-spacing:.11em;
+    color:#FAF6EF;
+  }
+  .slogan {
+    margin-top: 14px;
+    font-size: 14px; font-weight:600; letter-spacing:.26em;
+    color:#E3C87F;
+  }
+
+  .gach { margin: 28px 0; height:1px; width:120px;
+          background:linear-gradient(to right,#C8A24A,rgba(200,162,74,0)); }
+
+  .mo-ta {
+    font-family:"Playfair Display", serif;
+    font-size: 27px; line-height:1.32; color:#FAF6EF;
+  }
+
+  .cam-ket { margin-top: 26px; display:flex; flex-direction:column; gap:11px; }
+  .y { display:flex; align-items:center; gap:11px;
+       font-size:16px; font-weight:500; color:#F6D0CD; }
+  .cham { width:7px; height:7px; border-radius:50%; background:#C8A24A; flex:none; }
+</style>
+</head>
+<body>
+<div class="khung">
+  <div class="anh">
+    <img src="/images/thuong-hieu/banh-viet-nam-ngang.jpg" alt="">
+  </div>
+
+  <div class="bang">
+    <div class="noi-dung">
+      <!-- Biểu tượng mặt khuôn 8 cánh lồng hoa sen -->
+      <svg class="bieu-tuong" viewBox="-50 -50 100 100" fill="none">
+        <path d="M 16.84 -40.65 A 19 19 0 0 1 40.65 -16.84 A 19 19 0 0 1 40.65 16.84 A 19 19 0 0 1 16.84 40.65 A 19 19 0 0 1 -16.84 40.65 A 19 19 0 0 1 -40.65 16.84 A 19 19 0 0 1 -40.65 -16.84 A 19 19 0 0 1 -16.84 -40.65 A 19 19 0 0 1 16.84 -40.65 Z" stroke="#FAF6EF" stroke-width="3.2" stroke-linejoin="round"/>
+        <g fill="#C8A24A">
+          <circle cx="0" cy="-37" r="1.7"/><circle cx="18.5" cy="-32.04" r="1.7"/><circle cx="32.04" cy="-18.5" r="1.7"/><circle cx="37" cy="0" r="1.7"/><circle cx="32.04" cy="18.5" r="1.7"/><circle cx="18.5" cy="32.04" r="1.7"/><circle cx="0" cy="37" r="1.7"/><circle cx="-18.5" cy="32.04" r="1.7"/><circle cx="-32.04" cy="18.5" r="1.7"/><circle cx="-37" cy="0" r="1.7"/><circle cx="-32.04" cy="-18.5" r="1.7"/><circle cx="-18.5" cy="-32.04" r="1.7"/>
+        </g>
+        <path d="M 11.48 -27.72 A 13 13 0 0 1 27.72 -11.48 A 13 13 0 0 1 27.72 11.48 A 13 13 0 0 1 11.48 27.72 A 13 13 0 0 1 -11.48 27.72 A 13 13 0 0 1 -27.72 11.48 A 13 13 0 0 1 -27.72 -11.48 A 13 13 0 0 1 -11.48 -27.72 A 13 13 0 0 1 11.48 -27.72 Z" stroke="#FAF6EF" stroke-width="2" stroke-linejoin="round"/>
+        <g fill="#C8A24A">
+          <path d="M 0 0 C -7 -6, -6.5 -14, 0 -19 C 6.5 -14, 7 -6, 0 0 Z"/>
+          <path d="M 0 0 C -7 -6, -6.5 -14, 0 -19 C 6.5 -14, 7 -6, 0 0 Z" transform="rotate(60)" fill-opacity=".6"/>
+          <path d="M 0 0 C -7 -6, -6.5 -14, 0 -19 C 6.5 -14, 7 -6, 0 0 Z" transform="rotate(120)"/>
+          <path d="M 0 0 C -7 -6, -6.5 -14, 0 -19 C 6.5 -14, 7 -6, 0 0 Z" transform="rotate(180)" fill-opacity=".6"/>
+          <path d="M 0 0 C -7 -6, -6.5 -14, 0 -19 C 6.5 -14, 7 -6, 0 0 Z" transform="rotate(240)"/>
+          <path d="M 0 0 C -7 -6, -6.5 -14, 0 -19 C 6.5 -14, 7 -6, 0 0 Z" transform="rotate(300)" fill-opacity=".6"/>
+        </g>
+        <circle cx="0" cy="0" r="4.2" fill="#FAF6EF"/>
+        <circle cx="0" cy="0" r="1.8" fill="#9E2B25"/>
+      </svg>
+
+      <div class="ten">CHOURMAS</div>
+      <div class="slogan">ĐỘC QUYỀN HOA VĂN VIỆT</div>
+
+      <div class="gach"></div>
+
+      <div class="mo-ta">Khuôn bánh trung thu<br>hoa văn độc quyền</div>
+
+      <div class="cam-ket">
+        <div class="y"><span class="cham"></span>Miễn phí vận chuyển toàn quốc</div>
+        <div class="y"><span class="cham"></span>Nhận hàng, kiểm tra rồi mới trả tiền</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
