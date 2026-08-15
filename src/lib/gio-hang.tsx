@@ -86,6 +86,41 @@ function dangKyNghe(goi: () => void) {
 const layAnhChup = () => anhChup;
 const layAnhChupTrenMayChu = () => GIO_TRONG;
 
+// ---------------------------------------------------------------
+// Trạng thái đóng mở của ngăn giỏ hàng trượt bên phải
+// ---------------------------------------------------------------
+
+let dangMoNgan = false;
+const nguoiNgheNgan = new Set<() => void>();
+
+function baoNgan() {
+  for (const goi of nguoiNgheNgan) goi();
+}
+
+export function moNganGio() {
+  dangMoNgan = true;
+  baoNgan();
+}
+
+export function dongNganGio() {
+  dangMoNgan = false;
+  baoNgan();
+}
+
+function dangKyNgheNgan(goi: () => void) {
+  nguoiNgheNgan.add(goi);
+  return () => nguoiNgheNgan.delete(goi);
+}
+
+/** Ngăn giỏ hàng có đang mở hay không */
+export function useNganGioDangMo() {
+  return useSyncExternalStore(
+    dangKyNgheNgan,
+    () => dangMoNgan,
+    () => false, // Máy chủ luôn dựng ở trạng thái đóng
+  );
+}
+
 // Máy chủ chưa đọc được localStorage, nên lần dựng đầu tiên luôn coi là
 // "chưa nạp xong". Nhờ vậy giao diện không bị nhấp nháy khi tải trang.
 const layTrangThaiNap = () => true;
@@ -108,7 +143,12 @@ export function useGioHang() {
   );
 
   const them = useCallback(
-    (mon: Omit<MonHang, "quantity">, soLuong = 1) => {
+    (
+      mon: Omit<MonHang, "quantity">,
+      soLuong = 1,
+      /** Đặt false khi bấm "Mua ngay", vì lúc đó chuyển thẳng sang thanh toán */
+      moNgan = true,
+    ) => {
       const daCo = anhChup.find((m) => m.variantId === mon.variantId);
       dat(
         daCo
@@ -119,6 +159,7 @@ export function useGioHang() {
             )
           : [...anhChup, { ...mon, quantity: soLuong }],
       );
+      if (moNgan) moNganGio();
     },
     [],
   );

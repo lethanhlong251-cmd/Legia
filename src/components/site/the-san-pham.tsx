@@ -4,6 +4,7 @@ import Link from "next/link";
 import { dinhDangTien, phanTramGiam } from "@/lib/dinh-dang";
 import { theoNgonNgu, type BanDich, type NgonNgu } from "@/i18n";
 import type { SanPhamTrongDanhSach } from "@/lib/du-lieu";
+import { NutThemNhanh } from "./nut-them-nhanh";
 
 export function TheSanPham({
   sanPham,
@@ -39,11 +40,13 @@ export function TheSanPham({
   const giamGia = phanTramGiam(giaThapNhat, bienTheReNhat?.comparePrice);
   const nhieuCo = new Set(giaCacCo).size > 1;
 
+  const duongDan = `/${ngonNgu}/san-pham/${sanPham.slug}`;
+
   return (
-    <Link
-      href={`/${ngonNgu}/san-pham/${sanPham.slug}`}
-      className="group flex flex-col overflow-hidden rounded-lg border border-kem-300 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-dong-300 hover:shadow-vua"
-    >
+    // Thẻ là một khối bình thường, KHÔNG phải thẻ liên kết, vì bên trong có
+    // nút bấm. Đặt nút trong thẻ liên kết là sai chuẩn HTML và trình đọc
+    // màn hình sẽ đọc sai.
+    <div className="group relative flex flex-col overflow-hidden rounded-lg border border-kem-300 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-dong-300 hover:shadow-vua">
       <div className="relative aspect-square overflow-hidden bg-kem-200">
         {anhChinh ? (
           <Image
@@ -95,7 +98,10 @@ export function TheSanPham({
         )}
 
         <h3 className="mt-1.5 font-display text-[17px] leading-snug text-muc-900 transition-colors group-hover:text-son-700">
-          {ten}
+          {/* Liên kết phủ toàn thẻ, trừ những chỗ bấm được nằm cao hơn */}
+          <Link href={duongDan} className="before:absolute before:inset-0">
+            {ten}
+          </Link>
         </h3>
 
         {moTaNgan && (
@@ -117,7 +123,31 @@ export function TheSanPham({
             </span>
           ) : null}
         </div>
+
+        {/* Nút thêm nhanh — nằm cao hơn liên kết phủ thẻ để bấm được */}
+        <div className="relative z-10 mt-3.5">
+          <NutThemNhanh
+            ngonNgu={ngonNgu}
+            t={t}
+            sanPham={{
+              slug: sanPham.slug,
+              sku: sanPham.sku,
+              nameVi: sanPham.nameVi,
+              nameEn: sanPham.nameEn,
+              inStock: sanPham.inStock,
+              anhChinh: anhChinh?.url ?? "",
+            }}
+            bienThe={sanPham.variants.map((b) => ({
+              id: b.id,
+              labelVi: b.labelVi,
+              labelEn: b.labelEn,
+              price: b.price,
+              inStock: b.inStock,
+              isAccessory: b.isAccessory,
+            }))}
+          />
+        </div>
       </div>
-    </Link>
+    </div>
   );
 }

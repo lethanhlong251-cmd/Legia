@@ -92,7 +92,8 @@ export function ChonMua({
   function muaNgay() {
     const mon = taoMonHang();
     if (!mon) return;
-    them(mon, soLuong);
+    // Không bật ngăn giỏ hàng vì đang chuyển thẳng sang trang thanh toán
+    them(mon, soLuong, false);
     router.push(`/${ngonNgu}/thanh-toan`);
   }
 
