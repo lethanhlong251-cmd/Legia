@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Be_Vietnam_Pro } from "next/font/google";
 import { notFound } from "next/navigation";
 import "@/app/globals.css";
@@ -90,8 +90,22 @@ export async function generateMetadata({
       images: ["/anh-chia-se.jpg"],
     },
     robots: { index: true, follow: true },
+    manifest: "/manifest.webmanifest",
+    // Màu thanh trạng thái điện thoại, cho khớp với dải đỏ trên đầu trang
+    appleWebApp: {
+      capable: true,
+      title: "Chourmas",
+      statusBarStyle: "black-translucent",
+    },
   };
 }
+
+/** Màu thanh địa chỉ trên trình duyệt điện thoại */
+export const viewport: Viewport = {
+  themeColor: "#9E2B25",
+  width: "device-width",
+  initialScale: 1,
+};
 
 export default async function BoCucTrangChinh({
   children,

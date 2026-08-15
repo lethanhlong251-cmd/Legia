@@ -354,3 +354,11 @@ Gói KVM 1 có 4GB RAM, thừa sức cho website này.
   GitHub — nên bắt buộc phải sao lưu theo mục 8.
 - **File `.env` không bao giờ được đưa lên GitHub.** Nó đã nằm trong
   `.gitignore`.
+- **Ảnh được nén tự động sang AVIF** (nhẹ hơn WebP khoảng 45%). Việc này dựa
+  vào việc máy chủ đọc được tiêu đề `Accept` của trình duyệt. Nginx trong
+  hướng dẫn này chuyển tiếp tiêu đề đó sẵn nên không phải làm gì thêm.
+
+  > Nếu sau này bạn đặt thêm Cloudflare hay một dịch vụ tăng tốc nào khác ở
+  > phía trước, phải bật cho nó **chuyển tiếp tiêu đề `Accept`**. Quên bước
+  > này thì mọi khách đều nhận ảnh nặng hơn, website không lỗi nhưng chậm đi
+  > thấy rõ.
