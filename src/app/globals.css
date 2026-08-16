@@ -213,6 +213,36 @@
   animation: hien-len 0.5s var(--ease-muot) both;
 }
 
+/**
+ * Hiện dần khi cuộn tới.
+ *
+ * NGUYÊN TẮC: nội dung LUÔN nhìn thấy được, trừ khi chắc chắn có JavaScript
+ * đang chạy để hiện nó ra. Vì vậy trạng thái ẩn chỉ áp dụng khi thẻ <html>
+ * có lớp `js-cuon` — lớp này do một đoạn mã nhỏ thêm vào ngay đầu trang.
+ *
+ * Nhờ vậy:
+ *  - JavaScript hỏng hoặc bị tắt  → không có lớp js-cuon → nội dung hiện bình thường
+ *  - Máy bật "giảm chuyển động"   → không ẩn gì cả
+ *  - Trường hợp còn lại           → hiện dần khi cuộn tới
+ *
+ * Ẩn nội dung của một trang bán hàng vì hiệu ứng trang trí là điều không
+ * bao giờ được phép xảy ra.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .js-cuon .hien-dan {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.55s var(--ease-muot),
+      transform 0.55s var(--ease-muot);
+  }
+
+  .js-cuon .hien-dan.da-hien {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Tôn trọng cài đặt "giảm chuyển động" của người dùng */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -221,6 +251,7 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
     scroll-behavior: auto !important;
   }
 }

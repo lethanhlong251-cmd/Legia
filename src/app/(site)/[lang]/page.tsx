@@ -12,6 +12,7 @@ import { layBanDich, laNgonNguHopLe, theoNgonNgu } from "@/i18n";
 import { layCaiDat, laySanPhamNoiBat } from "@/lib/du-lieu";
 import { TheSanPham } from "@/components/site/the-san-pham";
 import { BieuTuongKhuon } from "@/components/logo";
+import { HienDan } from "@/components/site/hien-dan";
 import { notFound } from "next/navigation";
 
 export default async function TrangChu({ params }: PageProps<"/[lang]">) {
@@ -113,9 +114,10 @@ export default async function TrangChu({ params }: PageProps<"/[lang]">) {
       {/* ============ CAM KẾT ============ */}
       <section className="border-b border-kem-300 bg-kem-50">
         <div className="khung grid grid-cols-2 gap-px py-0 lg:grid-cols-4">
-          {camKet.map(({ icon: Icon, tieuDe, moTa }) => (
-            <div
+          {camKet.map(({ icon: Icon, tieuDe, moTa }, i) => (
+            <HienDan
               key={tieuDe}
+              tre={i * 80}
               className="flex flex-col items-center gap-2.5 px-3 py-8 text-center sm:px-5"
             >
               <Icon className="h-6 w-6 text-son-700" strokeWidth={1.6} />
@@ -123,7 +125,7 @@ export default async function TrangChu({ params }: PageProps<"/[lang]">) {
                 {tieuDe}
               </h3>
               <p className="text-xs leading-relaxed text-muc-500">{moTa}</p>
-            </div>
+            </HienDan>
           ))}
         </div>
       </section>
@@ -151,13 +153,14 @@ export default async function TrangChu({ params }: PageProps<"/[lang]">) {
 
         <div className="mt-8 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
           {sanPhamNoiBat.map((sp, i) => (
-            <TheSanPham
-              key={sp.id}
-              sanPham={sp}
-              ngonNgu={lang}
-              t={t}
-              uuTienTaiAnh={i < 4}
-            />
+            <HienDan key={sp.id} tre={(i % 4) * 70} className="flex">
+              <TheSanPham
+                sanPham={sp}
+                ngonNgu={lang}
+                t={t}
+                uuTienTaiAnh={i < 4}
+              />
+            </HienDan>
           ))}
         </div>
       </section>

@@ -119,6 +119,18 @@ export default async function BoCucTrangChinh({
 
   return (
     <html lang={lang} className={`${playfair.variable} ${beVietnam.variable}`}>
+      <head>
+        {/*
+          Bật hiệu ứng hiện dần khi cuộn. Chạy trước khi trang vẽ ra nên
+          không bị nháy. Nếu JavaScript hỏng thì lớp này không được thêm,
+          và mọi nội dung hiện bình thường — xem giải thích trong globals.css.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.add('js-cuon')`,
+          }}
+        />
+      </head>
       <body className="flex min-h-dvh flex-col antialiased">
         <NhaCungCapGioHang>
           <DauTrang ngonNgu={lang} t={t} caiDat={caiDat} />
