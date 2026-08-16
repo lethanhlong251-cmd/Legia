@@ -118,7 +118,14 @@ export default async function BoCucTrangChinh({
   const caiDat = await layCaiDat();
 
   return (
-    <html lang={lang} className={`${playfair.variable} ${beVietnam.variable}`}>
+    // suppressHydrationWarning vì đoạn mã ngay bên dưới gắn thêm lớp `js-cuon`
+    // vào thẻ này trước khi React kịp so khớp. Chỉ áp dụng cho riêng thẻ html,
+    // mọi phần bên trong vẫn được React kiểm tra bình thường.
+    <html
+      lang={lang}
+      suppressHydrationWarning
+      className={`${playfair.variable} ${beVietnam.variable}`}
+    >
       <head>
         {/*
           Bật hiệu ứng hiện dần khi cuộn. Chạy trước khi trang vẽ ra nên

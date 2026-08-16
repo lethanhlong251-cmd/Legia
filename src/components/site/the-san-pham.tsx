@@ -46,7 +46,11 @@ export function TheSanPham({
     // Thẻ là một khối bình thường, KHÔNG phải thẻ liên kết, vì bên trong có
     // nút bấm. Đặt nút trong thẻ liên kết là sai chuẩn HTML và trình đọc
     // màn hình sẽ đọc sai.
-    <div className="group relative flex flex-col overflow-hidden rounded-lg border border-kem-300 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-dong-300 hover:shadow-vua">
+    // `w-full h-full` để thẻ luôn lấp đầy ô lưới, kể cả khi bị bọc trong một
+    // lớp khác (ví dụ lớp hiệu ứng hiện dần). Thiếu nó thì thẻ co lại vừa nội
+    // dung, mỗi thẻ một chiều rộng, và vì ảnh là hình vuông nên chiều cao
+    // cũng lệch theo — cả hàng sản phẩm sẽ so le nhau.
+    <div className="group relative flex h-full w-full flex-col overflow-hidden rounded-lg border border-kem-300 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-dong-300 hover:shadow-vua">
       <div className="relative aspect-square overflow-hidden bg-kem-200">
         {anhChinh ? (
           <Image
@@ -90,25 +94,28 @@ export function TheSanPham({
         )}
       </div>
 
+      {/*
+        Các dòng chữ đều được chừa sẵn chỗ cố định. Sản phẩm này mô tả một
+        dòng, sản phẩm kia hai dòng, nếu không chừa thì cả hàng thẻ sẽ cao
+        thấp so le nhau, nhìn rất lộn xộn.
+      */}
       <div className="flex flex-1 flex-col p-4">
-        {sanPham.faceCount && (
-          <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dong-600">
-            {sanPham.faceCount} {ngonNgu === "vi" ? "mặt hoa văn" : "faces"}
-          </span>
-        )}
+        <span className="min-h-[1.1rem] text-[11px] font-semibold uppercase tracking-[0.14em] text-dong-600">
+          {sanPham.faceCount
+            ? `${sanPham.faceCount} ${ngonNgu === "vi" ? "mặt hoa văn" : "faces"}`
+            : ""}
+        </span>
 
-        <h3 className="mt-1.5 font-display text-[17px] leading-snug text-muc-900 transition-colors group-hover:text-son-700">
+        <h3 className="mt-1.5 line-clamp-2 min-h-[2.75rem] font-display text-[17px] leading-snug text-muc-900 transition-colors group-hover:text-son-700">
           {/* Liên kết phủ toàn thẻ, trừ những chỗ bấm được nằm cao hơn */}
           <Link href={duongDan} className="before:absolute before:inset-0">
             {ten}
           </Link>
         </h3>
 
-        {moTaNgan && (
-          <p className="mt-1 line-clamp-2 text-[13px] leading-relaxed text-muc-500">
-            {moTaNgan}
-          </p>
-        )}
+        <p className="mt-1 line-clamp-2 min-h-[2.6rem] text-[13px] leading-relaxed text-muc-500">
+          {moTaNgan}
+        </p>
 
         <div className="mt-auto flex flex-wrap items-baseline gap-x-2 gap-y-1 pt-3.5">
           {nhieuCo && (
