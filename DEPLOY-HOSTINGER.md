@@ -87,11 +87,12 @@ Dán nội dung sau vào, **nhớ thay các giá trị in hoa**:
 ```env
 DATABASE_URL="file:./data/chourmas.db"
 ADMIN_SESSION_SECRET="DAN_CHUOI_NGAU_NHIEN_VUA_TAO_VAO_DAY"
-TELEGRAM_BOT_TOKEN=""
-TELEGRAM_CHAT_ID=""
 NEXT_PUBLIC_SITE_URL="https://chourmasviet.com"
 NODE_ENV="production"
 ```
+
+> Phần thông báo đơn hàng (Telegram, email) **không điền tay ở đây**. Có
+> script tự điền, làm ở mục 6.5 bên dưới sau khi website đã chạy.
 
 Tạo chuỗi ngẫu nhiên cho `ADMIN_SESSION_SECRET` bằng lệnh:
 
@@ -149,6 +150,60 @@ curl -I http://localhost:3000/vi
 ```
 
 Thấy `HTTP/1.1 200 OK` là được.
+
+---
+
+## 6.5 Bật thông báo khi có đơn hàng mới
+
+Không làm bước này thì đơn hàng vẫn được lưu đầy đủ, nhưng bạn phải tự vào
+trang `/admin` xem, không có gì báo về máy.
+
+Nên bật **cả hai kênh**: Telegram nhanh nhưng nhà mạng Việt Nam thỉnh
+thoảng chặn, email chậm hơn vài giây nhưng chưa bao giờ bị chặn.
+
+### 6.5.1 Telegram
+
+Chuẩn bị trước trên điện thoại: nhắn `@BotFather`, gửi lệnh `/newbot`, đặt
+tên bot, copy lại **mã bot** dạng `1234567890:AAH...`
+
+```bash
+cd /var/www/chourmas && npm run bat-telegram
+```
+
+Script hỏi mã bot, rồi bảo bạn nhắn một tin cho chính con bot vừa tạo để nó
+biết gửi thông báo cho ai. Xong nó tự ghi vào `.env` và gửi tin nhắn thử.
+
+Kiểm tra lại bất cứ lúc nào: `npm run thu-telegram`
+
+### 6.5.2 Email
+
+Chuẩn bị trước trên trình duyệt:
+
+1. Bật Xác minh 2 bước cho tài khoản Google:
+   <https://myaccount.google.com/signinoptions/twosv>
+2. Tạo mật khẩu ứng dụng: <https://myaccount.google.com/apppasswords>
+   — Google trả về chuỗi 16 chữ dạng `abcd efgh ijkl mnop`
+
+```bash
+cd /var/www/chourmas && npm run bat-email
+```
+
+Script hỏi Gmail dùng để gửi, mật khẩu ứng dụng, và email nhận thông báo.
+Gửi thử thành công mới ghi vào `.env`.
+
+Kiểm tra lại bất cứ lúc nào: `npm run thu-email`
+
+> **Dùng mật khẩu ứng dụng, KHÔNG dùng mật khẩu Gmail thường.** Google đã
+> chặn việc đăng nhập bằng mật khẩu thường từ chương trình bên ngoài.
+
+### 6.5.3 Khởi động lại để cấu hình có hiệu lực
+
+Hai script trên chỉ ghi vào file `.env`. Website đang chạy vẫn giữ giá trị
+cũ trong bộ nhớ, nên phải nạp lại:
+
+```bash
+pm2 restart chourmas
+```
 
 ---
 
@@ -319,6 +374,20 @@ cd /var/www/chourmas && npm run build && pm2 restart chourmas
 **Lỗi "Thiếu ADMIN_SESSION_SECRET"**
 
 File `.env` chưa có hoặc chuỗi ngắn hơn 24 ký tự. Xem lại mục 4.
+
+**Có đơn hàng nhưng không thấy thông báo về máy**
+
+Chạy hai lệnh này trên VPS để biết kênh nào hỏng:
+
+```bash
+cd /var/www/chourmas && npm run thu-telegram && npm run thu-email
+```
+
+Cả hai đều báo "CHƯA CÓ" nghĩa là chưa cấu hình — xem lại mục 6.5. Cấu hình
+rồi mà vẫn không có thông báo thì thường là quên `pm2 restart chourmas`.
+
+Đơn hàng không bao giờ mất vì lý do này — dù cả hai kênh cùng hỏng, đơn vẫn
+nằm đủ trong trang `/admin`.
 
 **Upload ảnh trong admin báo lỗi**
 

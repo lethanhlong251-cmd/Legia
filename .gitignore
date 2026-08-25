@@ -46,5 +46,8 @@ next-env.d.ts
 /data
 /public/uploads
 
+# Công cụ tạo link xem thử, tự tải về khi chạy `npm run xem-thu`
+/.cong-cu
+
 # Nhưng file mẫu thì vẫn đưa lên để người deploy biết cần điền gì
 !.env.example

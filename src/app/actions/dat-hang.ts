@@ -5,6 +5,7 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { laSoDienThoaiVN, taoMaDonHang } from "@/lib/dinh-dang";
 import { guiThongBaoDonHang } from "@/lib/telegram";
+import { guiEmailDonHang } from "@/lib/email";
 import { layBanDich, type NgonNgu } from "@/i18n";
 
 /**
@@ -110,16 +111,33 @@ export async function datHang(duLieuTho: unknown): Promise<KetQuaDatHang> {
       include: { items: true },
     });
 
-    // Báo cho shop. Gửi hỏng cũng không được làm hỏng đơn của khách.
-    await guiThongBaoDonHang({
-      code: don.code,
-      customerName: don.customerName,
-      phone: don.phone,
-      address: don.address,
-      note: don.note,
-      total: don.total,
-      items: don.items,
-    });
+    // Báo cho shop qua cả hai kênh. Telegram nhanh nhưng nhà mạng Việt Nam
+    // thỉnh thoảng chặn, nên có email dự phòng.
+    //
+    // Đơn đã lưu xong rồi, nên từ đây trở đi mọi lỗi đều phải nuốt: gửi
+    // thông báo hỏng thì shop tự vào /admin xem, tuyệt đối không được báo
+    // lỗi cho khách và khiến khách đặt lại thành hai đơn.
+    await Promise.allSettled([
+      guiThongBaoDonHang({
+        code: don.code,
+        customerName: don.customerName,
+        phone: don.phone,
+        address: don.address,
+        note: don.note,
+        total: don.total,
+        items: don.items,
+      }),
+      guiEmailDonHang({
+        code: don.code,
+        customerName: don.customerName,
+        phone: don.phone,
+        address: don.address,
+        province: don.province,
+        note: don.note,
+        total: don.total,
+        items: don.items,
+      }),
+    ]);
 
     return { thanhCong: true, maDon: don.code };
   } catch (loi) {

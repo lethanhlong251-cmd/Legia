@@ -1,6 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  /**
+   * Khi tạo link xem thử tạm thời bằng script `npm run xem-thu`, khách vào
+   * website qua một tên miền lạ (dạng abc-xyz.trycloudflare.com) chứ không
+   * phải localhost. Next.js mặc định chặn các tên miền lạ khi chạy chế độ
+   * phát triển, nên phải khai báo ở đây thì link xem thử mới mở được.
+   *
+   * Dòng này chỉ có tác dụng lúc chạy `npm run dev`, không ảnh hưởng gì đến
+   * website thật khi đã lên máy chủ.
+   */
+  allowedDevOrigins: ["*.trycloudflare.com"],
+
   images: {
     /**
      * AVIF nhỏ hơn WebP khoảng 20% với cùng chất lượng. Trình duyệt nào
