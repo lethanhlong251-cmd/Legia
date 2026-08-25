@@ -58,6 +58,31 @@ node -v && npm -v && nginx -v
 
 Kết quả phải thấy Node phiên bản `v22.x` trở lên.
 
+### 2.1 Tạo bộ nhớ đệm (BẮT BUỘC nếu máy chỉ có 2GB RAM)
+
+Lệnh `npm run build` ngốn nhiều bộ nhớ. Máy 2GB RAM chạy build thường bị
+"Killed" giữa chừng — không phải lỗi code, chỉ là hết bộ nhớ.
+
+Cách xử lý: mượn tạm 2GB ổ cứng làm bộ nhớ phụ.
+
+```bash
+fallocate -l 2G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile
+```
+
+Cho nó tự bật lại mỗi khi máy khởi động:
+
+```bash
+echo '/swapfile none swap sw 0 0' >> /etc/fstab
+```
+
+Kiểm tra:
+
+```bash
+free -h
+```
+
+Dòng `Swap:` phải hiện `2.0Gi`. Máy từ 4GB RAM trở lên thì bỏ qua mục này.
+
 ---
 
 ## 3. Tải mã nguồn về máy chủ
