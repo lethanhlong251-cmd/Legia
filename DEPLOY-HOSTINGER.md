@@ -10,7 +10,7 @@ Hướng dẫn từng bước, chạy từ đầu đến khi website chạy th�
 |---|---|
 | **VPS Hostinger** gói KVM 1 trở lên | Bắt buộc. Gói Shared Hosting KHÔNG chạy được Node.js |
 | Hệ điều hành **Ubuntu 24.04** | Chọn khi tạo VPS |
-| Tên miền `chourmasviet.com` | Mua ở Hostinger hoặc nơi khác |
+| Tên miền `chourmas.online` | Mua ở Hostinger hoặc nơi khác |
 | Tài khoản GitHub | Đã có: `lethanhlong251-cmd` |
 
 **Vì sao phải là VPS?** Website có trang quản trị, giỏ hàng và cơ sở dữ liệu,
@@ -87,7 +87,7 @@ Dán nội dung sau vào, **nhớ thay các giá trị in hoa**:
 ```env
 DATABASE_URL="file:./data/chourmas.db"
 ADMIN_SESSION_SECRET="DAN_CHUOI_NGAU_NHIEN_VUA_TAO_VAO_DAY"
-NEXT_PUBLIC_SITE_URL="https://chourmasviet.com"
+NEXT_PUBLIC_SITE_URL="https://chourmas.online"
 NODE_ENV="production"
 ```
 
@@ -106,7 +106,7 @@ Copy kết quả và dán vào file. Lưu file: bấm `Ctrl+O`, `Enter`, rồi `
 > trong `.env.example`. Ai biết chuỗi này đều đăng nhập được vào trang quản trị.
 
 > **Cảnh báo 2:** `NEXT_PUBLIC_SITE_URL` phải là địa chỉ thật
-> `https://chourmasviet.com`. Nếu để `localhost` thì khi dán link website vào
+> `https://chourmas.online`. Nếu để `localhost` thì khi dán link website vào
 > Messenger hay Zalo sẽ **không hiện ảnh preview**, vì Facebook đi tìm ảnh ở
 > địa chỉ localhost của chính nó và không thấy gì.
 
@@ -231,7 +231,7 @@ Dán nội dung:
 ```nginx
 server {
     listen 80;
-    server_name chourmasviet.com www.chourmasviet.com;
+    server_name chourmas.online www.chourmas.online;
 
     # Cho phép khách tải ảnh sản phẩm nặng khi upload trong admin
     client_max_body_size 20M;
@@ -265,7 +265,7 @@ apt install -y certbot python3-certbot-nginx
 ```
 
 ```bash
-certbot --nginx -d chourmasviet.com -d www.chourmasviet.com
+certbot --nginx -d chourmas.online -d www.chourmas.online
 ```
 
 Làm theo hướng dẫn trên màn hình. Chọn **redirect** khi được hỏi, để khách vào
@@ -273,7 +273,7 @@ Làm theo hướng dẫn trên màn hình. Chọn **redirect** khi được hỏ
 
 Chứng chỉ tự gia hạn, bạn không phải làm gì thêm.
 
-**Xong. Mở trình duyệt vào `https://chourmasviet.com` để xem kết quả.**
+**Xong. Mở trình duyệt vào `https://chourmas.online` để xem kết quả.**
 
 ---
 

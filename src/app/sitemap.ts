@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/prisma";
 import { CAC_NGON_NGU } from "@/i18n";
 
-const GOC = process.env.NEXT_PUBLIC_SITE_URL ?? "https://chourmasviet.com";
+const GOC = process.env.NEXT_PUBLIC_SITE_URL ?? "https://chourmas.online";
 
 /** Sơ đồ website gửi cho Google, tự cập nhật theo sản phẩm đang bán */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

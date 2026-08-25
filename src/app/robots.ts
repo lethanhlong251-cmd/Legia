@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const GOC = process.env.NEXT_PUBLIC_SITE_URL ?? "https://chourmasviet.com";
+const GOC = process.env.NEXT_PUBLIC_SITE_URL ?? "https://chourmas.online";
 
 export default function robots(): MetadataRoute.Robots {
   return {
