@@ -431,3 +431,104 @@ Gói KVM 1 có 4GB RAM, thừa sức cho website này.
   > phía trước, phải bật cho nó **chuyển tiếp tiêu đề `Accept`**. Quên bước
   > này thì mọi khách đều nhận ảnh nặng hơn, website không lỗi nhưng chậm đi
   > thấy rõ.
+
+---
+
+## 12. Đổi sang máy chủ khác
+
+Mua thử một VPS rồi vài tháng sau muốn đổi nhà cung cấp, đổi gói to hơn, hay
+chuyển từ máy trong nước ra nước ngoài — đều làm được, mất khoảng 30-45 phút.
+
+**Vì sao dễ:** toàn bộ thứ không thể tạo lại được chỉ gồm **hai thứ**:
+
+| Thứ cần mang theo | Nằm ở đâu |
+|---|---|
+| Cơ sở dữ liệu (đơn hàng, sản phẩm, mật khẩu admin) | `data/chourmas.db` — một file duy nhất |
+| Ảnh tải lên qua trang quản trị | thư mục `public/uploads` |
+
+Mọi thứ còn lại đều dựng lại từ đầu được: mã nguồn tải từ GitHub, thư viện
+cài lại bằng `npm install`, chứng chỉ HTTPS xin lại miễn phí trong 1 phút.
+
+### 12.1 Nâng gói trên cùng một nhà cung cấp
+
+Đây là trường hợp dễ nhất. Hầu hết nhà cung cấp cho nâng RAM/ổ cứng ngay
+trong trang quản lý, máy khởi động lại vài phút là xong. **Không phải làm gì
+với code, không đổi địa chỉ IP, không đụng tới tên miền.**
+
+### 12.2 Chuyển sang máy chủ hoàn toàn mới
+
+**Bước 1 — Sao lưu ở máy cũ**
+
+```bash
+/root/sao-luu.sh && ls -lh /root/sao-luu/
+```
+
+**Bước 2 — Tải bản sao lưu về máy tính của bạn**
+
+Chạy trên MacBook, thay `IP_MAY_CU` bằng địa chỉ máy cũ:
+
+```bash
+scp root@IP_MAY_CU:/root/sao-luu/chourmas-*.tar.gz ~/Downloads/
+```
+
+Tiện thể lấy luôn file cấu hình, đỡ phải khai báo lại Telegram và email:
+
+```bash
+scp root@IP_MAY_CU:/var/www/chourmas/.env ~/Downloads/chourmas.env
+```
+
+**Bước 3 — Dựng máy mới**
+
+Làm lại **mục 1, 2, 3** của hướng dẫn này trên máy mới (cài Node/Nginx,
+clone code). Dừng lại trước mục 4, đừng tạo `.env` mới.
+
+**Bước 4 — Đổ dữ liệu cũ sang**
+
+Chạy trên MacBook, thay `IP_MAY_MOI`:
+
+```bash
+scp ~/Downloads/chourmas.env root@IP_MAY_MOI:/var/www/chourmas/.env
+scp ~/Downloads/chourmas-*.tar.gz root@IP_MAY_MOI:/root/
+```
+
+Rồi trên máy mới:
+
+```bash
+cd /var/www/chourmas
+tar xzf /root/chourmas-*.tar.gz
+npm install
+npm run build
+pm2 start npm --name chourmas -- start && pm2 save
+```
+
+> Lệnh `tar xzf` bung đúng hai thứ `data` và `public/uploads` vào đúng chỗ.
+> **Không chạy `npm run nap-du-lieu`** ở bước này — lệnh đó dành cho máy
+> trắng, chạy nhầm sẽ ghi đè dữ liệu vừa khôi phục.
+
+**Bước 5 — Nginx và HTTPS**
+
+Làm lại **mục 7.2 và 7.3**. Chứng chỉ HTTPS xin mới hoàn toàn miễn phí.
+
+**Bước 6 — Trỏ tên miền sang IP mới**
+
+Sửa hai bản ghi A (`@` và `www`) sang địa chỉ IP máy mới.
+
+> **Giữ máy cũ chạy thêm 24-48 tiếng.** DNS lan truyền không tức thời — một
+> số khách vẫn vào máy cũ trong lúc chờ. Tắt máy cũ ngay là những khách đó
+> gặp lỗi không vào được.
+
+**Bước 7 — Gom nốt đơn phát sinh ở máy cũ**
+
+Sau 48 tiếng, kiểm tra trang `/admin` của máy cũ (vào thẳng bằng IP) xem có
+đơn nào rơi vào đó trong lúc chuyển không. Có thì ghi lại thủ công sang máy
+mới rồi mới huỷ VPS cũ.
+
+### 12.3 Bảng thời gian tham khảo
+
+| Việc | Thời gian |
+|---|---|
+| Nâng gói cùng nhà cung cấp | 5-10 phút, gần như không gián đoạn |
+| Chuyển sang nhà cung cấp khác | 30-45 phút thao tác + 24-48 tiếng chờ DNS |
+
+Kết luận: **mua thử một VPS nhỏ trước là quyết định an toàn.** Dữ liệu chỉ
+nằm trong một file và một thư mục, mang đi đâu cũng được.
