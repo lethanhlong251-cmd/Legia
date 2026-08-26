@@ -352,6 +352,9 @@ pm2 restart chourmas
 
 > **Luôn sao lưu trước khi cập nhật:** `/root/sao-luu.sh`
 
+> **Không muốn làm thủ công nữa?** Xem **mục 13** để bật tự động cập nhật —
+> push code lên GitHub là website tự cập nhật trong 2 phút.
+
 Để tiện, tạo sẵn một lệnh tắt:
 
 ```bash
@@ -556,4 +559,97 @@ mới rồi mới huỷ VPS cũ.
 | Chuyển sang nhà cung cấp khác | 30-45 phút thao tác + 24-48 tiếng chờ DNS |
 
 Kết luận: **mua thử một VPS nhỏ trước là quyết định an toàn.** Dữ liệu chỉ
-nằm trong một file và một thư mục, mang đi đâu cũng được.
+nằm trong một file và một thư mục, mang đi đâu cũng được.\n
+---
+
+## 13. Bật tự động cập nhật khi push code lên GitHub
+
+Sau khi cài xong mục này, mỗi lần code được đẩy lên GitHub thì **website tự
+cập nhật trong vòng 2 phút**, bạn không phải đăng nhập máy chủ nữa.
+
+### 13.1 Cài đặt (làm một lần)
+
+Đăng nhập VPS rồi chạy:
+
+```bash
+cd /var/www/chourmas && git pull
+```
+
+```bash
+cp /var/www/chourmas/scripts/tu-dong-cap-nhat.sh /root/tu-dong-cap-nhat.sh
+chmod +x /root/tu-dong-cap-nhat.sh
+```
+
+Tạo file nhật ký và cho phép ghi:
+
+```bash
+touch /var/log/chourmas-cap-nhat.log
+```
+
+Hẹn giờ chạy 2 phút một lần:
+
+```bash
+crontab -e
+```
+
+Thêm dòng này vào cuối file:
+
+```
+*/2 * * * * /root/tu-dong-cap-nhat.sh
+```
+
+Xong. Từ giờ cứ push code là website tự cập nhật.
+
+### 13.2 Kiểm tra xem có chạy không
+
+```bash
+tail -f /var/log/chourmas-cap-nhat.log
+```
+
+Cửa sổ này sẽ hiện nhật ký mỗi lần có cập nhật. Bấm `Ctrl+C` để thoát.
+
+Muốn chạy thử ngay không cần chờ:
+
+```bash
+/root/tu-dong-cap-nhat.sh
+```
+
+### 13.3 Script tự bảo vệ website thế nào
+
+Đây là website đang bán hàng thật nên script được viết để **không bao giờ làm
+sập web**:
+
+| Tình huống | Script làm gì |
+|---|---|
+| Không có code mới | Thoát ngay, không tốn tài nguyên |
+| Lần chạy trước chưa xong | Thoát, không chạy chồng lên nhau |
+| Lần trước bị kẹt quá 30 phút | Tự gỡ kẹt rồi chạy tiếp |
+| Không kết nối được GitHub | Bỏ qua lượt này, thử lại sau 2 phút |
+| **Bản mới build lỗi** | **Tự quay về bản cũ, web vẫn bán hàng bình thường** |
+| Có bất kỳ lỗi nào | Nhắn Telegram báo bạn ngay |
+
+Trước mỗi lần cập nhật, script **luôn sao lưu** cơ sở dữ liệu và ảnh bằng
+`/root/sao-luu.sh` (mục 8).
+
+### 13.4 Điều quan trọng phải nhớ
+
+> **TUYỆT ĐỐI không sửa code trực tiếp trên máy chủ.**
+>
+> Script dùng lệnh `git reset --hard` để tránh bị kẹt vì xung đột. Nghĩa là
+> mọi thay đổi bạn gõ thẳng trên VPS sẽ **bị xoá sạch** ở lần cập nhật kế tiếp.
+>
+> Muốn sửa gì thì sửa trên máy tính rồi push lên GitHub.
+
+Những thứ sau **không bị ảnh hưởng** vì chúng không nằm trong Git:
+
+- `data/chourmas.db` — toàn bộ đơn hàng và sản phẩm
+- `public/uploads/` — ảnh bạn tải lên qua admin
+- `.env` — cấu hình và mật khẩu
+
+### 13.5 Tắt tự động cập nhật
+
+```bash
+crontab -e
+```
+
+Xoá dòng `*/2 * * * * /root/tu-dong-cap-nhat.sh` đi là xong.
