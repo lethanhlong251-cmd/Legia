@@ -564,57 +564,94 @@ nằm trong một file và một thư mục, mang đi đâu cũng được.\n
 
 ## 13. Bật tự động cập nhật khi push code lên GitHub
 
-Sau khi cài xong mục này, mỗi lần code được đẩy lên GitHub thì **website tự
-cập nhật trong vòng 2 phút**, bạn không phải đăng nhập máy chủ nữa.
+Sau khi làm xong mục này, mỗi lần bạn push code lên GitHub thì **website tự
+cập nhật trong vòng 2 phút**, không phải đụng tới máy chủ nữa.
 
-### 13.1 Cài đặt (làm một lần)
+Chỉ cần làm **một lần duy nhất**, mất khoảng 5 phút.
 
-Đăng nhập VPS rồi chạy:
+---
+
+### 13.1 Bước 1 — Lấy địa chỉ IP của VPS
+
+1. Vào <https://hpanel.hostinger.com> và đăng nhập
+2. Bấm **VPS** ở menu trên cùng
+3. Bấm vào máy chủ của bạn
+4. Nhìn mục **IP address**, dạng `123.45.67.89` — chép lại
+
+---
+
+### 13.2 Bước 2 — Đăng nhập vào máy chủ
+
+Có hai cách, chọn cách nào cũng được.
+
+**Cách A — Dùng ngay trên trình duyệt (dễ nhất, không cần cài gì)**
+
+Trong hPanel, ở trang VPS vừa mở, bấm nút **Browser terminal**. Một cửa sổ
+dòng lệnh hiện ra ngay trong trình duyệt, đã đăng nhập sẵn.
+
+**Cách B — Dùng Terminal trên máy Mac**
+
+Mở ứng dụng **Terminal** (bấm `Cmd + dấu cách`, gõ `Terminal`, Enter), rồi gõ:
 
 ```bash
-cd /var/www/chourmas && git pull
+ssh root@DIA_CHI_IP_CUA_BAN
 ```
+
+Thay `DIA_CHI_IP_CUA_BAN` bằng dãy số vừa chép ở bước 1.
+
+- Lần đầu nó hỏi `Are you sure you want to continue connecting?` → gõ `yes` rồi Enter
+- Nó hỏi `password` → gõ mật khẩu root của VPS rồi Enter
+
+> **Gõ mật khẩu không thấy gì hiện lên là bình thường.** Màn hình cố tình
+> không hiện ký tự nào, kể cả dấu sao. Cứ gõ rồi Enter.
+
+Đăng nhập thành công thì dòng lệnh đổi thành dạng `root@srv123:~#`
+
+---
+
+### 13.3 Bước 3 — Chạy một lệnh duy nhất
+
+Chép nguyên dòng dưới đây, dán vào cửa sổ dòng lệnh rồi bấm Enter:
 
 ```bash
-cp /var/www/chourmas/scripts/tu-dong-cap-nhat.sh /root/tu-dong-cap-nhat.sh
-chmod +x /root/tu-dong-cap-nhat.sh
+cd /var/www/chourmas && git pull && bash scripts/cai-tu-dong-cap-nhat.sh
 ```
 
-Tạo file nhật ký và cho phép ghi:
+> **Cách dán vào Terminal:** bấm `Cmd + V` (máy Mac) hoặc bấm chuột phải →
+> Paste. Trong Browser terminal của Hostinger thì dùng `Ctrl + V`.
 
-```bash
-touch /var/log/chourmas-cap-nhat.log
-```
-
-Hẹn giờ chạy 2 phút một lần:
-
-```bash
-crontab -e
-```
-
-Thêm dòng này vào cuối file:
+Script tự làm hết mọi việc và in ra từng bước. Thấy dòng này là xong:
 
 ```
-*/2 * * * * /root/tu-dong-cap-nhat.sh
+XONG. Từ giờ cứ push code lên GitHub là website tự cập nhật trong 2 phút.
 ```
 
-Xong. Từ giờ cứ push code là website tự cập nhật.
+Gõ `exit` rồi Enter để thoát khỏi máy chủ.
 
-### 13.2 Kiểm tra xem có chạy không
+---
+
+### 13.4 Kiểm tra xem có chạy thật không
+
+Cách chắc chắn nhất: sửa một thứ nhỏ trên máy tính, push lên GitHub, chờ 2
+phút rồi mở website xem đã đổi chưa.
+
+Muốn xem máy chủ đang làm gì thì đăng nhập lại và gõ:
 
 ```bash
 tail -f /var/log/chourmas-cap-nhat.log
 ```
 
-Cửa sổ này sẽ hiện nhật ký mỗi lần có cập nhật. Bấm `Ctrl+C` để thoát.
+Cửa sổ này hiện nhật ký mỗi lần có cập nhật. Bấm `Ctrl + C` để thoát.
 
-Muốn chạy thử ngay không cần chờ:
+Không muốn chờ 2 phút thì bắt cập nhật ngay:
 
 ```bash
 /root/tu-dong-cap-nhat.sh
 ```
 
-### 13.3 Script tự bảo vệ website thế nào
+---
+
+### 13.5 Script tự bảo vệ website thế nào
 
 Đây là website đang bán hàng thật nên script được viết để **không bao giờ làm
 sập web**:
@@ -631,7 +668,9 @@ sập web**:
 Trước mỗi lần cập nhật, script **luôn sao lưu** cơ sở dữ liệu và ảnh bằng
 `/root/sao-luu.sh` (mục 8).
 
-### 13.4 Điều quan trọng phải nhớ
+---
+
+### 13.6 Điều quan trọng phải nhớ
 
 > **TUYỆT ĐỐI không sửa code trực tiếp trên máy chủ.**
 >
@@ -646,10 +685,10 @@ Những thứ sau **không bị ảnh hưởng** vì chúng không nằm trong G
 - `public/uploads/` — ảnh bạn tải lên qua admin
 - `.env` — cấu hình và mật khẩu
 
-### 13.5 Tắt tự động cập nhật
+---
+
+### 13.7 Tắt tự động cập nhật
 
 ```bash
-crontab -e
+crontab -l | grep -v tu-dong-cap-nhat | crontab -
 ```
-
-Xoá dòng `*/2 * * * * /root/tu-dong-cap-nhat.sh` đi là xong.
