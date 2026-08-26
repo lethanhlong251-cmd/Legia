@@ -3,7 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
-import { Check, Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
+import {
+  ArrowLeft,
+  Check,
+  Minus,
+  Plus,
+  ShoppingBag,
+  Trash2,
+  X,
+} from "lucide-react";
 
 import { dinhDangTien } from "@/lib/dinh-dang";
 import { dongNganGio, useGioHang, useNganGioDangMo } from "@/lib/gio-hang";
@@ -204,27 +212,35 @@ export function NganGioHang({
               <Link
                 href={`/${ngonNgu}/thanh-toan`}
                 onClick={dongNganGio}
-                className="nut-chinh mt-4 w-full"
+                className="nut-chinh mt-4 h-12 w-full"
               >
                 {t.gioHang.datHang}
               </Link>
 
-              <div className="mt-2.5 flex items-center justify-between gap-3">
-                <button
-                  type="button"
-                  onClick={dongNganGio}
-                  className="text-[13px] font-medium text-muc-600 underline-offset-4 hover:text-son-700 hover:underline"
-                >
-                  ← {t.gioHang.tiepTucMua}
-                </button>
-                <Link
-                  href={`/${ngonNgu}/gio-hang`}
-                  onClick={dongNganGio}
-                  className="text-[13px] font-medium text-son-700 underline-offset-4 hover:underline"
-                >
-                  {t.gioHang.tieuDe}
-                </Link>
-              </div>
+              {/*
+                "Tiếp tục xem hàng" là nút bấm thật, không phải chữ nhỏ mờ.
+                Sau khi thêm hàng, phần lớn khách muốn xem tiếp chứ chưa đặt
+                ngay — để nó thành chữ xám thì nhiều người tưởng chỉ còn cách
+                đóng cửa sổ, hoặc bỏ luôn.
+
+                Vẫn để nhạt hơn nút đặt hàng để không lấn át hành động chính.
+              */}
+              <button
+                type="button"
+                onClick={dongNganGio}
+                className="mt-2.5 flex h-12 w-full items-center justify-center gap-2 rounded-md border-2 border-son-700/35 bg-white text-sm font-semibold text-son-700 transition-colors hover:border-son-700 hover:bg-son-50 active:bg-son-100"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                {t.gioHang.tiepTucMua}
+              </button>
+
+              <Link
+                href={`/${ngonNgu}/gio-hang`}
+                onClick={dongNganGio}
+                className="mt-3 block text-center text-[13px] font-medium text-muc-600 underline-offset-4 hover:text-son-700 hover:underline"
+              >
+                {t.gioHang.tieuDe}
+              </Link>
 
               <p className="mt-3 text-center text-[11px] leading-relaxed text-muc-500">
                 {t.datHang.thanhToanKhiNhan}
