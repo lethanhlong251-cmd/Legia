@@ -312,29 +312,55 @@ export function ChonMua({
       </div>
 
       {/* Thanh mua cố định dưới cùng — chỉ hiện trên điện thoại, luôn trong tầm tay dù cuộn tới đâu */}
-      <div className="fixed inset-x-0 bottom-0 z-30 flex items-center gap-3 border-t border-kem-300 bg-white/95 px-4 py-3 backdrop-blur pb-[calc(0.75rem+env(safe-area-inset-bottom))] lg:hidden">
+      {/*
+        Hai nút chia đôi đều nhau. Trước đây nút giỏ hàng chỉ là ô vuông nhỏ có
+        mỗi biểu tượng, khách khó nhận ra là bấm được. Nay cả hai cùng chiều
+        cao, cùng chiều rộng và đều có chữ.
+      */}
+      <div className="fixed inset-x-0 bottom-0 z-30 flex items-stretch gap-2.5 border-t border-kem-300 bg-white/95 px-4 py-3 backdrop-blur pb-[calc(0.75rem+env(safe-area-inset-bottom))] lg:hidden">
         <button
           type="button"
           onClick={themVaoGio}
           disabled={!conBan}
-          aria-label={t.sanPham.themVaoGio}
-          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-son-700/30 text-son-700 transition-colors hover:bg-son-50 disabled:cursor-not-allowed disabled:opacity-40"
+          className={`flex h-14 flex-1 items-center justify-center gap-2 rounded-md border-2 text-[13px] font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
+            vuaThem
+              ? "border-emerald-600 bg-emerald-600 text-white"
+              : "border-son-700 bg-white text-son-700 active:bg-son-50"
+          }`}
         >
           {vuaThem ? (
-            <Check className="h-5 w-5" />
+            <>
+              <Check className="h-[18px] w-[18px] shrink-0" />
+              {t.sanPham.daThemVaoGio}
+            </>
           ) : (
-            <ShoppingBag className="h-5 w-5" />
+            <>
+              <ShoppingBag className="h-[18px] w-[18px] shrink-0" />
+              {t.sanPham.themVaoGio}
+            </>
           )}
         </button>
+
         <button
           type="button"
           onClick={muaNgay}
           disabled={!conBan}
-          className="nut-chinh h-12 flex-1"
+          className="flex h-14 flex-1 flex-col items-center justify-center rounded-md border-2 border-son-700 bg-son-700 leading-tight text-kem-50 transition-colors active:bg-son-800 disabled:cursor-not-allowed disabled:opacity-40"
         >
-          {conBan
-            ? `${t.sanPham.muaNgay} · ${dinhDangTien(dangChon?.price ?? 0, ngonNgu)}`
-            : t.sanPham.hetHang}
+          {conBan ? (
+            <>
+              <span className="text-[13px] font-semibold">
+                {t.sanPham.muaNgay}
+              </span>
+              <span className="mt-0.5 text-[15px] font-bold">
+                {dinhDangTien(dangChon?.price ?? 0, ngonNgu)}
+              </span>
+            </>
+          ) : (
+            <span className="text-[13px] font-semibold">
+              {t.sanPham.hetHang}
+            </span>
+          )}
         </button>
       </div>
 

@@ -341,7 +341,7 @@ export default async function TrangChiTietSanPham({
       )}
 
       {/* Chừa chỗ cho thanh mua cố định dưới cùng trên điện thoại */}
-      <div className="h-20 lg:hidden" aria-hidden />
+      <div className="h-28 lg:hidden" aria-hidden />
     </>
   );
 }
