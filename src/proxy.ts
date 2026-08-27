@@ -7,18 +7,11 @@ import { CAC_NGON_NGU, NGON_NGU_MAC_DINH } from "@/i18n";
  *   /san-pham       →  /vi/san-pham
  *   /en/san-pham    →  giữ nguyên
  *
- * Khách lần đầu vào web sẽ được đưa tới ngôn ngữ trình duyệt của họ
- * (tiếng Việt nếu trình duyệt là tiếng Việt, ngược lại vẫn ưu tiên tiếng Việt
- * vì đây là shop Việt Nam).
+ * Đây là shop Việt Nam nên mặc định luôn là tiếng Việt, bất kể trình duyệt
+ * của khách đang đặt ngôn ngữ gì — nhiều người Việt dùng điện thoại cài
+ * tiếng Anh, trước đây họ vào web lại ra bản tiếng Anh.
+ * Muốn xem bản tiếng Anh thì bấm nút EN ở đầu trang, hoặc vào thẳng /en.
  */
-
-function chonNgonNgu(request: NextRequest) {
-  const acceptLanguage = request.headers.get("accept-language") ?? "";
-  // Chỉ chuyển sang tiếng Anh khi trình duyệt KHÔNG ưu tiên tiếng Việt
-  const uuTien = acceptLanguage.split(",")[0]?.toLowerCase() ?? "";
-  if (uuTien.startsWith("en")) return "en";
-  return NGON_NGU_MAC_DINH;
-}
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -28,9 +21,8 @@ export function proxy(request: NextRequest) {
   );
   if (daCoNgonNgu) return NextResponse.next();
 
-  const ngonNgu = chonNgonNgu(request);
   const urlMoi = request.nextUrl.clone();
-  urlMoi.pathname = `/${ngonNgu}${pathname === "/" ? "" : pathname}`;
+  urlMoi.pathname = `/${NGON_NGU_MAC_DINH}${pathname === "/" ? "" : pathname}`;
   return NextResponse.redirect(urlMoi);
 }
 

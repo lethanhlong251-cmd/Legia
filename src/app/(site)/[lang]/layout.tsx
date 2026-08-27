@@ -63,7 +63,12 @@ export async function generateMetadata({
       : ["mooncake mold", "vietnamese mooncake mold", "baking tools", "Chourmas"],
     alternates: {
       canonical: `/${lang}`,
-      languages: { vi: "/vi", en: "/en" },
+      languages: {
+        vi: "/vi",
+        en: "/en",
+        // Máy tìm kiếm gặp ngôn ngữ nào không khớp thì đưa về bản tiếng Việt
+        "x-default": "/vi",
+      },
     },
     openGraph: {
       type: "website",
