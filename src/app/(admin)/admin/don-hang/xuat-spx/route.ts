@@ -4,23 +4,15 @@ import { prisma } from "@/lib/prisma";
 import { batBuocDangNhap } from "@/lib/xac-thuc";
 import { layCaiDat } from "@/lib/du-lieu";
 import { taoFileSPX, tenFileSPX } from "@/lib/xuat-spx";
-import type { OrderStatus } from "@/generated/prisma/enums";
+import { docThamSoLoc, taoDieuKienLoc } from "@/lib/loc-don-hang";
 
 export const dynamic = "force-dynamic";
-
-const CAC_TRANG_THAI = [
-  "PENDING",
-  "CONFIRMED",
-  "SHIPPING",
-  "DELIVERED",
-  "CANCELLED",
-];
 
 /**
  * Tải file Excel theo mẫu SPX.
  *
- *   /admin/don-hang/xuat-spx?ma=id1,id2   → đúng những đơn được chọn
- *   /admin/don-hang/xuat-spx?trangThai=X  → tất cả đơn đang lọc
+ *   ?ma=id1,id2                        → đúng những đơn được chọn
+ *   ?trangThai=&tim=&tuNgay=&denNgay=  → đúng những đơn đang lọc trên màn hình
  */
 export async function GET(yeuCau: Request) {
   await batBuocDangNhap();
@@ -30,17 +22,13 @@ export async function GET(yeuCau: Request) {
     .split(",")
     .map((m) => m.trim())
     .filter(Boolean);
-  const trangThai = thamSo.get("trangThai");
-
-  const loc = ma.length
+  const dieuKien = ma.length
     ? { id: { in: ma } }
-    : trangThai && CAC_TRANG_THAI.includes(trangThai)
-      ? { status: trangThai as OrderStatus }
-      : {};
+    : taoDieuKienLoc(docThamSoLoc(thamSo));
 
   const [danhSach, caiDat] = await Promise.all([
     prisma.order.findMany({
-      where: loc,
+      where: dieuKien,
       orderBy: { createdAt: "asc" },
       take: 500,
       include: { items: { select: { productName: true, variantLabel: true, quantity: true, unitPrice: true } } },

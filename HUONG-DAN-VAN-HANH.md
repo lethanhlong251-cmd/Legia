@@ -37,6 +37,24 @@ theo mục 8). Đơn hàng cũng luôn hiện trong trang quản trị.
 6. Bấm **Đang giao**, và ghi mã vận đơn vào ô **Ghi chú nội bộ** rồi bấm Lưu
 7. Khi khách đã nhận hàng và trả tiền, bấm **Đã giao**
 
+**Tìm và lọc đơn:** phía trên danh sách có thanh lọc.
+
+- **Ô Tìm đơn** — gõ tên khách, số điện thoại, mã đơn hoặc **mã vận đơn** rồi
+  bấm Enter. Số điện thoại gõ cách quãng kiểu `0912 345 678` vẫn tìm ra.
+  Mã vận đơn tìm được là nhờ nó nằm trong ô **Ghi chú nội bộ** của đơn, nên
+  nhớ ghi mã vận đơn vào đó ở bước 6.
+- **Từ ngày / Đến ngày** — xem đơn trong một khoảng thời gian. Hoặc bấm nhanh
+  **Hôm nay**, **7 ngày qua**, **30 ngày qua**.
+- **Các thẻ trạng thái** bên dưới lọc thêm theo trạng thái, và con số trong
+  ngoặc luôn đếm theo đúng khoảng ngày và từ khoá đang lọc.
+
+Ba thứ trên cộng dồn với nhau, ví dụ: đơn **Chờ xác nhận** trong **7 ngày qua**.
+Bấm **Xoá lọc** để về danh sách đầy đủ. Địa chỉ trang có lưu bộ lọc nên lưu lại
+link là lần sau mở ra đúng chỗ đó.
+
+> Nút **Xuất file SPX** bám theo bộ lọc: đang lọc gì thì file lấy đúng chừng
+> ấy đơn.
+
 **Đổi trạng thái nhanh, không cần mở đơn:** ngay trong danh sách đơn hàng, cột
 **Trạng thái** là một ô chọn — bấm vào rồi chọn trạng thái mới, hệ thống lưu
 luôn.

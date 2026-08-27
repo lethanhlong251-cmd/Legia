@@ -9,6 +9,7 @@ import {
   doiTrangThaiNhieuDon,
 } from "@/app/actions/quan-tri";
 import { dinhDangNgay, dinhDangTien } from "@/lib/dinh-dang";
+import type { ThamSoLoc } from "@/lib/loc-don-hang";
 import {
   TEN_TRANG_THAI,
   THU_TU_TRANG_THAI,
@@ -33,10 +34,10 @@ export type DongDonHang = {
  */
 export function BangDonHang({
   danhSach,
-  trangThaiDangLoc,
+  loc,
 }: {
   danhSach: DongDonHang[];
-  trangThaiDangLoc: string | null;
+  loc: ThamSoLoc;
 }) {
   const [daChon, setDaChon] = useState<string[]>([]);
   const [dangChay, batDau] = useTransition();
@@ -51,13 +52,21 @@ export function BangDonHang({
 
   const chonHet = daChon.length > 0 && daChon.length === danhSach.length;
 
+  // Chọn đơn nào thì xuất đơn đó, không chọn thì xuất đúng những đơn
+  // đang lọc trên màn hình
   const duongDanXuat = useMemo(() => {
     const thamSo = new URLSearchParams();
-    if (daChon.length) thamSo.set("ma", daChon.join(","));
-    else if (trangThaiDangLoc) thamSo.set("trangThai", trangThaiDangLoc);
+    if (daChon.length) {
+      thamSo.set("ma", daChon.join(","));
+    } else {
+      if (loc.trangThai) thamSo.set("trangThai", loc.trangThai);
+      if (loc.tim) thamSo.set("tim", loc.tim);
+      if (loc.tuNgay) thamSo.set("tuNgay", loc.tuNgay);
+      if (loc.denNgay) thamSo.set("denNgay", loc.denNgay);
+    }
     const chuoi = thamSo.toString();
     return `/admin/don-hang/xuat-spx${chuoi ? `?${chuoi}` : ""}`;
-  }, [daChon, trangThaiDangLoc]);
+  }, [daChon, loc]);
 
   function bat(id: string) {
     setDaChon((cu) =>

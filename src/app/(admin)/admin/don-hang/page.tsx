@@ -2,39 +2,43 @@ import Link from "next/link";
 
 import { prisma } from "@/lib/prisma";
 import { batBuocDangNhap } from "@/lib/xac-thuc";
+import {
+  CAC_TRANG_THAI,
+  dangLoc,
+  docThamSoLoc,
+  duongDanLoc,
+  taoDieuKienLoc,
+} from "@/lib/loc-don-hang";
 import { KhungQuanTri } from "@/components/admin/khung-quan-tri";
 import { TEN_TRANG_THAI } from "@/components/admin/nhan-trang-thai";
 import { BangDonHang } from "@/components/admin/bang-don-hang";
-import type { OrderStatus } from "@/generated/prisma/enums";
+import { ThanhLocDon } from "@/components/admin/thanh-loc-don";
 
 export const dynamic = "force-dynamic";
 
-const CAC_TRANG_THAI = [
-  "PENDING",
-  "CONFIRMED",
-  "SHIPPING",
-  "DELIVERED",
-  "CANCELLED",
-];
+/** Lấy nhiều nhất chừng này đơn một lần, đơn cũ hơn thì lọc theo ngày để xem */
+const TOI_DA = 200;
 
 export default async function TrangDanhSachDon({
   searchParams,
 }: PageProps<"/admin/don-hang">) {
   const nguoiDung = await batBuocDangNhap();
-  const { trangThai } = await searchParams;
-  const locTheo =
-    typeof trangThai === "string" && CAC_TRANG_THAI.includes(trangThai)
-      ? (trangThai as OrderStatus)
-      : null;
+  const loc = docThamSoLoc(await searchParams);
 
   const [danhSach, demTheoTrangThai] = await Promise.all([
     prisma.order.findMany({
-      where: locTheo ? { status: locTheo } : {},
+      where: taoDieuKienLoc(loc),
       orderBy: { createdAt: "desc" },
-      take: 200,
+      take: TOI_DA,
       include: { _count: { select: { items: true } } },
     }),
-    prisma.order.groupBy({ by: ["status"], _count: true }),
+    // Đếm trong phạm vi ngày và từ khoá đang lọc, để con số trên các thẻ
+    // khớp với những gì đang xem
+    prisma.order.groupBy({
+      by: ["status"],
+      where: taoDieuKienLoc(loc, true),
+      _count: true,
+    }),
   ]);
 
   const soLuong = Object.fromEntries(
@@ -48,12 +52,14 @@ export default async function TrangDanhSachDon({
       tieuDe="Đơn hàng"
       moTa="Bấm vào mã đơn để xem chi tiết và đổi trạng thái"
     >
-      {/* Thanh lọc */}
-      <div className="flex flex-wrap gap-2">
+      <ThanhLocDon key={duongDanLoc(loc)} loc={loc} />
+
+      {/* Lọc theo trạng thái */}
+      <div className="mt-4 flex flex-wrap gap-2">
         <Link
-          href="/admin/don-hang"
+          href={duongDanLoc(loc, { trangThai: null })}
           className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-            !locTheo
+            !loc.trangThai
               ? "bg-son-700 text-kem-50"
               : "border border-kem-400 bg-white text-muc-600 hover:border-son-700"
           }`}
@@ -63,9 +69,9 @@ export default async function TrangDanhSachDon({
         {CAC_TRANG_THAI.map((tt) => (
           <Link
             key={tt}
-            href={`/admin/don-hang?trangThai=${tt}`}
+            href={duongDanLoc(loc, { trangThai: tt })}
             className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-              locTheo === tt
+              loc.trangThai === tt
                 ? "bg-son-700 text-kem-50"
                 : "border border-kem-400 bg-white text-muc-600 hover:border-son-700"
             }`}
@@ -77,25 +83,35 @@ export default async function TrangDanhSachDon({
 
       {danhSach.length === 0 ? (
         <p className="mt-6 rounded-lg border border-kem-300 bg-white px-5 py-16 text-center text-sm text-muc-500">
-          Không có đơn hàng nào ở mục này.
+          {dangLoc(loc)
+            ? "Không tìm thấy đơn nào khớp với bộ lọc. Thử xoá bớt điều kiện xem sao."
+            : "Chưa có đơn hàng nào."}
         </p>
       ) : (
-        <BangDonHang
-          danhSach={danhSach.map((don) => ({
-            id: don.id,
-            code: don.code,
-            customerName: don.customerName,
-            phone: don.phone,
-            address: don.address,
-            createdAt: don.createdAt.toISOString(),
-            total: don.total,
-            status: don.status,
-            soMon: don._count.items,
-          }))}
-          trangThaiDangLoc={locTheo}
-        />
-      )}
+        <>
+          <BangDonHang
+            danhSach={danhSach.map((don) => ({
+              id: don.id,
+              code: don.code,
+              customerName: don.customerName,
+              phone: don.phone,
+              address: don.address,
+              createdAt: don.createdAt.toISOString(),
+              total: don.total,
+              status: don.status,
+              soMon: don._count.items,
+            }))}
+            loc={loc}
+          />
 
+          {danhSach.length === TOI_DA && (
+            <p className="mt-3 text-center text-[13px] text-muc-500">
+              Đang hiện {TOI_DA} đơn mới nhất khớp bộ lọc. Muốn xem đơn cũ hơn
+              thì chọn khoảng ngày cụ thể.
+            </p>
+          )}
+        </>
+      )}
     </KhungQuanTri>
   );
 }
