@@ -93,6 +93,8 @@ export function MauCaiDat({ banDau }: { banDau: CaiDat }) {
       ))}
 
       <label className="flex cursor-pointer gap-3 border-t border-kem-300 pt-5">
+        {/* Ô ẩn để khi bỏ đánh dấu vẫn có giá trị gửi lên máy chủ */}
+        <input type="hidden" name="hienGiaGach" value="off" />
         <input
           type="checkbox"
           name="hienGiaGach"

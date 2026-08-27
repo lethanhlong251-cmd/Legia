@@ -2,12 +2,9 @@ import Link from "next/link";
 
 import { prisma } from "@/lib/prisma";
 import { batBuocDangNhap } from "@/lib/xac-thuc";
-import { dinhDangNgay, dinhDangTien } from "@/lib/dinh-dang";
 import { KhungQuanTri } from "@/components/admin/khung-quan-tri";
-import {
-  NHAN_TRANG_THAI,
-  TEN_TRANG_THAI,
-} from "@/components/admin/nhan-trang-thai";
+import { TEN_TRANG_THAI } from "@/components/admin/nhan-trang-thai";
+import { BangDonHang } from "@/components/admin/bang-don-hang";
 import type { OrderStatus } from "@/generated/prisma/enums";
 
 export const dynamic = "force-dynamic";
@@ -78,68 +75,27 @@ export default async function TrangDanhSachDon({
         ))}
       </div>
 
-      <div className="mt-6 overflow-hidden rounded-lg border border-kem-300 bg-white">
-        {danhSach.length === 0 ? (
-          <p className="px-5 py-16 text-center text-sm text-muc-500">
-            Không có đơn hàng nào ở mục này.
-          </p>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[720px] text-sm">
-              <thead className="bg-kem-100 text-left text-xs uppercase tracking-wider text-muc-500">
-                <tr>
-                  <th className="px-5 py-3 font-semibold">Mã đơn</th>
-                  <th className="px-5 py-3 font-semibold">Khách hàng</th>
-                  <th className="px-5 py-3 font-semibold">Địa chỉ</th>
-                  <th className="px-5 py-3 font-semibold">Thời gian</th>
-                  <th className="px-5 py-3 text-right font-semibold">Tổng tiền</th>
-                  <th className="px-5 py-3 font-semibold">Trạng thái</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-kem-200">
-                {danhSach.map((don) => (
-                  <tr key={don.id} className="hover:bg-kem-50">
-                    <td className="px-5 py-3.5 align-top">
-                      <Link
-                        href={`/admin/don-hang/${don.id}`}
-                        className="font-semibold text-son-700 hover:underline"
-                      >
-                        {don.code}
-                      </Link>
-                      <p className="text-[11px] text-muc-500">
-                        {don._count.items} sản phẩm
-                      </p>
-                    </td>
-                    <td className="px-5 py-3.5 align-top">
-                      <p className="font-medium text-muc-800">
-                        {don.customerName}
-                      </p>
-                      <a
-                        href={`tel:${don.phone}`}
-                        className="text-[11px] text-son-700 hover:underline"
-                      >
-                        {don.phone}
-                      </a>
-                    </td>
-                    <td className="max-w-[260px] px-5 py-3.5 align-top text-[13px] text-muc-600">
-                      {don.address}
-                    </td>
-                    <td className="whitespace-nowrap px-5 py-3.5 align-top text-muc-600">
-                      {dinhDangNgay(don.createdAt)}
-                    </td>
-                    <td className="whitespace-nowrap px-5 py-3.5 text-right align-top font-semibold text-muc-800">
-                      {dinhDangTien(don.total)}
-                    </td>
-                    <td className="px-5 py-3.5 align-top">
-                      <NHAN_TRANG_THAI trangThai={don.status} />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
+      {danhSach.length === 0 ? (
+        <p className="mt-6 rounded-lg border border-kem-300 bg-white px-5 py-16 text-center text-sm text-muc-500">
+          Không có đơn hàng nào ở mục này.
+        </p>
+      ) : (
+        <BangDonHang
+          danhSach={danhSach.map((don) => ({
+            id: don.id,
+            code: don.code,
+            customerName: don.customerName,
+            phone: don.phone,
+            address: don.address,
+            createdAt: don.createdAt.toISOString(),
+            total: don.total,
+            status: don.status,
+            soMon: don._count.items,
+          }))}
+          trangThaiDangLoc={locTheo}
+        />
+      )}
+
     </KhungQuanTri>
   );
 }

@@ -2,6 +2,7 @@ import { batBuocDangNhap } from "@/lib/xac-thuc";
 import { layCaiDat } from "@/lib/du-lieu";
 import { KhungQuanTri } from "@/components/admin/khung-quan-tri";
 import { MauCaiDat } from "@/components/admin/mau-cai-dat";
+import { MauCaiDatSPX } from "@/components/admin/mau-cai-dat-spx";
 import { MauDoiMatKhau } from "@/components/admin/mau-doi-mat-khau";
 
 export const dynamic = "force-dynamic";
@@ -24,6 +25,8 @@ export default async function TrangCaiDat() {
         <MauCaiDat banDau={caiDat} />
 
         <div className="space-y-6">
+          <MauCaiDatSPX banDau={caiDat} />
+
           <MauDoiMatKhau />
 
           <section className="rounded-lg border border-kem-300 bg-white p-6">

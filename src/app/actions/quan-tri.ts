@@ -501,15 +501,27 @@ export async function luuCaiDat(formData: FormData): Promise<KetQua> {
     "diaChi",
     "gioLamViec",
     "hienGiaGach",
+    // Thông số bưu gửi cho file SPX
+    "spxCanNang",
+    "spxDai",
+    "spxRong",
+    "spxCao",
+    "spxChoThuHang",
+    "spxChoXemHang",
   ];
 
+  const cacKhoaBatTat = ["hienGiaGach", "spxChoThuHang", "spxChoXemHang"];
+
   for (const khoa of cacKhoa) {
-    const giaTri =
-      khoa === "hienGiaGach"
-        ? formData.get(khoa) === "on"
-          ? "true"
-          : "false"
-        : String(formData.get(khoa) ?? "").trim();
+    // Trang cài đặt có nhiều mẫu riêng, mẫu nào gửi ô nào thì chỉ lưu ô đó,
+    // tránh việc lưu mẫu này lại xoá trắng ô của mẫu kia
+    if (!formData.has(khoa)) continue;
+
+    const giaTri = cacKhoaBatTat.includes(khoa)
+      ? formData.getAll(khoa).includes("on")
+        ? "true"
+        : "false"
+      : String(formData.get(khoa) ?? "").trim();
 
     await prisma.siteSetting.upsert({
       where: { key: khoa },

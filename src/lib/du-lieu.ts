@@ -158,7 +158,21 @@ export async function layCaiDat() {
     diaChi: caiDat.diaChi || "Bán hàng online, giao toàn quốc",
     gioLamViec: caiDat.gioLamViec || "Nhận đơn 24/7",
     hienGiaGach: caiDat.hienGiaGach !== "false",
+
+    // Thông số bưu gửi dùng khi xuất file cho SPX (xem src/lib/xuat-spx.ts)
+    spxCanNang: soHoacMacDinh(caiDat.spxCanNang, 0.5),
+    spxDai: soHoacMacDinh(caiDat.spxDai, 25),
+    spxRong: soHoacMacDinh(caiDat.spxRong, 20),
+    spxCao: soHoacMacDinh(caiDat.spxCao, 15),
+    spxChoThuHang: caiDat.spxChoThuHang === "true",
+    spxChoXemHang: caiDat.spxChoXemHang !== "false",
   };
+}
+
+/** Đọc số từ ô cài đặt, ô trống hay gõ sai thì lấy giá trị mặc định */
+function soHoacMacDinh(giaTri: string | undefined, macDinh: number) {
+  const so = Number(String(giaTri ?? "").replace(",", "."));
+  return Number.isFinite(so) && so > 0 ? so : macDinh;
 }
 
 export type CaiDat = Awaited<ReturnType<typeof layCaiDat>>;

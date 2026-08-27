@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, MapPin, Phone, StickyNote } from "lucide-react";
+import { ArrowLeft, FileSpreadsheet, MapPin, Phone, StickyNote } from "lucide-react";
 
 import { prisma } from "@/lib/prisma";
 import { batBuocDangNhap } from "@/lib/xac-thuc";
@@ -30,10 +30,20 @@ export default async function TrangChiTietDon({
       tieuDe={`Đơn ${don.code}`}
       moTa={dinhDangNgay(don.createdAt)}
       hanhDong={
-        <Link href="/admin/don-hang" className="nut-phu !py-2 !text-[13px]">
-          <ArrowLeft className="h-3.5 w-3.5" />
-          Danh sách đơn
-        </Link>
+        <>
+          <a
+            href={`/admin/don-hang/xuat-spx?ma=${don.id}`}
+            download
+            className="nut-phu !py-2 !text-[13px]"
+          >
+            <FileSpreadsheet className="h-3.5 w-3.5" />
+            Xuất file SPX
+          </a>
+          <Link href="/admin/don-hang" className="nut-phu !py-2 !text-[13px]">
+            <ArrowLeft className="h-3.5 w-3.5" />
+            Danh sách đơn
+          </Link>
+        </>
       }
     >
       <div className="grid gap-6 lg:grid-cols-[1.7fr_1fr]">

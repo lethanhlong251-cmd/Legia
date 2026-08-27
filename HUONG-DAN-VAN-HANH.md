@@ -16,7 +16,7 @@ https://chourmas.online/admin
 - **Tài khoản:** `admin`
 - **Mật khẩu:** mật khẩu đã được cấp khi cài đặt website
 
-> **Quên mật khẩu?** Xem mục 8 ở cuối tài liệu này.
+> **Quên mật khẩu?** Xem mục 9 ở cuối tài liệu này.
 
 Sau khi đăng nhập, bạn ở trong hệ thống 7 ngày rồi mới phải đăng nhập lại.
 
@@ -25,7 +25,7 @@ Sau khi đăng nhập, bạn ở trong hệ thống 7 ngày rồi mới phải �
 ## 2. Xử lý đơn hàng mới
 
 Khi có khách đặt hàng, bạn nhận được tin nhắn Telegram ngay lập tức (nếu đã cài
-theo mục 7). Đơn hàng cũng luôn hiện trong trang quản trị.
+theo mục 8). Đơn hàng cũng luôn hiện trong trang quản trị.
 
 **Các bước xử lý một đơn:**
 
@@ -52,7 +52,32 @@ theo mục 7). Đơn hàng cũng luôn hiện trong trang quản trị.
 
 ---
 
-## 3. Sửa giá sản phẩm
+## 3. Gửi hàng qua SPX — xuất file đơn hàng loạt
+
+Thay vì gõ tay từng đơn trên spx.vn, bạn tải cả loạt đơn lên bằng một file Excel.
+
+1. Vào **Đơn hàng**, chọn mục cần gửi (thường là **Đã xác nhận**)
+2. Đánh dấu vào ô vuông trước các đơn muốn gửi.
+   Không đánh dấu đơn nào thì file sẽ lấy toàn bộ đơn đang hiện.
+3. Bấm **Xuất file SPX** — máy tính tải về một file Excel
+4. **Mở file ra kiểm tra lại cột Tỉnh/Thành Phố và Xã/Phường.**
+   Khách gõ địa chỉ tự do nên máy chỉ đoán, có thể sai — sửa lại cho đúng
+   rồi lưu file.
+5. Lên **spx.vn** → **Tạo đơn** → **Tạo nhiều đơn hàng** → **Chọn tệp** →
+   tải file vừa lưu lên
+
+Muốn xuất một đơn lẻ thì mở đơn đó ra rồi bấm **Xuất file SPX** ở góc trên.
+
+**Các thông số điền sẵn trong file** (cân nặng, kích thước hộp, cho xem hàng
+hay không) nằm ở **Cài đặt → Thông số gửi hàng SPX**. Sửa ở đó, lần xuất sau
+sẽ dùng số mới.
+
+> Tiền COD trong file luôn bằng tổng tiền đơn hàng, hình thức thanh toán để
+> "Người gửi trả" phí vận chuyển.
+
+---
+
+## 4. Sửa giá sản phẩm
 
 1. Vào **Sản phẩm** ở thanh bên trái
 2. Bấm vào **tên sản phẩm** muốn sửa
@@ -69,7 +94,7 @@ Website tự tính và hiện phần trăm giảm.
 
 ---
 
-## 4. Báo hết hàng / còn hàng
+## 5. Báo hết hàng / còn hàng
 
 **Cách nhanh nhất:** vào **Sản phẩm**, tìm dòng sản phẩm, gạt công tắc ở cột
 **Còn hàng**. Xong. Không cần bấm Lưu.
@@ -86,7 +111,7 @@ Khi tắt "Hiện trên web": sản phẩm **biến mất hoàn toàn** khỏi w
 
 ---
 
-## 5. Thêm sản phẩm mới
+## 6. Thêm sản phẩm mới
 
 1. Vào **Sản phẩm** → bấm **Thêm sản phẩm** ở góc trên bên phải
 2. Điền các ô **bắt buộc** (có dấu sao đỏ):
@@ -117,7 +142,7 @@ Muốn đổi ảnh đại diện, di chuột lên ảnh khác rồi bấm **Đ�
 
 ---
 
-## 6. Bán thêm mặt hàng khác (bột, dụng cụ, khuôn bánh in…)
+## 7. Bán thêm mặt hàng khác (bột, dụng cụ, khuôn bánh in…)
 
 Website đã dựng sẵn cấu trúc cho việc này. Bạn **không cần thuê code lại**.
 
@@ -132,7 +157,7 @@ danh mục** cho phép tạo danh mục con (ví dụ `Khuôn bánh` → `Khuôn
 
 ---
 
-## 7. Cài thông báo Telegram khi có đơn mới
+## 8. Cài thông báo Telegram khi có đơn mới
 
 Làm một lần, dùng mãi. Mất khoảng 5 phút.
 
@@ -152,7 +177,7 @@ Trang **Cài đặt** trong admin có hướng dẫn chi tiết kèm mẫu file.
 
 ---
 
-## 8. Đổi mật khẩu
+## 9. Đổi mật khẩu
 
 **Cách thường:** vào **Cài đặt** → mục **Đổi mật khẩu**, nhập mật khẩu cũ và
 mật khẩu mới.
@@ -167,7 +192,7 @@ Hệ thống sẽ tạo một mật khẩu mới và in ra màn hình.
 
 ---
 
-## 9. Sửa thông tin liên hệ
+## 10. Sửa thông tin liên hệ
 
 Vào **Cài đặt** → mục **Thông tin liên hệ**. Sửa số điện thoại, Zalo, link
 Facebook, khu vực bán hàng, thời gian nhận đơn.
@@ -177,7 +202,7 @@ Các thông tin này hiện ở: đầu trang, chân trang, trang Liên hệ, v�
 
 ---
 
-## 10. Những việc CẦN người kỹ thuật
+## 11. Những việc CẦN người kỹ thuật
 
 Các việc sau phải sửa trong code, không làm được trong admin:
 
@@ -192,7 +217,7 @@ Các việc sau phải sửa trong code, không làm được trong admin:
 
 ---
 
-## 11. Sao lưu dữ liệu
+## 12. Sao lưu dữ liệu
 
 Toàn bộ đơn hàng và sản phẩm nằm trong **một file duy nhất**:
 
