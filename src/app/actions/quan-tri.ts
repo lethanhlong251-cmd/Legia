@@ -127,6 +127,33 @@ export async function doiTrangThaiDon(
   return { ok: true, thongBao: "Đã cập nhật trạng thái đơn." };
 }
 
+/**
+ * Đổi trạng thái cho nhiều đơn cùng lúc.
+ * Dùng khi vừa gửi cả loạt đơn cho bên vận chuyển, đánh dấu một lượt cho nhanh.
+ */
+export async function doiTrangThaiNhieuDon(
+  cacIdDon: string[],
+  trangThai: string,
+): Promise<KetQua> {
+  await batBuocDangNhap();
+
+  if (!(TRANG_THAI_HOP_LE as readonly string[]).includes(trangThai)) {
+    return { ok: false, loi: "Trạng thái không hợp lệ." };
+  }
+  if (cacIdDon.length === 0) {
+    return { ok: false, loi: "Chưa chọn đơn nào." };
+  }
+
+  const kq = await prisma.order.updateMany({
+    where: { id: { in: cacIdDon } },
+    data: { status: trangThai as OrderStatus },
+  });
+
+  revalidatePath("/admin/don-hang");
+  revalidatePath("/admin");
+  return { ok: true, thongBao: `Đã cập nhật ${kq.count} đơn.` };
+}
+
 export async function luuGhiChuDon(
   idDon: string,
   ghiChu: string,

@@ -37,6 +37,17 @@ theo mục 8). Đơn hàng cũng luôn hiện trong trang quản trị.
 6. Bấm **Đang giao**, và ghi mã vận đơn vào ô **Ghi chú nội bộ** rồi bấm Lưu
 7. Khi khách đã nhận hàng và trả tiền, bấm **Đã giao**
 
+**Đổi trạng thái nhanh, không cần mở đơn:** ngay trong danh sách đơn hàng, cột
+**Trạng thái** là một ô chọn — bấm vào rồi chọn trạng thái mới, hệ thống lưu
+luôn.
+
+**Đổi cả loạt:** đánh dấu ô vuông trước những đơn cần đổi, rồi chọn ở ô
+**"Đánh dấu tất cả là…"** phía trên bảng. Tiện nhất khi vừa giao cả chồng đơn
+cho bên vận chuyển — chọn hết rồi đánh dấu **Đang giao** một lượt.
+
+> Chọn **Đã huỷ** thì hệ thống hỏi lại một lần cho chắc, vì huỷ nhầm thì phải
+> vào từng đơn sửa lại.
+
 **Ý nghĩa các trạng thái:**
 
 | Trạng thái | Khi nào dùng |

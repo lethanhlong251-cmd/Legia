@@ -1,5 +1,14 @@
 /** Nhãn màu cho trạng thái đơn hàng, dùng chung ở nhiều trang quản trị */
 
+/** Thứ tự một đơn thường đi qua, dùng cho các ô chọn trạng thái */
+export const THU_TU_TRANG_THAI = [
+  "PENDING",
+  "CONFIRMED",
+  "SHIPPING",
+  "DELIVERED",
+  "CANCELLED",
+];
+
 export const TEN_TRANG_THAI: Record<string, string> = {
   PENDING: "Chờ xác nhận",
   CONFIRMED: "Đã xác nhận",
@@ -8,7 +17,7 @@ export const TEN_TRANG_THAI: Record<string, string> = {
   CANCELLED: "Đã huỷ",
 };
 
-const MAU_TRANG_THAI: Record<string, string> = {
+export const MAU_TRANG_THAI: Record<string, string> = {
   PENDING: "bg-amber-100 text-amber-800",
   CONFIRMED: "bg-blue-100 text-blue-800",
   SHIPPING: "bg-indigo-100 text-indigo-800",

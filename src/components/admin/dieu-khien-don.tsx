@@ -4,9 +4,7 @@ import { useState, useTransition } from "react";
 import { Check, Loader2 } from "lucide-react";
 
 import { doiTrangThaiDon, luuGhiChuDon } from "@/app/actions/quan-tri";
-import { TEN_TRANG_THAI } from "./nhan-trang-thai";
-
-const THU_TU = ["PENDING", "CONFIRMED", "SHIPPING", "DELIVERED", "CANCELLED"];
+import { TEN_TRANG_THAI, THU_TU_TRANG_THAI } from "./nhan-trang-thai";
 
 export function DieuKhienDon({
   idDon,
@@ -44,7 +42,7 @@ export function DieuKhienDon({
           Trạng thái đơn
         </h2>
         <div className="mt-3 flex flex-col gap-2">
-          {THU_TU.map((tt) => {
+          {THU_TU_TRANG_THAI.map((tt) => {
             const dangChon = tt === trangThaiHienTai;
             return (
               <button
