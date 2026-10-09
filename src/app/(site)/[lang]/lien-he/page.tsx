@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { thongTinChiaSe } from "@/lib/chia-se";
 import { notFound } from "next/navigation";
 import { Clock, MapPin, MessageCircle, Phone } from "lucide-react";
 
@@ -13,6 +14,11 @@ export async function generateMetadata({
   return {
     title: t.dieuHuong.lienHe,
     alternates: { canonical: `/${lang}/lien-he` },
+    ...thongTinChiaSe({
+      lang,
+      duongDan: "/lien-he",
+      tieuDe: t.dieuHuong.lienHe,
+    }),
   };
 }
 

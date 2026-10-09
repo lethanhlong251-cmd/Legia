@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { thongTinChiaSe } from "@/lib/chia-se";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -14,6 +15,12 @@ export async function generateMetadata({
     title: t.huongDan.tieuDe,
     description: t.huongDan.moTa,
     alternates: { canonical: `/${lang}/huong-dan` },
+    ...thongTinChiaSe({
+      lang,
+      duongDan: "/huong-dan",
+      tieuDe: t.huongDan.tieuDe,
+      moTa: t.huongDan.moTa,
+    }),
   };
 }
 

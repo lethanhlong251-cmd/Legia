@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { thongTinChiaSe } from "@/lib/chia-se";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BadgeCheck, PackageCheck, ShieldCheck, Truck } from "lucide-react";
@@ -15,6 +16,12 @@ export async function generateMetadata({
     title: t.dieuHuong.gioiThieu,
     description: t.chanTrang.gioiThieuNgan,
     alternates: { canonical: `/${lang}/gioi-thieu` },
+    ...thongTinChiaSe({
+      lang,
+      duongDan: "/gioi-thieu",
+      tieuDe: t.dieuHuong.gioiThieu,
+      moTa: t.chanTrang.gioiThieuNgan,
+    }),
   };
 }
 

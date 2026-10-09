@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { thongTinChiaSe } from "@/lib/chia-se";
 import { notFound } from "next/navigation";
 import { AlertTriangle } from "lucide-react";
 
@@ -21,6 +22,11 @@ export async function generateMetadata({
   return {
     title: trang[lang as NgonNgu].tieuDe,
     alternates: { canonical: `/${lang}/chinh-sach/${slug}` },
+    ...thongTinChiaSe({
+      lang,
+      duongDan: `/chinh-sach/${slug}`,
+      tieuDe: trang[lang as NgonNgu].tieuDe,
+    }),
   };
 }
 

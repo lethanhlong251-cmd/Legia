@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { thongTinChiaSe } from "@/lib/chia-se";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
@@ -18,6 +19,12 @@ export async function generateMetadata({
     title: t.sanPham.tieuDeTrang,
     description: t.sanPham.moTaTrang,
     alternates: { canonical: `/${lang}/san-pham` },
+    ...thongTinChiaSe({
+      lang,
+      duongDan: "/san-pham",
+      tieuDe: t.sanPham.tieuDeTrang,
+      moTa: t.sanPham.moTaTrang,
+    }),
   };
 }
 

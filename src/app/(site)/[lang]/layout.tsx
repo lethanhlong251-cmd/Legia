@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { MO_TA_CHUNG, TIEU_DE_CHUNG, thongTinChiaSe } from "@/lib/chia-se";
 import { Cormorant_Garamond, Be_Vietnam_Pro } from "next/font/google";
 import { notFound } from "next/navigation";
 import "@/app/globals.css";
@@ -37,13 +38,8 @@ export async function generateMetadata({
   const t = layBanDich(lang);
   const laViet = lang !== "en";
 
-  const tieuDe = laViet
-    ? "Khuôn bánh trung thu Thach Lan — Độc quyền hoa văn Việt"
-    : "Thach Lan Mooncake Molds — Exclusive Vietnamese patterns";
-
-  const moTa = laViet
-    ? "Khuôn bánh trung thu lò xo hoa văn độc quyền. Miễn phí vận chuyển toàn quốc, nhận hàng kiểm tra rồi mới thanh toán. Thach Lan tự thiết kế hoa văn và bán trực tiếp."
-    : "Spring-loaded mooncake molds with exclusive Vietnamese patterns. Free nationwide delivery, inspect before you pay. Designed and sold directly by Thach Lan.";
+  const tieuDe = TIEU_DE_CHUNG[laViet ? "vi" : "en"];
+  const moTa = MO_TA_CHUNG[laViet ? "vi" : "en"];
 
   return {
     metadataBase: new URL(
@@ -60,7 +56,6 @@ export async function generateMetadata({
           "khuôn bánh 200g",
           "đồ làm bánh",
           "Thach Lan",
-          "Thach Lan",
         ]
       : ["mooncake mold", "vietnamese mooncake mold", "baking tools", "Thach Lan"],
     alternates: {
@@ -72,30 +67,7 @@ export async function generateMetadata({
         "x-default": "/vi",
       },
     },
-    openGraph: {
-      type: "website",
-      locale: laViet ? "vi_VN" : "en_US",
-      siteName: t.chung.tenShop,
-      title: tieuDe,
-      description: moTa,
-      // Ảnh hiện ra khi dán link vào Messenger, Zalo, Facebook
-      images: [
-        {
-          url: "/anh-chia-se-thachlan.jpg",
-          width: 1200,
-          height: 630,
-          alt: laViet
-            ? "Khuôn bánh trung thu Thach Lan — Độc quyền hoa văn Việt"
-            : "Thach Lan Mooncake Molds — Exclusive Vietnamese patterns",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: tieuDe,
-      description: moTa,
-      images: ["/anh-chia-se-thachlan.jpg"],
-    },
+    ...thongTinChiaSe({ lang, duongDan: "" }),
     robots: { index: true, follow: true },
     manifest: "/manifest.webmanifest",
     // Màu thanh trạng thái điện thoại, cho khớp với dải đỏ trên đầu trang
