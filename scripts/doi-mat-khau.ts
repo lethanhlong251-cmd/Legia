@@ -35,7 +35,7 @@ async function main() {
   await prisma.adminUser.upsert({
     where: { username: "admin" },
     update: { passwordHash },
-    create: { username: "admin", passwordHash, name: "Quản trị Thạch Lan" },
+    create: { username: "admin", passwordHash, name: "Quản trị Thach Lan" },
   });
 
   console.log("\n  Đã đổi mật khẩu quản trị.");

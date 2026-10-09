@@ -10,7 +10,7 @@ const beVietnam = Be_Vietnam_Pro({
 });
 
 export const metadata: Metadata = {
-  title: "Quản trị Thạch Lan",
+  title: "Quản trị Thach Lan",
   robots: { index: false, follow: false },
 };
 

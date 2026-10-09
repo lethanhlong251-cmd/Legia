@@ -1,7 +1,7 @@
-# Thạch Lan — Khuôn bánh trung thu hoa văn độc quyền
+# Thach Lan — Khuôn bánh trung thu hoa văn độc quyền
 
-Website bán hàng của Thạch Lan, đối tác phân phối chính thức các mẫu khuôn bánh
-trung thu độc quyền do Thạch Lan thiết kế.
+Website bán hàng của Thach Lan, đối tác phân phối chính thức các mẫu khuôn bánh
+trung thu độc quyền do Thach Lan thiết kế.
 
 **Địa chỉ:** https://thachlan.com · **Quản trị:** https://thachlan.com/admin
 

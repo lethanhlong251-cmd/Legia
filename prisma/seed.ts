@@ -40,7 +40,7 @@ const DANH_MUC = [
         nameVi: "Khuôn bánh trung thu",
         nameEn: "Mooncake molds",
         descVi:
-          "Khuôn lò xo nhấn tay, hoa văn độc quyền do Thạch Lan tự thiết kế và bán trực tiếp.",
+          "Khuôn lò xo nhấn tay, hoa văn độc quyền do Thach Lan tự thiết kế và bán trực tiếp.",
         descEn:
           "Hand-press spring molds carrying exclusive patterns designed and sold directly by Thach Lan.",
         sortOrder: 1,
@@ -249,7 +249,7 @@ async function main() {
       data: {
         username: "admin",
         passwordHash: await bcrypt.hash(matKhau, 12),
-        name: "Quản trị Thạch Lan",
+        name: "Quản trị Thach Lan",
       },
     });
     console.log("\n  ╔══════════════════════════════════════════════╗");

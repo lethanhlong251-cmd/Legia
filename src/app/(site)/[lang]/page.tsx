@@ -10,7 +10,7 @@ import { HienDan } from "@/components/site/hien-dan";
 
 /**
  * TRANG CHỦ — phong cách tối giản, sang trọng.
- * Thứ tự: mở đầu → 4 cam kết → sản phẩm nổi bật → về Thạch Lan →
+ * Thứ tự: mở đầu → 4 cam kết → sản phẩm nổi bật → về Thach Lan →
  * danh mục → lời mời tư vấn.
  */
 export default async function TrangChu({ params }: PageProps<"/[lang]">) {
@@ -160,7 +160,7 @@ export default async function TrangChu({ params }: PageProps<"/[lang]">) {
         </div>
       </section>
 
-      {/* ============ VỀ THẠCH LAN ============ */}
+      {/* ============ VỀ THACH LAN ============ */}
       <section className="bg-kem-200">
         <div className="khung grid items-center gap-12 py-20 sm:py-24 lg:grid-cols-2 lg:gap-16">
           {cauChuyen && (
@@ -186,13 +186,13 @@ export default async function TrangChu({ params }: PageProps<"/[lang]">) {
               {vi ? (
                 <>
                   <p>
-                    Thạch Lan tự tay thiết kế từng bộ hoa văn — sen tứ quý, mẫu
+                    Thach Lan tự tay thiết kế từng bộ hoa văn — sen tứ quý, mẫu
                     đơn, cúc, cá đôi, thần tài — để mâm cỗ trung thu của gia
                     đình Việt có những chiếc bánh không lẫn với ai.
                   </p>
                   <p>
                     Không qua trung gian: bạn mua khuôn trực tiếp từ người làm
-                    ra hoa văn. Và vì lòng tin phải đến trước đồng tiền, Thạch
+                    ra hoa văn. Và vì lòng tin phải đến trước đồng tiền, Thach
                     Lan{" "}
                     <strong className="font-semibold text-muc-800">
                       không bao giờ yêu cầu chuyển khoản trước
@@ -273,7 +273,7 @@ export default async function TrangChu({ params }: PageProps<"/[lang]">) {
           </h2>
           <p className="mt-5 max-w-lg text-base leading-[1.75] text-dong-200">
             {vi
-              ? "Gửi ảnh khay bánh bạn đang dùng qua Zalo, Thạch Lan tư vấn đúng cỡ trong vài phút."
+              ? "Gửi ảnh khay bánh bạn đang dùng qua Zalo, Thach Lan tư vấn đúng cỡ trong vài phút."
               : "Send us a photo of the tray you use on Zalo and we will tell you the right mold size within minutes."}
           </p>
           <div className="mt-9 flex flex-wrap justify-center gap-3">

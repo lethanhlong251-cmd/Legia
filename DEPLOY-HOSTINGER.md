@@ -1,4 +1,4 @@
-# Đưa website Thạch Lan lên Hostinger
+# Đưa website Thach Lan lên Hostinger
 
 Hướng dẫn từng bước, chạy từ đầu đến khi website chạy thật trên tên miền.
 

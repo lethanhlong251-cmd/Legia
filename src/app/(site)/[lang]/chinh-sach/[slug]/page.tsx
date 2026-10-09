@@ -66,7 +66,7 @@ export default async function TrangChinhSach({
       <div className="mt-12 rounded-lg border border-kem-300 bg-kem-50 p-6">
         <p className="text-sm leading-relaxed text-muc-600">
           {lang === "vi"
-            ? "Mọi thắc mắc liên quan đến chính sách này, vui lòng liên hệ Thạch Lan qua số"
+            ? "Mọi thắc mắc liên quan đến chính sách này, vui lòng liên hệ Thach Lan qua số"
             : "For any question about this policy, please contact Thach Lan at"}{" "}
           <a
             href={`tel:${caiDat.hotline}`}

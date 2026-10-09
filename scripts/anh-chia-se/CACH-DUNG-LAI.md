@@ -3,7 +3,7 @@
 Ảnh hiện ra khi dán link website vào Messenger, Zalo hay Facebook nằm ở:
 
 ```
-public/anh-chia-se-thach-lan.jpg      (1200 × 630)
+public/anh-chia-se-thachlan.jpg      (1200 × 630)
 ```
 
 Ảnh này được dựng sẵn một lần rồi lưu thành file, nên website chạy không tốn
@@ -45,7 +45,7 @@ chia sẻ"* và chỉ ra chỗ muốn đổi. Quy trình gồm ba bước:
 1. Chép `mau.html` vào thư mục `public/`, chạy `npm run dev`
 2. Mở trang đó trong trình duyệt, vẽ nội dung ra thẻ `canvas` kích thước
    1200×630 rồi xuất ra JPEG
-3. Lưu đè lên `public/anh-chia-se-thach-lan.jpg`, sau đó xoá file HTML khỏi `public/`
+3. Lưu đè lên `public/anh-chia-se-thachlan.jpg`, sau đó xoá file HTML khỏi `public/`
 
 > **Vì sao không để sẵn công cụ tự động?** Việc đó cần một đường dẫn cho phép
 > ghi file lên máy chủ. Để lại trong mã nguồn của một website bán hàng là rủi

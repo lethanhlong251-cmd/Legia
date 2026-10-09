@@ -112,7 +112,7 @@ async function main() {
   console.log("");
   console.log("   2. Tạo mật khẩu ứng dụng:");
   console.log("      https://myaccount.google.com/apppasswords");
-  console.log("      Đặt tên bất kỳ, ví dụ 'Thạch Lan'. Google trả về một");
+  console.log("      Đặt tên bất kỳ, ví dụ 'Thach Lan'. Google trả về một");
   console.log("      chuỗi 16 chữ cái dạng: abcd efgh ijkl mnop");
   console.log("");
   console.log("   Không tạo được mật khẩu ứng dụng thường là do chưa bật");

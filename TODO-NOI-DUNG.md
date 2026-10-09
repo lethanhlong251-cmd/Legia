@@ -10,7 +10,7 @@ Ghi rõ **sửa ở đâu** để làm cho nhanh.
 ### 1. Duyệt lại 3 trang chính sách
 
 Nội dung hiện tại được soạn theo **thông lệ chung** của thương mại điện tử Việt
-Nam, chưa phải cách vận hành thật của Thạch Lan. Khách đọc và tin theo, nên sai
+Nam, chưa phải cách vận hành thật của Thach Lan. Khách đọc và tin theo, nên sai
 là mất uy tín.
 
 **Sửa ở:** `src/noi-dung/chinh-sach.ts`
@@ -117,9 +117,9 @@ sẽ không mất khách. Chi phí khoảng 750.000đ/năm.
 
 ### 10. Watermark ảnh
 
-Toàn bộ ảnh hiện có watermark "Khuôn thiết kế Thạch Lan". Điều này **có lợi** —
-nó chứng minh hàng chính hãng, và website đã nói rõ Thạch Lan là đối tác phân
-phối chính thức. Nếu sau này muốn ảnh mang thương hiệu Thạch Lan, cần chụp lại
+Toàn bộ ảnh hiện có watermark "Khuôn thiết kế Thach Lan". Điều này **có lợi** —
+nó chứng minh hàng chính hãng, và website đã nói rõ Thach Lan là đối tác phân
+phối chính thức. Nếu sau này muốn ảnh mang thương hiệu Thach Lan, cần chụp lại
 bộ ảnh mới.
 
 ---

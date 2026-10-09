@@ -1,5 +1,5 @@
 /**
- * LOGO THẠCH LAN
+ * LOGO THACH LAN
  * --------------
  * Biểu tượng là một mặt khuôn bánh trung thu 8 cánh, bên trong là hoa sen 6 cánh.
  * Vẽ bằng SVG nên phóng to cỡ nào cũng nét, in ấn được, và đổi màu theo nền.
@@ -54,7 +54,7 @@ export function BieuTuongKhuon({
       viewBox="-50 -50 100 100"
       className={className}
       role="img"
-      aria-label="Thạch Lan"
+      aria-label="Thach Lan"
       fill="none"
     >
       {/* Cánh khuôn vòng ngoài */}
@@ -114,7 +114,7 @@ export function Logo({
             toi ? "text-kem-50" : "text-muc-900"
           }`}
         >
-          THẠCH LAN
+          THACH LAN
         </span>
         {hienSlogan && (
           <span

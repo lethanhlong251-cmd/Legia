@@ -38,11 +38,11 @@ export async function generateMetadata({
   const laViet = lang !== "en";
 
   const tieuDe = laViet
-    ? "Khuôn bánh trung thu Thạch Lan — Độc quyền hoa văn Việt"
+    ? "Khuôn bánh trung thu Thach Lan — Độc quyền hoa văn Việt"
     : "Thach Lan Mooncake Molds — Exclusive Vietnamese patterns";
 
   const moTa = laViet
-    ? "Khuôn bánh trung thu lò xo hoa văn độc quyền. Miễn phí vận chuyển toàn quốc, nhận hàng kiểm tra rồi mới thanh toán. Thạch Lan tự thiết kế hoa văn và bán trực tiếp."
+    ? "Khuôn bánh trung thu lò xo hoa văn độc quyền. Miễn phí vận chuyển toàn quốc, nhận hàng kiểm tra rồi mới thanh toán. Thach Lan tự thiết kế hoa văn và bán trực tiếp."
     : "Spring-loaded mooncake molds with exclusive Vietnamese patterns. Free nationwide delivery, inspect before you pay. Designed and sold directly by Thach Lan.";
 
   return {
@@ -60,7 +60,7 @@ export async function generateMetadata({
           "khuôn bánh 200g",
           "đồ làm bánh",
           "Thach Lan",
-          "Thạch Lan",
+          "Thach Lan",
         ]
       : ["mooncake mold", "vietnamese mooncake mold", "baking tools", "Thach Lan"],
     alternates: {
@@ -81,11 +81,11 @@ export async function generateMetadata({
       // Ảnh hiện ra khi dán link vào Messenger, Zalo, Facebook
       images: [
         {
-          url: "/anh-chia-se-thach-lan.jpg",
+          url: "/anh-chia-se-thachlan.jpg",
           width: 1200,
           height: 630,
           alt: laViet
-            ? "Khuôn bánh trung thu Thạch Lan — Độc quyền hoa văn Việt"
+            ? "Khuôn bánh trung thu Thach Lan — Độc quyền hoa văn Việt"
             : "Thach Lan Mooncake Molds — Exclusive Vietnamese patterns",
         },
       ],
@@ -94,14 +94,14 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: tieuDe,
       description: moTa,
-      images: ["/anh-chia-se-thach-lan.jpg"],
+      images: ["/anh-chia-se-thachlan.jpg"],
     },
     robots: { index: true, follow: true },
     manifest: "/manifest.webmanifest",
     // Màu thanh trạng thái điện thoại, cho khớp với dải đỏ trên đầu trang
     appleWebApp: {
       capable: true,
-      title: "Thạch Lan",
+      title: "Thach Lan",
       statusBarStyle: "black-translucent",
     },
   };

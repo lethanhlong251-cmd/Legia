@@ -54,20 +54,20 @@ export async function generateMetadata({
     alternates: { canonical: `/${lang}/san-pham/${slug}` },
     openGraph: {
       type: "website",
-      siteName: "Thạch Lan",
+      siteName: "Thach Lan",
       title: ten,
       description: moTa,
       // Chia sẻ trang sản phẩm thì hiện đúng ảnh mẫu khuôn đó.
       // Không có ảnh thì dùng ảnh chung của shop để không bị trống trơn.
       images: anh
         ? [{ url: anh.url, width: 1400, height: 1400, alt: ten }]
-        : [{ url: "/anh-chia-se-thach-lan.jpg", width: 1200, height: 630, alt: ten }],
+        : [{ url: "/anh-chia-se-thachlan.jpg", width: 1200, height: 630, alt: ten }],
     },
     twitter: {
       card: "summary_large_image",
       title: ten,
       description: moTa,
-      images: [anh?.url ?? "/anh-chia-se-thach-lan.jpg"],
+      images: [anh?.url ?? "/anh-chia-se-thachlan.jpg"],
     },
   };
 }
@@ -122,7 +122,7 @@ export default async function TrangChiTietSanPham({
     name: ten,
     description: theoNgonNgu(lang, sanPham.shortDescVi, sanPham.shortDescEn),
     sku: sanPham.sku,
-    brand: { "@type": "Brand", name: "Thạch Lan" },
+    brand: { "@type": "Brand", name: "Thach Lan" },
     image: sanPham.images.map((a) => a.url),
     offers: {
       "@type": "AggregateOffer",

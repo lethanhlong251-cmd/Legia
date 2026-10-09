@@ -60,7 +60,7 @@ export default async function TrangGioiThieu({
           {vi ? (
             <>
               <p className="font-display text-xl leading-relaxed text-muc-900">
-                Thạch Lan bắt đầu từ một điều rất giản dị: một chiếc bánh trung
+                Thach Lan bắt đầu từ một điều rất giản dị: một chiếc bánh trung
                 thu đẹp phải bắt đầu từ một chiếc khuôn đủ sắc nét.
               </p>
               <p>
@@ -72,7 +72,7 @@ export default async function TrangGioiThieu({
               </p>
               <p>
                 Vì vậy{" "}
-                <strong className="text-muc-900">Thạch Lan</strong> tự tay thiết
+                <strong className="text-muc-900">Thach Lan</strong> tự tay thiết
                 kế từng bộ hoa văn — sen tứ quý, mẫu đơn, cúc, cá đôi, thần tài —
                 và bán trực tiếp tới bạn,{" "}
                 <strong className="text-muc-900">không qua trung gian</strong>.
@@ -82,7 +82,7 @@ export default async function TrangGioiThieu({
               <p>
                 Chúng tôi cũng biết chuyện mua hàng qua mạng không phải lúc nào
                 cũng dễ chịu. Đã có quá nhiều người chuyển khoản rồi nhận về một
-                thứ khác hẳn với ảnh. Nên Thạch Lan làm ngược lại:{" "}
+                thứ khác hẳn với ảnh. Nên Thach Lan làm ngược lại:{" "}
                 <strong className="text-muc-900">
                   chúng tôi không bao giờ yêu cầu bạn chuyển khoản trước
                 </strong>
@@ -92,7 +92,7 @@ export default async function TrangGioiThieu({
                 nào.
               </p>
               <p>
-                Trước mắt Thạch Lan tập trung vào khuôn bánh trung thu. Nhưng
+                Trước mắt Thach Lan tập trung vào khuôn bánh trung thu. Nhưng
                 chúng tôi đang chuẩn bị để mang thêm về những dụng cụ và nguyên
                 liệu làm bánh khác — vẫn với đúng cách làm này: chọn kỹ, nói
                 thật, và để bạn kiểm tra trước khi trả tiền.

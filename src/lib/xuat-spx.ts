@@ -285,7 +285,7 @@ export function taoFileSPX(danhSachDon: DonDeXuat[], caiDat: CaiDatSPX) {
   ]);
 }
 
-/** Tên file gợi ý khi tải về: SPX-Thạch Lan-27-08-2026-8don.xlsx */
+/** Tên file gợi ý khi tải về: SPX-Thach Lan-27-08-2026-8don.xlsx */
 export function tenFileSPX(soDon: number) {
   const gio = new Intl.DateTimeFormat("vi-VN", {
     day: "2-digit",

@@ -1,6 +1,7 @@
 /**
- * ĐỔI THƯƠNG HIỆU TRONG CƠ SỞ DỮ LIỆU: Chourmas → Thạch Lan
- * ----------------------------------------------------------
+ * ĐỔI THƯƠNG HIỆU TRONG CƠ SỞ DỮ LIỆU: Chourmas / Thạch Lan → Thach Lan
+ * ----------------------------------------------------------------------
+ * Tên thương hiệu viết KHÔNG DẤU: "Thach Lan" (chữ hoa: "THACH LAN").
  * Mô tả sản phẩm, danh mục, chữ thay thế của ảnh... nằm trong cơ sở dữ liệu,
  * không nằm trong code, nên sửa code không đổi được chúng. Script này sửa
  * thẳng trong cơ sở dữ liệu.
@@ -8,7 +9,7 @@
  * Chạy:  npm run doi-thuong-hieu
  *
  * An toàn để chạy nhiều lần: lần sau không còn gì để đổi thì không làm gì.
- * Chỉ sửa đúng những câu nhắc tới Chourmas / "phân phối", không đụng nội
+ * Chỉ sửa đúng những câu nhắc tới Chourmas / Thạch Lan / "phân phối", không đụng nội
  * dung khác bạn đã tự sửa trong trang quản trị.
  */
 
@@ -54,12 +55,16 @@ const CAU_THAY: [string, string][] = [
 
 function doiChu(giaTri: string | null, tiengViet: boolean): string | null {
   if (!giaTri) return giaTri;
-  let s = giaTri;
+  let s = giaTri.normalize("NFC");
   for (const [cu, moi] of CAU_THAY) s = s.split(cu).join(moi);
   // Còn sót chữ Chourmas ở chỗ khác thì đổi tên đơn thuần
+  s = s.replace(/CHOURMAS/g, "THACH LAN").replace(/Chourmas/g, "Thach Lan");
+  // Tên thương hiệu viết không dấu: Thạch Lan → Thach Lan (cả kiểu gõ dấu
+  // tổ hợp, nên chuẩn hoá trước khi so)
   s = s
-    .replace(/CHOURMAS/g, tiengViet ? "THẠCH LAN" : "THACH LAN")
-    .replace(/Chourmas/g, tiengViet ? "Thạch Lan" : "Thach Lan");
+    .replace(/THẠCH LAN/g, "THACH LAN")
+    .replace(/Thạch [Ll]an/g, "Thach Lan");
+  void tiengViet;
   return s;
 }
 
@@ -134,14 +139,14 @@ async function main() {
   }
 
   await prisma.adminUser.updateMany({
-    where: { name: "Quản trị Chourmas" },
-    data: { name: "Quản trị Thạch Lan" },
+    where: { name: { in: ["Quản trị Chourmas", "Quản trị Thạch Lan"] } },
+    data: { name: "Quản trị Thach Lan" },
   });
 
   console.log(
     soDoi
-      ? `\n  Xong: đã cập nhật ${soDoi} mục sang tên Thạch Lan.\n`
-      : "\n  Không còn chữ Chourmas nào trong cơ sở dữ liệu.\n",
+      ? `\n  Xong: đã cập nhật ${soDoi} mục sang tên Thach Lan.\n`
+      : "\n  Không còn gì cần đổi trong cơ sở dữ liệu.\n",
   );
 }
 

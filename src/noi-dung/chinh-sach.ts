@@ -28,7 +28,7 @@ export const CHINH_SACH: Record<
         {
           tieuDe: "Phí vận chuyển",
           cacY: [
-            "Thạch Lan miễn phí vận chuyển toàn quốc cho mọi đơn hàng. Giá niêm yết trên website đã bao gồm phí vận chuyển, bạn không phải trả thêm khoản nào cho shipper ngoài giá trị đơn hàng.",
+            "Thach Lan miễn phí vận chuyển toàn quốc cho mọi đơn hàng. Giá niêm yết trên website đã bao gồm phí vận chuyển, bạn không phải trả thêm khoản nào cho shipper ngoài giá trị đơn hàng.",
             "Chính sách này áp dụng cho tất cả các tỉnh thành, không phân biệt nội thành hay vùng xa.",
           ],
         },
@@ -44,14 +44,14 @@ export const CHINH_SACH: Record<
         {
           tieuDe: "Đơn vị vận chuyển",
           cacY: [
-            "Thạch Lan gửi hàng qua các đơn vị chuyển phát nhanh có thu hộ (COD).", // ⚠️ ĐIỀN TÊN ĐƠN VỊ BẠN ĐANG DÙNG
+            "Thach Lan gửi hàng qua các đơn vị chuyển phát nhanh có thu hộ (COD).", // ⚠️ ĐIỀN TÊN ĐƠN VỊ BẠN ĐANG DÙNG
             "Bạn sẽ nhận được số điện thoại của shipper trước khi hàng đến.",
           ],
         },
         {
           tieuDe: "Nhận hàng và thanh toán",
           cacY: [
-            "Thạch Lan không yêu cầu chuyển khoản trước dưới bất kỳ hình thức nào.",
+            "Thach Lan không yêu cầu chuyển khoản trước dưới bất kỳ hình thức nào.",
             "Bạn được mở hộp kiểm tra hàng trước khi thanh toán cho shipper.",
             "Nếu hàng không đúng như mô tả trên website, bạn có quyền từ chối nhận và không phải trả bất kỳ khoản phí nào.",
           ],
@@ -127,14 +127,14 @@ export const CHINH_SACH: Record<
         {
           tieuDe: "Phí đổi trả",
           cacY: [
-            "Lỗi từ phía Thạch Lan (giao sai, thiếu, hàng lỗi): Thạch Lan chịu toàn bộ phí vận chuyển hai chiều.", // ⚠️ XÁC NHẬN LẠI
+            "Lỗi từ phía Thach Lan (giao sai, thiếu, hàng lỗi): Thach Lan chịu toàn bộ phí vận chuyển hai chiều.", // ⚠️ XÁC NHẬN LẠI
             "Đổi vì bạn chọn nhầm cỡ hoặc đổi sang mẫu khác: bạn chịu phí vận chuyển chiều gửi trả.", // ⚠️ XÁC NHẬN LẠI
           ],
         },
         {
           tieuDe: "Cách thực hiện",
           cacY: [
-            "Gọi hoặc nhắn Zalo cho Thạch Lan kèm mã đơn hàng và ảnh hoặc video phần lỗi.",
+            "Gọi hoặc nhắn Zalo cho Thach Lan kèm mã đơn hàng và ảnh hoặc video phần lỗi.",
             "Shop xác nhận và hướng dẫn bạn gửi hàng về trong vòng 24 giờ.",
             "Hàng đổi được gửi đi ngay khi shop nhận được hàng trả.",
           ],
@@ -192,10 +192,10 @@ export const CHINH_SACH: Record<
       tieuDe: "Chính sách bảo mật",
       cacPhan: [
         {
-          tieuDe: "Thông tin Thạch Lan thu thập",
+          tieuDe: "Thông tin Thach Lan thu thập",
           cacY: [
-            "Khi bạn đặt hàng, Thạch Lan chỉ thu thập những thông tin cần thiết để giao hàng: họ tên, số điện thoại, địa chỉ nhận hàng và ghi chú của bạn.",
-            "Thạch Lan không thu thập thông tin thẻ ngân hàng, vì website không có chức năng thanh toán trực tuyến. Bạn trả tiền mặt trực tiếp cho shipper.",
+            "Khi bạn đặt hàng, Thach Lan chỉ thu thập những thông tin cần thiết để giao hàng: họ tên, số điện thoại, địa chỉ nhận hàng và ghi chú của bạn.",
+            "Thach Lan không thu thập thông tin thẻ ngân hàng, vì website không có chức năng thanh toán trực tuyến. Bạn trả tiền mặt trực tiếp cho shipper.",
             "Giỏ hàng của bạn được lưu ngay trong trình duyệt của bạn, không gửi về máy chủ cho tới khi bạn bấm xác nhận đặt hàng.",
           ],
         },
@@ -204,20 +204,20 @@ export const CHINH_SACH: Record<
           cacY: [
             "Thông tin của bạn chỉ dùng để xác nhận đơn, đóng gói và giao hàng.",
             "Số điện thoại có thể được dùng để gọi xác nhận đơn hoặc báo tình trạng giao hàng.",
-            "Thạch Lan không dùng thông tin của bạn để gửi tin nhắn quảng cáo nếu bạn không đồng ý.",
+            "Thach Lan không dùng thông tin của bạn để gửi tin nhắn quảng cáo nếu bạn không đồng ý.",
           ],
         },
         {
           tieuDe: "Chia sẻ thông tin",
           cacY: [
-            "Thạch Lan chỉ chia sẻ tên, số điện thoại và địa chỉ của bạn cho đơn vị vận chuyển, ở mức tối thiểu cần để giao được hàng.",
-            "Thạch Lan không bán, không trao đổi thông tin khách hàng cho bất kỳ bên thứ ba nào khác.",
+            "Thach Lan chỉ chia sẻ tên, số điện thoại và địa chỉ của bạn cho đơn vị vận chuyển, ở mức tối thiểu cần để giao được hàng.",
+            "Thach Lan không bán, không trao đổi thông tin khách hàng cho bất kỳ bên thứ ba nào khác.",
           ],
         },
         {
           tieuDe: "Quyền của bạn",
           cacY: [
-            "Bạn có quyền yêu cầu Thạch Lan cung cấp, sửa hoặc xoá thông tin cá nhân của bạn trong hệ thống.",
+            "Bạn có quyền yêu cầu Thach Lan cung cấp, sửa hoặc xoá thông tin cá nhân của bạn trong hệ thống.",
             "Chỉ cần gọi hoặc nhắn Zalo tới số hotline của shop kèm mã đơn hàng.",
           ],
         },

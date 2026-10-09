@@ -1,4 +1,4 @@
-# Hướng dẫn vận hành website Thạch Lan
+# Hướng dẫn vận hành website Thach Lan
 
 Tài liệu này viết cho người **không rành kỹ thuật**. Mọi việc thường ngày đều
 làm được trong trang quản trị, không cần đụng tới code.
@@ -191,7 +191,7 @@ danh mục** cho phép tạo danh mục con (ví dụ `Khuôn bánh` → `Khuôn
 Làm một lần, dùng mãi. Mất khoảng 5 phút.
 
 1. Mở Telegram, tìm tài khoản **@BotFather**
-2. Nhắn `/newbot`, đặt tên bot (ví dụ `Thạch Lan Đơn Hàng`)
+2. Nhắn `/newbot`, đặt tên bot (ví dụ `Thach Lan Đơn Hàng`)
 3. BotFather trả về một chuỗi dài — đó là **token**, copy lại
 4. Tìm tài khoản **@userinfobot**, nhắn `/start`, nó trả về **số ID** của bạn
 5. **Quan trọng:** nhắn một câu bất kỳ cho chính con bot bạn vừa tạo, để bot
