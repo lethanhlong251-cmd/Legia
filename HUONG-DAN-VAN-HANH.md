@@ -10,7 +10,7 @@ làm được trong trang quản trị, không cần đụng tới code.
 Mở trình duyệt, vào địa chỉ:
 
 ```
-https://chourmas.online/admin
+https://thachlan.com/admin
 ```
 
 - **Tài khoản:** `admin`

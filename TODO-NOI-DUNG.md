@@ -112,7 +112,7 @@ Nếu là ảnh feedback khách hoặc ảnh bánh thành phẩm, báo tôi đ�
 
 ### 9. Mua thêm tên miền `.vn`
 
-Khách Việt hay gõ `.vn` theo phản xạ. Mua `chourmas.vn` và trỏ về cùng website
+Khách Việt hay gõ `.vn` theo phản xạ. Mua `thachlan.vn` và trỏ về cùng website
 sẽ không mất khách. Chi phí khoảng 750.000đ/năm.
 
 ### 10. Watermark ảnh

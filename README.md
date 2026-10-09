@@ -3,7 +3,7 @@
 Website bán hàng của Chourmas, đối tác phân phối chính thức các mẫu khuôn bánh
 trung thu độc quyền do Thạch Lan thiết kế.
 
-**Địa chỉ:** https://chourmas.online · **Quản trị:** https://chourmas.online/admin
+**Địa chỉ:** https://thachlan.com · **Quản trị:** https://thachlan.com/admin
 
 ---
 
