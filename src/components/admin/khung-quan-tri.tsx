@@ -45,7 +45,7 @@ export function KhungQuanTri({
           />
           <div>
             <p className="font-display text-sm tracking-[0.12em] text-kem-50">
-              CHOURMAS
+              THẠCH LAN
             </p>
             <p className="text-[9px] font-semibold tracking-[0.18em] text-dong-500">
               QUẢN TRỊ

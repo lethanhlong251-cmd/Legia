@@ -24,7 +24,7 @@ xong() { echo "  ${xanh}✓${het} $1"; }
 loi()  { echo "  ${do}✗ $1${het}"; }
 
 echo ""
-echo "${dam}CÀI ĐẶT TỰ ĐỘNG CẬP NHẬT WEBSITE CHOURMAS${het}"
+echo "${dam}CÀI ĐẶT TỰ ĐỘNG CẬP NHẬT WEBSITE THẠCH LAN${het}"
 echo "─────────────────────────────────────────────"
 echo ""
 

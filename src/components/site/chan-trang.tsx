@@ -56,34 +56,31 @@ export function ChanTrang({
   ];
 
   return (
-    <footer className="mt-20 bg-muc-900 text-kem-300">
-      {/* Đường viền vàng đồng trên cùng */}
-      <div className="duong-vien-dong h-px w-full" />
-
-      <div className="khung py-14">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="mt-20 bg-muc-900 text-kem-400">
+      <div className="khung pb-10 pt-16">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr]">
           {/* Cột giới thiệu */}
-          <div className="lg:col-span-2">
+          <div>
             <Logo bien="tren-nen-toi" />
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-kem-400/90">
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-kem-400">
               {t.chanTrang.gioiThieuNgan}
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm">
               <a
                 href={`tel:${caiDat.hotline}`}
-                className="inline-flex items-center gap-2 rounded-md bg-son-700 px-4 py-2.5 text-sm font-semibold text-kem-50 transition-colors hover:bg-son-600"
+                className="inline-flex items-center gap-2 text-kem-100 transition-colors hover:text-dong-400"
               >
-                <Phone className="h-4 w-4" />
+                <Phone className="h-4 w-4" strokeWidth={1.5} />
                 {caiDat.hotline}
               </a>
               <a
                 href={`https://zalo.me/${zaloSach}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-md border border-kem-500/30 px-4 py-2.5 text-sm font-semibold text-kem-200 transition-colors hover:border-dong-500 hover:text-dong-400"
+                className="inline-flex items-center gap-2 text-kem-100 transition-colors hover:text-dong-400"
               >
-                <MessageCircle className="h-4 w-4" />
+                <MessageCircle className="h-4 w-4" strokeWidth={1.5} />
                 Zalo
               </a>
               {caiDat.facebook && (
@@ -91,7 +88,7 @@ export function ChanTrang({
                   href={caiDat.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-md border border-kem-500/30 px-4 py-2.5 text-sm font-semibold text-kem-200 transition-colors hover:border-dong-500 hover:text-dong-400"
+                  className="inline-flex items-center gap-2 text-kem-100 transition-colors hover:text-dong-400"
                 >
                   <IconFacebook className="h-4 w-4" />
                   Facebook
@@ -103,15 +100,15 @@ export function ChanTrang({
           {/* Các cột liên kết */}
           {cotLienKet.map((cot) => (
             <div key={cot.tieuDe}>
-              <h3 className="text-[13px] font-semibold uppercase tracking-[0.16em] text-dong-500">
+              <h3 className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-kem-100">
                 {cot.tieuDe}
               </h3>
-              <ul className="mt-4 space-y-2.5">
+              <ul className="mt-5 space-y-3">
                 {cot.muc.map((m) => (
                   <li key={m.dich}>
                     <Link
                       href={m.dich}
-                      className="text-sm text-kem-400/90 transition-colors hover:text-dong-400"
+                      className="text-sm text-kem-400 transition-colors hover:text-kem-50"
                     >
                       {m.nhan}
                     </Link>
@@ -123,13 +120,13 @@ export function ChanTrang({
         </div>
 
         {/* Dòng cuối */}
-        <div className="mt-12 flex flex-col gap-4 border-t border-kem-500/15 pt-7 text-xs text-kem-500 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-4 border-t border-muc-700 pt-7 text-xs text-muc-400 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {t.chanTrang.banQuyen}
           </p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <span className="inline-flex items-center gap-1.5">
-              <MapPin className="h-3.5 w-3.5" />
+              <MapPin className="h-3.5 w-3.5" strokeWidth={1.5} />
               {caiDat.diaChi}
             </span>
             <span>{caiDat.gioLamViec}</span>

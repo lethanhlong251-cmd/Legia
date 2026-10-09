@@ -43,22 +43,20 @@ export function DauTrang({
   return (
     <>
       {/* Dải thông báo trên cùng */}
-      <div className="bg-son-700 text-kem-50">
-        <div className="khung flex h-9 items-center justify-center gap-2 text-center text-[11px] font-medium tracking-wide sm:text-xs">
-          <span className="hidden sm:inline">✦</span>
-          <span>{t.chung.doiTac}</span>
-          <span className="hidden sm:inline">✦</span>
+      <div className="bg-muc-900 text-kem-200">
+        <div className="khung flex min-h-9 items-center justify-center py-2 text-center text-[11.5px] tracking-[0.04em] sm:text-[12.5px]">
+          {t.chung.doiTac}
         </div>
       </div>
 
-      <header className="sticky top-0 z-40 border-b border-kem-300 bg-kem-100/95 backdrop-blur supports-[backdrop-filter]:bg-kem-100/80">
-        <div className="khung flex h-[68px] items-center justify-between gap-4">
+      <header className="sticky top-0 z-40 border-b border-kem-300 bg-kem-100/95 backdrop-blur supports-[backdrop-filter]:bg-kem-100/85">
+        <div className="khung flex h-[72px] items-center justify-between gap-4">
           <Link href={g("")} aria-label={t.chung.tenDayDu}>
             <Logo />
           </Link>
 
           {/* Menu máy tính */}
-          <nav className="hidden items-center gap-1 lg:flex">
+          <nav className="hidden items-center gap-8 lg:flex">
             {menu.map((m) => {
               const dangO =
                 m.dich === g("")
@@ -68,10 +66,10 @@ export function DauTrang({
                 <Link
                   key={m.dich}
                   href={m.dich}
-                  className={`rounded-md px-3.5 py-2 text-sm font-medium transition-colors ${
+                  className={`border-b py-1 text-sm tracking-[0.02em] transition-colors ${
                     dangO
-                      ? "text-son-700"
-                      : "text-muc-600 hover:bg-kem-200 hover:text-son-700"
+                      ? "border-son-700 text-son-700"
+                      : "border-transparent text-muc-700 hover:text-son-700"
                   }`}
                 >
                   {m.nhan}
@@ -80,11 +78,20 @@ export function DauTrang({
             })}
           </nav>
 
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1 sm:gap-3">
+            {/* Hotline — chỉ hiện trên máy tính */}
+            <a
+              href={`tel:${caiDat.hotline}`}
+              className="hidden items-center gap-2 px-2 py-2 text-sm text-muc-700 transition-colors hover:text-son-700 xl:flex"
+            >
+              <Phone className="h-4 w-4" strokeWidth={1.5} />
+              {caiDat.hotline}
+            </a>
+
             {/* Đổi ngôn ngữ */}
             <Link
               href={duongDanNgonNguKhac}
-              className="rounded-md border border-kem-400 px-2.5 py-1.5 text-xs font-semibold tracking-wide text-muc-600 transition-colors hover:border-son-700 hover:text-son-700"
+              className="flex h-11 items-center px-2 text-xs font-medium tracking-[0.12em] text-muc-500 transition-colors hover:text-son-700"
               aria-label={ngonNgu === "vi" ? "Switch to English" : "Chuyển sang tiếng Việt"}
             >
               {ngonNgu === "vi" ? "EN" : "VI"}
@@ -93,30 +100,21 @@ export function DauTrang({
             {/* Gọi điện — chỉ hiện trên điện thoại */}
             <a
               href={`tel:${caiDat.hotline}`}
-              className="rounded-md p-2.5 text-muc-600 transition-colors hover:bg-kem-200 hover:text-son-700 sm:hidden"
+              className="flex h-11 w-11 items-center justify-center text-muc-700 transition-colors hover:text-son-700 sm:hidden"
               aria-label={t.chanTrang.hotline}
             >
-              <Phone className="h-5 w-5" />
-            </a>
-
-            {/* Hotline — chỉ hiện trên máy tính */}
-            <a
-              href={`tel:${caiDat.hotline}`}
-              className="hidden items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-son-700 transition-colors hover:bg-kem-200 sm:flex"
-            >
-              <Phone className="h-4 w-4" />
-              {caiDat.hotline}
+              <Phone className="h-5 w-5" strokeWidth={1.5} />
             </a>
 
             {/* Giỏ hàng */}
             <Link
               href={g("/gio-hang")}
-              className="relative rounded-md p-2.5 text-muc-700 transition-colors hover:bg-kem-200 hover:text-son-700"
+              className="relative flex h-11 w-11 items-center justify-center text-muc-800 transition-colors hover:text-son-700"
               aria-label={`${t.dieuHuong.gioHang}${daNapXong && soMon > 0 ? `, ${soMon}` : ""}`}
             >
-              <ShoppingBag className="h-5 w-5" />
+              <ShoppingBag className="h-[22px] w-[22px]" strokeWidth={1.4} />
               {daNapXong && soMon > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-son-700 px-1 text-[10px] font-bold text-kem-50">
+                <span className="absolute right-0.5 top-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-son-700 px-1 text-[10px] font-semibold text-kem-50">
                   {soMon > 99 ? "99+" : soMon}
                 </span>
               )}
@@ -126,11 +124,15 @@ export function DauTrang({
             <button
               type="button"
               onClick={() => setMoMenu((v) => !v)}
-              className="rounded-md p-2.5 text-muc-700 transition-colors hover:bg-kem-200 lg:hidden"
+              className="flex h-11 w-11 items-center justify-center text-muc-800 lg:hidden"
               aria-label="Menu"
               aria-expanded={moMenu}
             >
-              {moMenu ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {moMenu ? (
+                <X className="h-5 w-5" strokeWidth={1.5} />
+              ) : (
+                <Menu className="h-5 w-5" strokeWidth={1.5} />
+              )}
             </button>
           </div>
         </div>
@@ -138,13 +140,13 @@ export function DauTrang({
         {/* Menu điện thoại */}
         {moMenu && (
           <nav className="border-t border-kem-300 bg-kem-100 lg:hidden">
-            <div className="khung flex flex-col py-2">
+            <div className="khung flex flex-col py-3">
               {menu.map((m) => (
                 <Link
                   key={m.dich}
                   href={m.dich}
                   onClick={() => setMoMenu(false)}
-                  className="rounded-md px-2 py-3 text-[15px] font-medium text-muc-700 transition-colors hover:bg-kem-200 hover:text-son-700"
+                  className="border-b border-kem-300 py-3.5 font-display text-xl text-muc-900 transition-colors last:border-b-0 hover:text-son-700"
                 >
                   {m.nhan}
                 </Link>

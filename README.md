@@ -1,6 +1,6 @@
-# Chourmas — Khuôn bánh trung thu hoa văn độc quyền
+# Thạch Lan — Khuôn bánh trung thu hoa văn độc quyền
 
-Website bán hàng của Chourmas, đối tác phân phối chính thức các mẫu khuôn bánh
+Website bán hàng của Thạch Lan, đối tác phân phối chính thức các mẫu khuôn bánh
 trung thu độc quyền do Thạch Lan thiết kế.
 
 **Địa chỉ:** https://thachlan.com · **Quản trị:** https://thachlan.com/admin

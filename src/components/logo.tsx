@@ -1,6 +1,6 @@
 /**
- * LOGO CHOURMAS
- * -------------
+ * LOGO THẠCH LAN
+ * --------------
  * Biểu tượng là một mặt khuôn bánh trung thu 8 cánh, bên trong là hoa sen 6 cánh.
  * Vẽ bằng SVG nên phóng to cỡ nào cũng nét, in ấn được, và đổi màu theo nền.
  *
@@ -54,7 +54,7 @@ export function BieuTuongKhuon({
       viewBox="-50 -50 100 100"
       className={className}
       role="img"
-      aria-label="Chourmas"
+      aria-label="Thạch Lan"
       fill="none"
     >
       {/* Cánh khuôn vòng ngoài */}
@@ -92,7 +92,7 @@ export function BieuTuongKhuon({
 
 export function Logo({
   bien = "mac-dinh",
-  hienSlogan = true,
+  hienSlogan = false,
   className = "",
 }: {
   bien?: Bien;
@@ -102,7 +102,7 @@ export function Logo({
   const toi = bien === "tren-nen-toi";
 
   return (
-    <span className={`inline-flex items-center gap-2.5 ${className}`}>
+    <span className={`inline-flex items-center gap-3 ${className}`}>
       <BieuTuongKhuon
         className="h-9 w-9 shrink-0"
         mauChinh={toi ? "#FAF6EF" : "#9E2B25"}
@@ -110,20 +110,19 @@ export function Logo({
       />
       <span className="flex flex-col leading-none">
         <span
-          className={`font-display text-[19px] font-semibold tracking-[0.14em] ${
-            toi ? "text-kem-100" : "text-son-700"
+          className={`font-display text-[22px] font-semibold tracking-[0.22em] ${
+            toi ? "text-kem-50" : "text-muc-900"
           }`}
         >
-          CHOURMAS
+          THẠCH LAN
         </span>
         {hienSlogan && (
-          // Ẩn trên màn hình rất hẹp để dòng chữ không bị xuống hàng
           <span
-            className={`mt-1 hidden whitespace-nowrap text-[8.5px] font-medium tracking-[0.22em] min-[400px]:block ${
-              toi ? "text-dong-400" : "text-dong-600"
+            className={`mt-1.5 hidden whitespace-nowrap text-[8.5px] font-medium tracking-[0.26em] min-[400px]:block ${
+              toi ? "text-dong-400" : "text-dong-700"
             }`}
           >
-            ĐỘC QUYỀN HOA VĂN VIỆT
+            KHUÔN BÁNH HOA VĂN VIỆT
           </span>
         )}
       </span>

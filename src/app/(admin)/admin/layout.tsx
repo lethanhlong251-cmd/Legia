@@ -10,7 +10,7 @@ const beVietnam = Be_Vietnam_Pro({
 });
 
 export const metadata: Metadata = {
-  title: "Quản trị Chourmas",
+  title: "Quản trị Thạch Lan",
   robots: { index: false, follow: false },
 };
 

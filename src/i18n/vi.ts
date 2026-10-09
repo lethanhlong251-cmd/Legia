@@ -7,10 +7,10 @@
 
 export const vi = {
   chung: {
-    tenShop: "Chourmas",
-    tenDayDu: "Khuôn bánh trung thu Chourmas",
+    tenShop: "Thạch Lan",
+    tenDayDu: "Khuôn bánh trung thu Thạch Lan",
     slogan: "Độc quyền hoa văn Việt",
-    doiTac: "Đối tác phân phối chính thức khuôn độc quyền Thạch Lan",
+    doiTac: "Miễn phí vận chuyển toàn quốc · Nhận hàng, kiểm tra rồi mới thanh toán",
     dangTai: "Đang tải…",
     xemThem: "Xem thêm",
     quayLai: "Quay lại",
@@ -28,7 +28,7 @@ export const vi = {
   },
 
   camKet: {
-    tieuDe: "Cam kết của Chourmas",
+    tieuDe: "Cam kết của Thạch Lan",
     khongChuyenKhoan: {
       tieuDe: "Không chuyển khoản trước",
       moTa: "Nhận hàng, kiểm tra xong mới thanh toán",
@@ -49,21 +49,21 @@ export const vi = {
 
   trangChu: {
     heroNhan: "Mùa trăng 2026",
-    heroTieuDe: "Khuôn bánh trung thu\nhoa văn độc quyền",
+    heroTieuDe: "Hoa văn Việt,\nkhắc trọn từng chiếc bánh",
     heroMoTa:
-      "Những bộ khuôn lò xo có đường nét sắc sảo nhất, hoa văn thiết kế riêng cho Chourmas. Nhận hàng kiểm tra rồi mới thanh toán.",
+      "Khuôn bánh trung thu lò xo do Thạch Lan tự thiết kế hoa văn và trực tiếp bán ra. Mỗi mẫu là thiết kế riêng, đường nét sắc, bánh in ra rõ từng cánh hoa.",
     heroNutChinh: "Xem bộ sưu tập",
     heroNutPhu: "Nhắn Zalo tư vấn",
-    noiBatTieuDe: "Mẫu được chọn nhiều nhất",
+    noiBatTieuDe: "Được chọn nhiều nhất mùa này",
     noiBatMoTa: "Những bộ khuôn khách đặt nhiều nhất mùa này",
     tatCaSanPham: "Xem tất cả sản phẩm",
-    vaySaoTieuDe: "Vì sao chọn Chourmas",
-    cauChuyenTieuDe: "Câu chuyện Chourmas",
+    vaySaoTieuDe: "Vì sao chọn Thạch Lan",
+    cauChuyenTieuDe: "Về Thạch Lan",
   },
 
   sanPham: {
     tieuDeTrang: "Bộ sưu tập khuôn",
-    moTaTrang: "Toàn bộ mẫu khuôn độc quyền hiện có tại Chourmas",
+    moTaTrang: "Toàn bộ mẫu khuôn độc quyền hiện có tại Thạch Lan",
     maSanPham: "Mã sản phẩm",
     soMat: "Số mặt khuôn",
     duongKinh: "Đường kính",
@@ -130,7 +130,7 @@ export const vi = {
 
   thanhCong: {
     tieuDe: "Đặt hàng thành công",
-    moTa: "Cảm ơn bạn đã tin tưởng Chourmas. Shop sẽ gọi điện xác nhận trong thời gian sớm nhất.",
+    moTa: "Cảm ơn bạn đã tin tưởng Thạch Lan. Shop sẽ gọi điện xác nhận trong thời gian sớm nhất.",
     maDon: "Mã đơn hàng của bạn",
     luuMa: "Bạn hãy lưu lại mã này để tiện tra cứu khi cần.",
     veTrangChu: "Về trang chủ",
@@ -139,11 +139,11 @@ export const vi = {
 
   chanTrang: {
     gioiThieuNgan:
-      "Chourmas là đối tác phân phối chính thức các mẫu khuôn bánh trung thu độc quyền do Thạch Lan thiết kế. Nhận hàng kiểm tra rồi mới thanh toán.",
+      "Khuôn bánh trung thu hoa văn Việt, do Thạch Lan tự thiết kế và bán trực tiếp. Nhận hàng kiểm tra rồi mới thanh toán.",
     lienKet: "Liên kết",
     hoTro: "Hỗ trợ",
     lienHe: "Liên hệ",
-    banQuyen: "Bản quyền thuộc về Chourmas",
+    banQuyen: "Bản quyền thuộc về Thạch Lan",
     hotline: "Hotline / Zalo",
     facebook: "Facebook",
     gioLamViec: "Nhận đơn 24/7",

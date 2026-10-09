@@ -50,7 +50,7 @@ export function TheSanPham({
     // lớp khác (ví dụ lớp hiệu ứng hiện dần). Thiếu nó thì thẻ co lại vừa nội
     // dung, mỗi thẻ một chiều rộng, và vì ảnh là hình vuông nên chiều cao
     // cũng lệch theo — cả hàng sản phẩm sẽ so le nhau.
-    <div className="group relative flex h-full w-full flex-col overflow-hidden rounded-lg border border-kem-300 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-dong-300 hover:shadow-vua">
+    <div className="group relative flex h-full w-full flex-col">
       <div className="relative aspect-square overflow-hidden bg-kem-200">
         {anhChinh ? (
           <Image
@@ -62,7 +62,7 @@ export function TheSanPham({
             {...(anhChinh.blurData
               ? { placeholder: "blur" as const, blurDataURL: anhChinh.blurData }
               : {})}
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
           />
         ) : (
           <div className="flex h-full items-center justify-center text-sm text-muc-400">
@@ -73,12 +73,12 @@ export function TheSanPham({
         {/* Huy hiệu góc trên trái */}
         <div className="absolute left-2.5 top-2.5 flex flex-col items-start gap-1.5">
           {sanPham.isExclusive && (
-            <span className="huy-hieu bg-dong-500 text-muc-900 shadow-nhe">
+            <span className="huy-hieu bg-kem-50/95 text-muc-900">
               {t.sanPham.docQuyen}
             </span>
           )}
           {giamGia !== null && (
-            <span className="huy-hieu bg-son-700 text-kem-50 shadow-nhe">
+            <span className="huy-hieu bg-son-700 text-kem-50">
               −{giamGia}%
             </span>
           )}
@@ -87,7 +87,7 @@ export function TheSanPham({
         {/* Hết hàng thì phủ lớp mờ lên ảnh */}
         {!sanPham.inStock && (
           <div className="absolute inset-0 flex items-center justify-center bg-kem-100/75">
-            <span className="rounded-md bg-muc-800 px-3.5 py-2 text-xs font-semibold uppercase tracking-wider text-kem-100">
+            <span className="bg-muc-800 px-3.5 py-2 text-xs font-semibold uppercase tracking-wider text-kem-100">
               {t.sanPham.hetHang}
             </span>
           </div>
@@ -99,14 +99,14 @@ export function TheSanPham({
         dòng, sản phẩm kia hai dòng, nếu không chừa thì cả hàng thẻ sẽ cao
         thấp so le nhau, nhìn rất lộn xộn.
       */}
-      <div className="flex flex-1 flex-col p-4">
-        <span className="min-h-[1.1rem] text-[11px] font-semibold uppercase tracking-[0.14em] text-dong-600">
+      <div className="flex flex-1 flex-col pt-4">
+        <span className="min-h-[1.1rem] text-[11px] font-medium uppercase tracking-[0.14em] text-muc-500">
           {sanPham.faceCount
             ? `${sanPham.faceCount} ${ngonNgu === "vi" ? "mặt hoa văn" : "faces"}`
             : ""}
         </span>
 
-        <h3 className="mt-1.5 line-clamp-2 min-h-[2.75rem] font-display text-[17px] leading-snug text-muc-900 transition-colors group-hover:text-son-700">
+        <h3 className="mt-1.5 line-clamp-2 min-h-[3rem] font-display text-[22px] font-semibold leading-tight text-muc-900 transition-colors group-hover:text-son-700">
           {/* Liên kết phủ toàn thẻ, trừ những chỗ bấm được nằm cao hơn */}
           <Link href={duongDan} className="before:absolute before:inset-0">
             {ten}
@@ -121,7 +121,7 @@ export function TheSanPham({
           {nhieuCo && (
             <span className="text-xs text-muc-500">{t.sanPham.tuGia}</span>
           )}
-          <span className="font-display text-lg font-semibold text-son-700">
+          <span className="text-[15px] font-medium text-muc-900">
             {dinhDangTien(giaThapNhat, ngonNgu)}
           </span>
           {bienTheReNhat?.comparePrice ? (

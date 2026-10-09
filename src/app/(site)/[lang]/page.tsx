@@ -1,157 +1,152 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  BadgeCheck,
-  MessageCircle,
-  PackageCheck,
-  ShieldCheck,
-  Truck,
-} from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
+import { notFound } from "next/navigation";
 
 import { layBanDich, laNgonNguHopLe, theoNgonNgu } from "@/i18n";
 import { layCaiDat, laySanPhamNoiBat } from "@/lib/du-lieu";
 import { TheSanPham } from "@/components/site/the-san-pham";
-import { BieuTuongKhuon } from "@/components/logo";
 import { HienDan } from "@/components/site/hien-dan";
-import { notFound } from "next/navigation";
 
+/**
+ * TRANG CHỦ — phong cách tối giản, sang trọng.
+ * Thứ tự: mở đầu → 4 cam kết → sản phẩm nổi bật → về Thạch Lan →
+ * danh mục → lời mời tư vấn.
+ */
 export default async function TrangChu({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
   if (!laNgonNguHopLe(lang)) notFound();
 
   const t = layBanDich(lang);
+  const vi = lang === "vi";
   const [sanPhamNoiBat, caiDat] = await Promise.all([
     laySanPhamNoiBat(8),
     layCaiDat(),
   ]);
-
   const zaloSach = caiDat.zalo.replace(/\D/g, "");
 
-  // Ảnh giới thiệu ở phần mở đầu: ưu tiên mẫu 7 mặt vì khoe được nhiều hoa văn
-  const sanPhamGioiThieu =
-    sanPhamNoiBat.find((s) => s.slug === "lx-011-7") ?? sanPhamNoiBat[0];
-  const anhGioiThieu =
-    sanPhamGioiThieu?.images.find((a) => a.isMain) ??
-    sanPhamGioiThieu?.images[0];
+  const anhCua = (slug: string) => {
+    const sp = sanPhamNoiBat.find((s) => s.slug === slug);
+    const anh = sp?.images.find((a) => a.isMain) ?? sp?.images[0];
+    return sp && anh ? { sp, anh } : null;
+  };
+  const dauTien = () => {
+    const sp = sanPhamNoiBat[0];
+    const anh = sp?.images.find((a) => a.isMain) ?? sp?.images[0];
+    return sp && anh ? { sp, anh } : null;
+  };
 
+  // Ảnh mở đầu: ưu tiên ảnh hộp bánh Vuông Sen vì nhìn ra ngay thành phẩm
+  const moDau = anhCua("vuong-sen") ?? anhCua("lx-011-7") ?? dauTien();
+  // Ảnh phần câu chuyện
+  const cauChuyen =
+    anhCua("mau-don-sen-cuc") ?? anhCua("sen-tu-quy") ?? dauTien();
+
+  const [dongDau, dongSau] = t.trangChu.heroTieuDe.split("\n");
   const camKet = [
-    { icon: ShieldCheck, ...t.camKet.khongChuyenKhoan },
-    { icon: Truck, ...t.camKet.mienShip },
-    { icon: PackageCheck, ...t.camKet.kiemTraHang },
-    { icon: BadgeCheck, ...t.camKet.docQuyen },
+    t.camKet.khongChuyenKhoan,
+    t.camKet.mienShip,
+    t.camKet.kiemTraHang,
+    t.camKet.docQuyen,
   ];
 
   return (
     <>
-      {/* ============ PHẦN MỞ ĐẦU ============ */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-muc-900 via-muc-900 to-son-950">
-        <div className="hoa-van-luoi absolute inset-0 opacity-50" />
-        {/* Quầng sáng vàng đồng phía sau ảnh */}
-        <div className="pointer-events-none absolute -right-40 top-1/2 h-[38rem] w-[38rem] -translate-y-1/2 rounded-full bg-dong-500/10 blur-3xl" />
-
-        <div className="khung relative grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:py-24">
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-dong-500/40 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-dong-400">
-              <BieuTuongKhuon className="h-3.5 w-3.5" mauChinh="#C8A24A" />
-              {t.trangChu.heroNhan}
-            </span>
-
-            <h1 className="mt-6 whitespace-pre-line font-display text-[2.15rem] leading-[1.15] text-kem-50 sm:text-[3rem] lg:text-[3.35rem]">
-              {t.trangChu.heroTieuDe}
-            </h1>
-
-            <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-kem-300 sm:text-base">
-              {t.trangChu.heroMoTa}
-            </p>
-
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Link href={`/${lang}/san-pham`} className="nut-dong">
-                {t.trangChu.heroNutChinh}
-              </Link>
-              <a
-                href={`https://zalo.me/${zaloSach}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-md border border-kem-300/30 px-6 py-3 text-sm font-semibold tracking-wide text-kem-100 transition-colors hover:border-dong-500 hover:text-dong-400"
-              >
-                <MessageCircle className="h-4 w-4" />
-                {t.trangChu.heroNutPhu}
-              </a>
-            </div>
-          </div>
-
-          {/* Ảnh giới thiệu, đóng khung viền vàng đồng */}
-          {anhGioiThieu && sanPhamGioiThieu && (
-            <Link
-              href={`/${lang}/san-pham/${sanPhamGioiThieu.slug}`}
-              className="group relative mx-auto w-full max-w-lg"
-            >
-              <div className="absolute -inset-2 rounded-xl border border-dong-500/25" />
-              <div className="relative aspect-square overflow-hidden rounded-lg border border-dong-500/50 shadow-manh">
-                <Image
-                  src={anhGioiThieu.url}
-                  alt={
-                    theoNgonNgu(lang, sanPhamGioiThieu.nameVi, sanPhamGioiThieu.nameEn)
-                  }
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 92vw, 480px"
-                  className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                />
-              </div>
-              <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-dong-500 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-muc-900 shadow-vua">
-                {sanPhamGioiThieu.faceCount
-                  ? lang === "vi"
-                    ? `${sanPhamGioiThieu.faceCount} mặt hoa văn trong 1 bộ`
-                    : `${sanPhamGioiThieu.faceCount} patterns in one set`
-                  : t.sanPham.docQuyen}
-              </span>
+      {/* ============ MỞ ĐẦU ============ */}
+      <section className="khung grid items-center gap-12 pb-20 pt-12 sm:pt-16 lg:grid-cols-[1fr_1fr] lg:gap-16 lg:pb-24 lg:pt-20">
+        <div className="hien-len">
+          <span className="nhan-muc">{t.trangChu.heroNhan}</span>
+          <h1 className="mt-6 font-display text-[2.6rem] leading-[1.04] sm:text-[3.4rem] lg:text-[4rem]">
+            {dongDau}
+            <br />
+            <em className="italic text-son-700">
+              {dongSau?.split(" ").slice(0, 2).join(" ")}
+            </em>{" "}
+            {dongSau?.split(" ").slice(2).join(" ")}
+          </h1>
+          <p className="mt-7 max-w-[30rem] text-base leading-[1.75] text-muc-500 sm:text-[16.5px]">
+            {t.trangChu.heroMoTa}
+          </p>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link href={`/${lang}/san-pham`} className="nut-chinh">
+              {t.trangChu.heroNutChinh}
             </Link>
-          )}
+            <a
+              href={`https://zalo.me/${zaloSach}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nut-phu"
+            >
+              {t.trangChu.heroNutPhu}
+            </a>
+          </div>
         </div>
+
+        {moDau && (
+          <Link
+            href={`/${lang}/san-pham/${moDau.sp.slug}`}
+            className="group relative block"
+          >
+            <div className="relative aspect-[4/5] overflow-hidden bg-kem-200">
+              <Image
+                src={moDau.anh.url}
+                alt={theoNgonNgu(lang, moDau.sp.nameVi, moDau.sp.nameEn)}
+                fill
+                priority
+                sizes="(max-width: 1024px) 92vw, 600px"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              />
+            </div>
+            <span className="absolute bottom-0 left-0 bg-kem-100 pr-5 pt-3.5 text-[13px] tracking-[0.02em] text-muc-500">
+              {theoNgonNgu(lang, moDau.sp.nameVi, moDau.sp.nameEn)}
+              {moDau.sp.faceCount
+                ? vi
+                  ? ` — ${moDau.sp.faceCount} mặt hoa văn`
+                  : ` — ${moDau.sp.faceCount} pattern faces`
+                : ""}
+            </span>
+          </Link>
+        )}
       </section>
 
       {/* ============ CAM KẾT ============ */}
-      <section className="border-b border-kem-300 bg-kem-50">
-        <div className="khung grid grid-cols-2 gap-px py-0 lg:grid-cols-4">
-          {camKet.map(({ icon: Icon, tieuDe, moTa }, i) => (
+      <section className="border-y border-kem-300">
+        <div className="khung grid grid-cols-2 lg:grid-cols-4">
+          {camKet.map(({ tieuDe, moTa }, i) => (
             <HienDan
               key={tieuDe}
               tre={i * 80}
-              className="flex flex-col items-center gap-2.5 px-3 py-8 text-center sm:px-5"
+              className="flex flex-col gap-2 py-8 pr-4 sm:pr-6"
             >
-              <Icon className="h-6 w-6 text-son-700" strokeWidth={1.6} />
-              <h3 className="font-display text-[15px] leading-tight text-muc-900">
+              <span className="font-display text-[15px] text-dong-700">
+                0{i + 1}
+              </span>
+              <h3 className="font-sans text-[15px] font-semibold tracking-normal text-muc-900 [font-size-adjust:none]">
                 {tieuDe}
               </h3>
-              <p className="text-xs leading-relaxed text-muc-500">{moTa}</p>
+              <p className="text-[13.5px] leading-relaxed text-muc-500">
+                {moTa}
+              </p>
             </HienDan>
           ))}
         </div>
       </section>
 
       {/* ============ SẢN PHẨM NỔI BẬT ============ */}
-      <section className="khung py-16 sm:py-20">
-        <div className="flex flex-wrap items-end justify-between gap-4">
+      <section className="khung py-20 sm:py-24">
+        <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h2 className="font-display text-2xl text-muc-900 sm:text-3xl">
+            <span className="nhan-muc">{vi ? "Bộ sưu tập" : "Collection"}</span>
+            <h2 className="mt-3 font-display text-[2rem] leading-tight sm:text-[2.6rem]">
               {t.trangChu.noiBatTieuDe}
             </h2>
-            <p className="mt-2 text-sm text-muc-500">
-              {t.trangChu.noiBatMoTa}
-            </p>
           </div>
-          <Link
-            href={`/${lang}/san-pham`}
-            className="text-sm font-semibold text-son-700 underline-offset-4 hover:underline"
-          >
-            {t.trangChu.tatCaSanPham} →
+          <Link href={`/${lang}/san-pham`} className="lien-ket-gach">
+            {t.trangChu.tatCaSanPham}
           </Link>
         </div>
 
-        <div className="duong-vien-dong mt-5 h-px w-full opacity-50" />
-
-        <div className="mt-8 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-6 lg:grid-cols-4">
           {sanPhamNoiBat.map((sp, i) => (
             <HienDan key={sp.id} tre={(i % 4) * 70} className="flex">
               <TheSanPham
@@ -165,132 +160,138 @@ export default async function TrangChu({ params }: PageProps<"/[lang]">) {
         </div>
       </section>
 
-      {/* ============ CÂU CHUYỆN ============ */}
+      {/* ============ VỀ THẠCH LAN ============ */}
       <section className="bg-kem-200">
-        <div className="khung py-16 sm:py-20">
-          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-            <div>
-              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-dong-600">
-                {t.trangChu.cauChuyenTieuDe}
-              </span>
-              <h2 className="mt-3 font-display text-2xl leading-snug text-muc-900 sm:text-[2rem]">
-                {lang === "vi"
-                  ? "Một chiếc bánh đẹp bắt đầu từ một chiếc khuôn đủ sắc nét"
-                  : "A beautiful cake starts with a mold sharp enough to make it"}
-              </h2>
-
-              <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-muc-600">
-                {lang === "vi" ? (
-                  <>
-                    <p>
-                      Chourmas là đối tác phân phối chính thức các mẫu khuôn bánh
-                      trung thu do <strong className="text-muc-800">Thạch Lan</strong>{" "}
-                      thiết kế — những bộ hoa văn sen tứ quý, mẫu đơn, cúc, cá đôi,
-                      thần tài đã đi cùng mâm cỗ Việt qua nhiều mùa trăng.
-                    </p>
-                    <p>
-                      Mỗi mẫu hoa văn là thiết kế riêng, không bán đại trà. Bạn sẽ
-                      không tìm thấy những bộ khuôn này ở nơi nào khác.
-                    </p>
-                    <p>
-                      Và vì chúng tôi tin lòng tin phải đến trước đồng tiền,
-                      Chourmas <strong className="text-muc-800">không bao giờ yêu
-                      cầu bạn chuyển khoản trước</strong>. Bạn nhận hàng, mở hộp
-                      kiểm tra, rồi mới thanh toán cho shipper.
-                    </p>
-                  </>
-                ) : (
-                  <>
-                    <p>
-                      Chourmas is the official distributor of the mooncake mold
-                      designs created by{" "}
-                      <strong className="text-muc-800">Thach Lan</strong> — lotus,
-                      peony, chrysanthemum, twin fish and fortune patterns that have
-                      graced Vietnamese tables through many Mid-Autumn seasons.
-                    </p>
-                    <p>
-                      Every pattern is an exclusive design, never mass-distributed.
-                      You will not find these molds anywhere else.
-                    </p>
-                    <p>
-                      And because we believe trust comes before money, Chourmas{" "}
-                      <strong className="text-muc-800">never asks for a bank
-                      transfer up front</strong>. Your parcel arrives, you open it,
-                      you check it, and only then do you pay the courier.
-                    </p>
-                  </>
-                )}
-              </div>
-
-              <Link href={`/${lang}/gioi-thieu`} className="nut-phu mt-8">
-                {t.chung.xemThem}
-              </Link>
+        <div className="khung grid items-center gap-12 py-20 sm:py-24 lg:grid-cols-2 lg:gap-16">
+          {cauChuyen && (
+            <div className="relative aspect-square overflow-hidden bg-kem-300">
+              <Image
+                src={cauChuyen.anh.url}
+                alt={theoNgonNgu(lang, cauChuyen.sp.nameVi, cauChuyen.sp.nameEn)}
+                fill
+                sizes="(max-width: 1024px) 92vw, 600px"
+                className="object-cover"
+              />
             </div>
+          )}
 
-            {/* Ảnh sản phẩm xếp lệch nhau */}
-            <div className="relative mx-auto grid w-full max-w-md grid-cols-2 gap-4">
-              {sanPhamNoiBat.slice(0, 4).map((sp, i) => {
-                const anh = sp.images.find((a) => a.isMain) ?? sp.images[0];
-                if (!anh) return null;
-                return (
-                  <div
-                    key={sp.id}
-                    className={`relative aspect-square overflow-hidden rounded-lg border border-kem-400 shadow-vua ${
-                      i % 2 === 1 ? "translate-y-6" : ""
-                    }`}
-                  >
-                    <Image
-                      src={anh.url}
-                      alt=""
-                      fill
-                      sizes="(max-width: 1024px) 45vw, 220px"
-                      className="object-cover"
-                    />
-                  </div>
-                );
-              })}
+          <div className="max-w-[33rem]">
+            <span className="nhan-muc">{t.trangChu.cauChuyenTieuDe}</span>
+            <h2 className="mt-4 font-display text-[2rem] leading-[1.12] sm:text-[2.6rem]">
+              {vi
+                ? "Một chiếc bánh đẹp bắt đầu từ một chiếc khuôn đủ sắc nét"
+                : "A beautiful cake starts with a mold sharp enough to make it"}
+            </h2>
+            <div className="mt-6 space-y-4 text-base leading-[1.8] text-muc-600">
+              {vi ? (
+                <>
+                  <p>
+                    Thạch Lan tự tay thiết kế từng bộ hoa văn — sen tứ quý, mẫu
+                    đơn, cúc, cá đôi, thần tài — để mâm cỗ trung thu của gia
+                    đình Việt có những chiếc bánh không lẫn với ai.
+                  </p>
+                  <p>
+                    Không qua trung gian: bạn mua khuôn trực tiếp từ người làm
+                    ra hoa văn. Và vì lòng tin phải đến trước đồng tiền, Thạch
+                    Lan{" "}
+                    <strong className="font-semibold text-muc-800">
+                      không bao giờ yêu cầu chuyển khoản trước
+                    </strong>
+                    .
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p>
+                    Thach Lan designs every pattern set by hand — four-season
+                    lotus, peony, chrysanthemum, twin fish, the god of fortune —
+                    so a Vietnamese family&apos;s Mid-Autumn table has cakes
+                    that look like no one else&apos;s.
+                  </p>
+                  <p>
+                    No middlemen: you buy straight from the people who draw the
+                    patterns. And because trust comes before money, Thach Lan{" "}
+                    <strong className="font-semibold text-muc-800">
+                      never asks for a bank transfer up front
+                    </strong>
+                    .
+                  </p>
+                </>
+              )}
+            </div>
+            <Link href={`/${lang}/gioi-thieu`} className="lien-ket-gach mt-8">
+              {vi ? "Đọc câu chuyện của chúng tôi" : "Read our story"}
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ DANH MỤC ============ */}
+      <section className="khung py-20 sm:py-24">
+        <h2 className="mb-10 font-display text-[1.9rem] sm:text-[2.2rem]">
+          {vi ? "Danh mục" : "Categories"}
+        </h2>
+        <div className="grid gap-5 md:grid-cols-2">
+          <Link
+            href={`/${lang}/san-pham`}
+            className="group flex min-h-44 items-end justify-between gap-4 border border-muc-800 p-7 transition-colors hover:border-son-700 sm:p-8"
+          >
+            <div>
+              <span className="block font-display text-[1.75rem] font-semibold text-muc-900 transition-colors group-hover:text-son-700">
+                {vi ? "Khuôn trung thu" : "Mooncake molds"}
+              </span>
+              <span className="mt-2 block text-sm text-muc-500">
+                {vi
+                  ? "Khuôn lò xo 2 – 7 mặt hoa văn, cỡ 75g đến 200g"
+                  : "Spring molds with 2 – 7 pattern faces, 75g to 200g"}
+              </span>
+            </div>
+            <ArrowRight
+              className="h-6 w-6 shrink-0 text-muc-800 transition-transform group-hover:translate-x-1 group-hover:text-son-700"
+              strokeWidth={1.3}
+            />
+          </Link>
+          <div className="flex min-h-44 items-end border border-dashed border-kem-500 p-7 text-muc-500 sm:p-8">
+            <div>
+              <span className="block font-display text-[1.75rem] font-semibold">
+                {vi ? "Dụng cụ làm bánh" : "Baking tools"}
+              </span>
+              <span className="mt-2 block text-sm">
+                {vi ? "Sắp ra mắt" : "Coming soon"}
+              </span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ============ KÊU GỌI CUỐI TRANG ============ */}
-      <section className="khung py-16 sm:py-20">
-        <div className="relative overflow-hidden rounded-xl bg-son-700 px-6 py-14 text-center sm:px-12">
-          <div className="hoa-van-luoi absolute inset-0 opacity-20" />
-          <div className="relative">
-            <BieuTuongKhuon
-              className="mx-auto h-12 w-12"
-              mauChinh="#FAF6EF"
-              mauNhan="#E3C87F"
-            />
-            <h2 className="mt-6 font-display text-2xl text-kem-50 sm:text-3xl">
-              {lang === "vi"
-                ? "Chưa biết chọn cỡ nào?"
-                : "Not sure which size to pick?"}
-            </h2>
-            <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-kem-200">
-              {lang === "vi"
-                ? "Nhắn Zalo cho shop, gửi ảnh khay bánh bạn đang dùng, shop tư vấn đúng cỡ khuôn trong vài phút."
-                : "Message us on Zalo with a photo of the tray you use, and we will tell you the right mold size within minutes."}
-            </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <a
-                href={`https://zalo.me/${zaloSach}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="nut-dong"
-              >
-                <MessageCircle className="h-4 w-4" />
-                {t.trangChu.heroNutPhu}
-              </a>
-              <a
-                href={`tel:${caiDat.hotline}`}
-                className="inline-flex items-center justify-center gap-2 rounded-md border border-kem-100/40 px-6 py-3 text-sm font-semibold text-kem-50 transition-colors hover:bg-kem-50/10"
-              >
-                {caiDat.hotline}
-              </a>
-            </div>
+      {/* ============ LỜI MỜI TƯ VẤN ============ */}
+      {/* -mb-20 để dải đỏ nằm sát chân trang (chân trang có mt-20) */}
+      <section className="-mb-20 bg-son-700 text-kem-50">
+        <div className="mx-auto flex max-w-3xl flex-col items-center px-4 py-20 text-center sm:py-24">
+          <h2 className="font-display text-[2rem] leading-tight text-kem-50 sm:text-[2.6rem]">
+            {vi ? "Chưa biết chọn cỡ khuôn nào?" : "Not sure which size to pick?"}
+          </h2>
+          <p className="mt-5 max-w-lg text-base leading-[1.75] text-dong-200">
+            {vi
+              ? "Gửi ảnh khay bánh bạn đang dùng qua Zalo, Thạch Lan tư vấn đúng cỡ trong vài phút."
+              : "Send us a photo of the tray you use on Zalo and we will tell you the right mold size within minutes."}
+          </p>
+          <div className="mt-9 flex flex-wrap justify-center gap-3">
+            <a
+              href={`https://zalo.me/${zaloSach}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nut-dong"
+            >
+              <MessageCircle className="h-4 w-4" strokeWidth={1.5} />
+              {vi ? "Nhắn Zalo" : "Message on Zalo"}
+            </a>
+            <a
+              href={`tel:${caiDat.hotline}`}
+              className="inline-flex min-h-12 items-center justify-center border border-kem-50/70 px-7 py-3 text-sm font-medium tracking-[0.06em] text-kem-50 transition-colors hover:bg-kem-50/10"
+            >
+              {vi ? "Gọi" : "Call"} {caiDat.hotline}
+            </a>
           </div>
         </div>
       </section>

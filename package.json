@@ -11,6 +11,7 @@
     "xem-thu": "bash scripts/xem-thu.sh",
     "nap-du-lieu": "tsx prisma/seed.ts",
     "doi-mat-khau": "tsx scripts/doi-mat-khau.ts",
+    "doi-thuong-hieu": "tsx scripts/doi-thuong-hieu.ts",
     "bat-telegram": "tsx scripts/bat-telegram.ts",
     "thu-telegram": "tsx scripts/thu-telegram.ts",
     "bat-email": "tsx scripts/bat-email.ts",

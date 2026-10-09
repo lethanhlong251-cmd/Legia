@@ -11,7 +11,7 @@ export function NutZaloNoi({ zalo }: { zalo: string }) {
       href={`https://zalo.me/${so}`}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Nhắn tin Zalo cho Chourmas"
+      aria-label="Nhắn tin Zalo cho Thạch Lan"
       className="group fixed bottom-24 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#0068FF] shadow-manh transition-transform duration-200 hover:scale-105 active:scale-95 lg:bottom-5"
     >
       {/* Vòng sóng nhấp nháy để thu hút chú ý */}

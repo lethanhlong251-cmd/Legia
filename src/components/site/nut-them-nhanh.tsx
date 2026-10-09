@@ -101,7 +101,7 @@ export function NutThemNhanh({
 
   if (!conBan) {
     return (
-      <span className="block w-full rounded-md border border-kem-400 bg-kem-200 px-4 py-2.5 text-center text-[13px] font-semibold text-muc-500">
+      <span className="block w-full border border-kem-400 bg-kem-200 px-4 py-2.5 text-center text-[13px] font-semibold text-muc-500">
         {t.sanPham.hetHang}
       </span>
     );
@@ -146,10 +146,10 @@ export function NutThemNhanh({
         onClick={bamNut}
         aria-expanded={cacCoBan.length > 1 ? moBangChon : undefined}
         aria-label={`${t.sanPham.themVaoGio} — ${tenSanPham}`}
-        className={`flex w-full items-center justify-center gap-2 rounded-md border px-4 py-2.5 text-[13px] font-semibold transition-all ${
+        className={`flex min-h-11 w-full items-center justify-center gap-2 border px-4 py-2.5 text-[13px] font-medium tracking-[0.04em] transition-colors ${
           vuaThem
-            ? "border-emerald-600 bg-emerald-600 text-white"
-            : "border-son-700/30 bg-white text-son-700 hover:border-son-700 hover:bg-son-700 hover:text-kem-50"
+            ? "border-emerald-700 bg-emerald-700 text-white"
+            : "border-muc-800 bg-transparent text-muc-800 hover:border-son-700 hover:bg-son-700 hover:text-kem-50"
         }`}
       >
         {vuaThem ? (

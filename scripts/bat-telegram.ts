@@ -232,7 +232,7 @@ async function main() {
     text: [
       "✅ <b>Thông báo đơn hàng đã được bật</b>",
       "",
-      "Từ giờ mỗi khi có khách đặt hàng trên website Chourmas,",
+      "Từ giờ mỗi khi có khách đặt hàng trên website Thạch Lan,",
       "bạn sẽ nhận được tin nhắn tại đây kèm đầy đủ:",
       "",
       "• Mã đơn",

@@ -21,7 +21,7 @@ export default async function TrangThanhToan({
       <h1 className="font-display text-3xl text-muc-900">
         {t.gioHang.datHang}
       </h1>
-      <div className="duong-vien-dong mt-4 h-px w-full opacity-50" />
+      <div className="duong-vien-dong mt-4 h-px w-full" />
       <MauThanhToan ngonNgu={lang} t={t} hotline={caiDat.hotline} />
     </div>
   );

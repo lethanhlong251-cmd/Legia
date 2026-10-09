@@ -36,19 +36,21 @@ export default async function TrangGioiThieu({
 
   return (
     <>
-      <section className="relative overflow-hidden bg-muc-900">
-        <div className="hoa-van-luoi absolute inset-0 opacity-50" />
-        <div className="khung relative flex flex-col items-center py-16 text-center sm:py-20">
+      <section className="border-b border-kem-300">
+        <div className="khung flex flex-col items-center py-16 text-center sm:py-24">
           <BieuTuongKhuon
-            className="h-14 w-14"
-            mauChinh="#FAF6EF"
+            className="h-12 w-12"
+            mauChinh="#9E2B25"
             mauNhan="#C8A24A"
           />
-          <h1 className="mt-6 font-display text-3xl text-kem-50 sm:text-4xl">
-            {t.trangChu.cauChuyenTieuDe}
+          <span className="nhan-muc mt-8">{t.chung.tenShop}</span>
+          <h1 className="mt-4 font-display text-[2.4rem] leading-tight sm:text-[3.2rem]">
+            {vi
+              ? "Hoa văn do chính tay chúng tôi thiết kế"
+              : "Patterns we design ourselves"}
           </h1>
-          <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-kem-300">
-            {t.chung.doiTac}
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-muc-500">
+            {t.chanTrang.gioiThieuNgan}
           </p>
         </div>
       </section>
@@ -58,7 +60,7 @@ export default async function TrangGioiThieu({
           {vi ? (
             <>
               <p className="font-display text-xl leading-relaxed text-muc-900">
-                Chourmas bắt đầu từ một điều rất giản dị: một chiếc bánh trung
+                Thạch Lan bắt đầu từ một điều rất giản dị: một chiếc bánh trung
                 thu đẹp phải bắt đầu từ một chiếc khuôn đủ sắc nét.
               </p>
               <p>
@@ -69,20 +71,18 @@ export default async function TrangGioiThieu({
                 phẳng.
               </p>
               <p>
-                Vì vậy chúng tôi chọn đi cùng{" "}
-                <strong className="text-muc-900">Thạch Lan</strong> — người thiết
-                kế ra những bộ hoa văn sen tứ quý, mẫu đơn, cúc, cá đôi, thần
-                tài mà bạn thấy trên website này. Chourmas là{" "}
-                <strong className="text-muc-900">
-                  đối tác phân phối chính thức
-                </strong>{" "}
-                các mẫu khuôn ấy. Mỗi hoa văn là một thiết kế riêng, không sản
-                xuất đại trà, và bạn sẽ không tìm thấy chúng ở nơi nào khác.
+                Vì vậy{" "}
+                <strong className="text-muc-900">Thạch Lan</strong> tự tay thiết
+                kế từng bộ hoa văn — sen tứ quý, mẫu đơn, cúc, cá đôi, thần tài —
+                và bán trực tiếp tới bạn,{" "}
+                <strong className="text-muc-900">không qua trung gian</strong>.
+                Mỗi hoa văn là một thiết kế riêng, không sản xuất đại trà, và bạn
+                sẽ không tìm thấy chúng ở nơi nào khác.
               </p>
               <p>
                 Chúng tôi cũng biết chuyện mua hàng qua mạng không phải lúc nào
                 cũng dễ chịu. Đã có quá nhiều người chuyển khoản rồi nhận về một
-                thứ khác hẳn với ảnh. Nên Chourmas làm ngược lại:{" "}
+                thứ khác hẳn với ảnh. Nên Thạch Lan làm ngược lại:{" "}
                 <strong className="text-muc-900">
                   chúng tôi không bao giờ yêu cầu bạn chuyển khoản trước
                 </strong>
@@ -92,7 +92,7 @@ export default async function TrangGioiThieu({
                 nào.
               </p>
               <p>
-                Trước mắt Chourmas tập trung vào khuôn bánh trung thu. Nhưng
+                Trước mắt Thạch Lan tập trung vào khuôn bánh trung thu. Nhưng
                 chúng tôi đang chuẩn bị để mang thêm về những dụng cụ và nguyên
                 liệu làm bánh khác — vẫn với đúng cách làm này: chọn kỹ, nói
                 thật, và để bạn kiểm tra trước khi trả tiền.
@@ -101,7 +101,7 @@ export default async function TrangGioiThieu({
           ) : (
             <>
               <p className="font-display text-xl leading-relaxed text-muc-900">
-                Chourmas began with something very simple: a beautiful mooncake
+                Thach Lan began with something very simple: a beautiful mooncake
                 has to start with a mold sharp enough to make one.
               </p>
               <p>
@@ -112,18 +112,18 @@ export default async function TrangGioiThieu({
                 shallow, a weak spring, a face that is not quite flat.
               </p>
               <p>
-                So we chose to work with{" "}
-                <strong className="text-muc-900">Thach Lan</strong>, the designer
-                behind the lotus, peony, chrysanthemum, twin fish and fortune
-                patterns you see on this site. Chourmas is the{" "}
-                <strong className="text-muc-900">official distributor</strong> of
-                those molds. Each pattern is an exclusive design, never mass
-                produced, and you will not find them anywhere else.
+                That is why{" "}
+                <strong className="text-muc-900">Thach Lan</strong> designs every
+                pattern set by hand — lotus, peony, chrysanthemum, twin fish,
+                fortune — and sells it to you directly,{" "}
+                <strong className="text-muc-900">with no middlemen</strong>. Each
+                pattern is an exclusive design, never mass produced, and you will
+                not find them anywhere else.
               </p>
               <p>
                 We also know that buying online is not always comfortable. Too
                 many people have transferred money and received something quite
-                unlike the photo. So Chourmas does it the other way round:{" "}
+                unlike the photo. So Thach Lan does it the other way round:{" "}
                 <strong className="text-muc-900">
                   we never ask you to pay in advance
                 </strong>
@@ -133,7 +133,7 @@ export default async function TrangGioiThieu({
                 included in the listed price.
               </p>
               <p>
-                For now Chourmas focuses on mooncake molds. But we are preparing
+                For now Thach Lan focuses on mooncake molds. But we are preparing
                 to bring in other baking tools and ingredients — in exactly the
                 same way: chosen carefully, described honestly, and yours to
                 inspect before you pay.
@@ -147,14 +147,14 @@ export default async function TrangGioiThieu({
           {camKet.map(({ icon: Icon, tieuDe, moTa }) => (
             <div
               key={tieuDe}
-              className="flex gap-3.5 rounded-lg border border-kem-300 bg-white p-5"
+              className="flex gap-3.5 border border-kem-300 bg-kem-50 p-5"
             >
               <Icon
                 className="mt-0.5 h-5 w-5 shrink-0 text-son-700"
                 strokeWidth={1.7}
               />
               <div>
-                <p className="font-display text-[15px] text-muc-900">
+                <p className="text-[15px] font-semibold text-muc-900">
                   {tieuDe}
                 </p>
                 <p className="mt-1 text-[13px] leading-relaxed text-muc-600">

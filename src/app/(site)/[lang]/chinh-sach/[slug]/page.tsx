@@ -41,7 +41,7 @@ export default async function TrangChinhSach({
       <h1 className="font-display text-3xl text-muc-900 sm:text-4xl">
         {noiDung.tieuDe}
       </h1>
-      <div className="duong-vien-dong mt-5 h-px w-full opacity-50" />
+      <div className="duong-vien-dong mt-5 h-px w-full" />
 
       <div className="mt-9 space-y-9">
         {noiDung.cacPhan.map((phan) => (
@@ -66,8 +66,8 @@ export default async function TrangChinhSach({
       <div className="mt-12 rounded-lg border border-kem-300 bg-kem-50 p-6">
         <p className="text-sm leading-relaxed text-muc-600">
           {lang === "vi"
-            ? "Mọi thắc mắc liên quan đến chính sách này, vui lòng liên hệ Chourmas qua số"
-            : "For any question about this policy, please contact Chourmas at"}{" "}
+            ? "Mọi thắc mắc liên quan đến chính sách này, vui lòng liên hệ Thạch Lan qua số"
+            : "For any question about this policy, please contact Thach Lan at"}{" "}
           <a
             href={`tel:${caiDat.hotline}`}
             className="font-semibold text-son-700 hover:underline"

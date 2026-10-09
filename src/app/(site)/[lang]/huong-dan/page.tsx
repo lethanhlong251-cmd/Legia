@@ -127,7 +127,7 @@ export default async function TrangHuongDan({
         {t.huongDan.moTa}
       </p>
 
-      <div className="duong-vien-dong mt-6 h-px w-full opacity-50" />
+      <div className="duong-vien-dong mt-6 h-px w-full" />
 
       <div className="mt-10 space-y-11">
         {cacPhan.map((phan, i) => (

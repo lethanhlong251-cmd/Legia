@@ -9,10 +9,10 @@ import type { BanDich } from "./vi";
 
 export const en: BanDich = {
   chung: {
-    tenShop: "Chourmas",
-    tenDayDu: "Chourmas Mooncake Molds",
+    tenShop: "Thach Lan",
+    tenDayDu: "Thach Lan Mooncake Molds",
     slogan: "Exclusive Vietnamese patterns",
-    doiTac: "Official distributor of Thach Lan exclusive mold designs",
+    doiTac: "Free delivery nationwide · Inspect your parcel before you pay",
     dangTai: "Loading…",
     xemThem: "See more",
     quayLai: "Back",
@@ -30,7 +30,7 @@ export const en: BanDich = {
   },
 
   camKet: {
-    tieuDe: "The Chourmas promise",
+    tieuDe: "The Thach Lan promise",
     khongChuyenKhoan: {
       tieuDe: "No prepayment",
       moTa: "Pay only after your order arrives and you have checked it",
@@ -45,27 +45,27 @@ export const en: BanDich = {
     },
     docQuyen: {
       tieuDe: "Exclusive designs",
-      moTa: "Patterns made for Chourmas alone — available nowhere else",
+      moTa: "Patterns designed by Thach Lan — available nowhere else",
     },
   },
 
   trangChu: {
     heroNhan: "Mid-Autumn 2026",
-    heroTieuDe: "Mooncake molds with\nexclusive Vietnamese patterns",
+    heroTieuDe: "Vietnamese patterns,\npressed into every cake",
     heroMoTa:
-      "Spring-loaded molds with the crispest detail, carrying patterns designed for Chourmas alone. Inspect your parcel first, pay afterwards.",
+      "Spring-loaded mooncake molds whose patterns Thach Lan designs and sells directly. Every design is our own, cut sharp enough to print each petal clearly.",
     heroNutChinh: "Browse the collection",
     heroNutPhu: "Chat on Zalo",
     noiBatTieuDe: "Most loved this season",
     noiBatMoTa: "The molds our customers order most",
     tatCaSanPham: "See every mold",
-    vaySaoTieuDe: "Why Chourmas",
+    vaySaoTieuDe: "Why Thach Lan",
     cauChuyenTieuDe: "Our story",
   },
 
   sanPham: {
     tieuDeTrang: "The mold collection",
-    moTaTrang: "Every exclusive mold currently available at Chourmas",
+    moTaTrang: "Every exclusive mold currently available from Thach Lan",
     maSanPham: "Product code",
     soMat: "Pattern faces",
     duongKinh: "Diameter",
@@ -132,7 +132,7 @@ export const en: BanDich = {
 
   thanhCong: {
     tieuDe: "Order placed",
-    moTa: "Thank you for trusting Chourmas. We will call you shortly to confirm.",
+    moTa: "Thank you for trusting Thach Lan. We will call you shortly to confirm.",
     maDon: "Your order code",
     luuMa: "Please keep this code so you can check on your order later.",
     veTrangChu: "Back to home",
@@ -141,11 +141,11 @@ export const en: BanDich = {
 
   chanTrang: {
     gioiThieuNgan:
-      "Chourmas is the official distributor of the exclusive mooncake mold patterns designed by Thach Lan. Inspect your parcel first, pay afterwards.",
+      "Vietnamese-pattern mooncake molds, designed and sold directly by Thach Lan. Inspect your parcel first, pay afterwards.",
     lienKet: "Links",
     hoTro: "Support",
     lienHe: "Contact",
-    banQuyen: "All rights reserved, Chourmas",
+    banQuyen: "All rights reserved, Thach Lan",
     hotline: "Hotline / Zalo",
     facebook: "Facebook",
     gioLamViec: "Orders taken 24/7",

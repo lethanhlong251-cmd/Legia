@@ -75,7 +75,7 @@ export default async function TrangLienHe({
           : "Questions about a mold, a size, or an order? Call or message us — Zalo gets the fastest reply."}
       </p>
 
-      <div className="duong-vien-dong mt-6 h-px w-full opacity-50" />
+      <div className="duong-vien-dong mt-6 h-px w-full" />
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         {cachLienHe.map(({ icon: Icon, nhan, giaTri, dich, moTa }) => {

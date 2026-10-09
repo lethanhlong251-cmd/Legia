@@ -40,9 +40,9 @@ const DANH_MUC = [
         nameVi: "Khuôn bánh trung thu",
         nameEn: "Mooncake molds",
         descVi:
-          "Khuôn lò xo nhấn tay, hoa văn độc quyền do Thạch Lan thiết kế, Chourmas phân phối chính thức.",
+          "Khuôn lò xo nhấn tay, hoa văn độc quyền do Thạch Lan tự thiết kế và bán trực tiếp.",
         descEn:
-          "Hand-press spring molds carrying exclusive patterns designed by Thach Lan and distributed officially by Chourmas.",
+          "Hand-press spring molds carrying exclusive patterns designed and sold directly by Thach Lan.",
         sortOrder: 1,
         isActive: true,
       },
@@ -249,7 +249,7 @@ async function main() {
       data: {
         username: "admin",
         passwordHash: await bcrypt.hash(matKhau, 12),
-        name: "Quản trị Chourmas",
+        name: "Quản trị Thạch Lan",
       },
     });
     console.log("\n  ╔══════════════════════════════════════════════╗");

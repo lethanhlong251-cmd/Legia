@@ -1,6 +1,6 @@
 #!/bin/bash
 # ============================================================
-#  TẠO LINK XEM THỬ WEBSITE CHOURMAS
+#  TẠO LINK XEM THỬ WEBSITE THẠCH LAN
 #
 #  Script này bật website trên máy bạn rồi tạo một đường link
 #  công khai, gửi cho ai cũng xem được — kể cả trên điện thoại,
@@ -22,7 +22,7 @@ CONG=3000
 
 echo ""
 echo "════════════════════════════════════════════════════"
-echo "   CHOURMAS — TẠO LINK XEM THỬ"
+echo "   THẠCH LAN — TẠO LINK XEM THỬ"
 echo "════════════════════════════════════════════════════"
 echo ""
 

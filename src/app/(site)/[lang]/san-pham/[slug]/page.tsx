@@ -54,7 +54,7 @@ export async function generateMetadata({
     alternates: { canonical: `/${lang}/san-pham/${slug}` },
     openGraph: {
       type: "website",
-      siteName: "Chourmas",
+      siteName: "Thạch Lan",
       title: ten,
       description: moTa,
       // Chia sẻ trang sản phẩm thì hiện đúng ảnh mẫu khuôn đó.
@@ -122,7 +122,7 @@ export default async function TrangChiTietSanPham({
     name: ten,
     description: theoNgonNgu(lang, sanPham.shortDescVi, sanPham.shortDescEn),
     sku: sanPham.sku,
-    brand: { "@type": "Brand", name: "Chourmas" },
+    brand: { "@type": "Brand", name: "Thạch Lan" },
     image: sanPham.images.map((a) => a.url),
     offers: {
       "@type": "AggregateOffer",
@@ -242,7 +242,7 @@ export default async function TrangChiTietSanPham({
             <h2 className="font-display text-xl text-muc-900">
               {t.sanPham.moTaSanPham}
             </h2>
-            <div className="duong-vien-dong mt-3 h-px w-full opacity-50" />
+            <div className="duong-vien-dong mt-3 h-px w-full" />
             <div className="mt-5 space-y-4 whitespace-pre-line text-[15px] leading-relaxed text-muc-600">
               {moTa}
             </div>
@@ -274,7 +274,7 @@ export default async function TrangChiTietSanPham({
             <h2 className="font-display text-xl text-muc-900">
               {t.sanPham.thongSo}
             </h2>
-            <div className="duong-vien-dong mt-3 h-px w-full opacity-50" />
+            <div className="duong-vien-dong mt-3 h-px w-full" />
             <dl className="mt-5 divide-y divide-kem-300 overflow-hidden rounded-lg border border-kem-300 bg-white text-sm">
               {thongSo.map((ts) => (
                 <div

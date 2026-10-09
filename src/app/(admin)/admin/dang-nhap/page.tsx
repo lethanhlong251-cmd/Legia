@@ -20,7 +20,7 @@ export default async function TrangDangNhap() {
             mauNhan="#C8A24A"
           />
           <h1 className="mt-5 font-display text-2xl tracking-[0.12em] text-kem-50">
-            CHOURMAS
+            THẠCH LAN
           </h1>
           <p className="mt-1 text-[10px] font-semibold tracking-[0.22em] text-dong-500">
             TRANG QUẢN TRỊ

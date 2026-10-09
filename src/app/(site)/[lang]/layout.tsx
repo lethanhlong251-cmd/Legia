@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Be_Vietnam_Pro } from "next/font/google";
+import { Cormorant_Garamond, Be_Vietnam_Pro } from "next/font/google";
 import { notFound } from "next/navigation";
 import "@/app/globals.css";
 
@@ -11,9 +11,11 @@ import { ChanTrang } from "@/components/site/chan-trang";
 import { NutZaloNoi } from "@/components/site/nut-zalo-noi";
 import { NganGioHang } from "@/components/site/ngan-gio-hang";
 
-const playfair = Playfair_Display({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin", "vietnamese"],
-  variable: "--font-playfair",
+  weight: ["500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
   display: "swap",
 });
 
@@ -36,12 +38,12 @@ export async function generateMetadata({
   const laViet = lang !== "en";
 
   const tieuDe = laViet
-    ? "Khuôn bánh trung thu Chourmas — Độc quyền hoa văn Việt"
-    : "Chourmas Mooncake Molds — Exclusive Vietnamese patterns";
+    ? "Khuôn bánh trung thu Thạch Lan — Độc quyền hoa văn Việt"
+    : "Thach Lan Mooncake Molds — Exclusive Vietnamese patterns";
 
   const moTa = laViet
-    ? "Khuôn bánh trung thu lò xo hoa văn độc quyền. Miễn phí vận chuyển toàn quốc, nhận hàng kiểm tra rồi mới thanh toán. Đối tác phân phối chính thức khuôn Thạch Lan."
-    : "Spring-loaded mooncake molds with exclusive Vietnamese patterns. Free nationwide delivery, inspect before you pay. Official distributor of Thach Lan molds.";
+    ? "Khuôn bánh trung thu lò xo hoa văn độc quyền. Miễn phí vận chuyển toàn quốc, nhận hàng kiểm tra rồi mới thanh toán. Thạch Lan tự thiết kế hoa văn và bán trực tiếp."
+    : "Spring-loaded mooncake molds with exclusive Vietnamese patterns. Free nationwide delivery, inspect before you pay. Designed and sold directly by Thach Lan.";
 
   return {
     metadataBase: new URL(
@@ -57,10 +59,10 @@ export async function generateMetadata({
           "khuôn bánh 150g",
           "khuôn bánh 200g",
           "đồ làm bánh",
-          "Chourmas",
+          "Thach Lan",
           "Thạch Lan",
         ]
-      : ["mooncake mold", "vietnamese mooncake mold", "baking tools", "Chourmas"],
+      : ["mooncake mold", "vietnamese mooncake mold", "baking tools", "Thach Lan"],
     alternates: {
       canonical: `/${lang}`,
       languages: {
@@ -83,8 +85,8 @@ export async function generateMetadata({
           width: 1200,
           height: 630,
           alt: laViet
-            ? "Khuôn bánh trung thu Chourmas — Độc quyền hoa văn Việt"
-            : "Chourmas Mooncake Molds — Exclusive Vietnamese patterns",
+            ? "Khuôn bánh trung thu Thạch Lan — Độc quyền hoa văn Việt"
+            : "Thach Lan Mooncake Molds — Exclusive Vietnamese patterns",
         },
       ],
     },
@@ -99,7 +101,7 @@ export async function generateMetadata({
     // Màu thanh trạng thái điện thoại, cho khớp với dải đỏ trên đầu trang
     appleWebApp: {
       capable: true,
-      title: "Chourmas",
+      title: "Thạch Lan",
       statusBarStyle: "black-translucent",
     },
   };
@@ -129,7 +131,7 @@ export default async function BoCucTrangChinh({
     <html
       lang={lang}
       suppressHydrationWarning
-      className={`${playfair.variable} ${beVietnam.variable}`}
+      className={`${cormorant.variable} ${beVietnam.variable}`}
     >
       <head>
         {/*

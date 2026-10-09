@@ -1,4 +1,4 @@
-# Đưa website Chourmas lên Hostinger
+# Đưa website Thạch Lan lên Hostinger
 
 Hướng dẫn từng bước, chạy từ đầu đến khi website chạy thật trên tên miền.
 

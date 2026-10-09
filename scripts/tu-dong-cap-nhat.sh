@@ -89,25 +89,25 @@ fi
 # ---- Tải code mới ----
 # Dùng reset --hard thay vì pull để không bao giờ kẹt vì xung đột.
 # Đổi lại: TUYỆT ĐỐI không sửa code trực tiếp trên máy chủ, sẽ bị ghi đè.
-git reset --hard "origin/$NHANH" -q || { ghi "LỖI: không tải được code mới"; bao "❌ Chourmas: không tải được code mới từ GitHub"; exit 1; }
+git reset --hard "origin/$NHANH" -q || { ghi "LỖI: không tải được code mới"; bao "❌ Thạch Lan: không tải được code mới từ GitHub"; exit 1; }
 
 # ---- Cài thư viện, chỉ khi danh sách thư viện có thay đổi ----
 if ! git diff --quiet "$BAN_CU" "$BAN_MOI" -- package-lock.json package.json; then
   ghi "Danh sách thư viện có thay đổi, đang cài lại…"
-  npm install --no-audit --no-fund >>"$NHAT_KY" 2>&1 || { ghi "LỖI: cài thư viện thất bại"; bao "❌ Chourmas: cài thư viện thất bại"; exit 1; }
+  npm install --no-audit --no-fund >>"$NHAT_KY" 2>&1 || { ghi "LỖI: cài thư viện thất bại"; bao "❌ Thạch Lan: cài thư viện thất bại"; exit 1; }
 else
   ghi "Thư viện không đổi, bỏ qua bước cài"
 fi
 
 # ---- Chuyển đổi cơ sở dữ liệu ----
-npx prisma migrate deploy >>"$NHAT_KY" 2>&1 || { ghi "LỖI: chuyển đổi cơ sở dữ liệu thất bại"; bao "❌ Chourmas: chuyển đổi cơ sở dữ liệu thất bại. Web vẫn đang chạy bản cũ."; exit 1; }
+npx prisma migrate deploy >>"$NHAT_KY" 2>&1 || { ghi "LỖI: chuyển đổi cơ sở dữ liệu thất bại"; bao "❌ Thạch Lan: chuyển đổi cơ sở dữ liệu thất bại. Web vẫn đang chạy bản cũ."; exit 1; }
 
 # ---- Build ----
 ghi "Đang build…"
 if npm run build >>"$NHAT_KY" 2>&1; then
   pm2 restart "$TEN_PM2" >>"$NHAT_KY" 2>&1
   ghi "✅ Cập nhật xong, website đã chạy bản mới"
-  bao "✅ Chourmas đã cập nhật: $MO_TA"
+  bao "✅ Thạch Lan đã cập nhật: $MO_TA"
 else
   # Build hỏng: quay về bản cũ đang chạy tốt
   ghi "LỖI: build thất bại. Đang quay về bản cũ ${BAN_CU:0:7}…"
@@ -116,10 +116,10 @@ else
   if npm run build >>"$NHAT_KY" 2>&1; then
     pm2 restart "$TEN_PM2" >>"$NHAT_KY" 2>&1
     ghi "Đã quay về bản cũ, website vẫn chạy bình thường"
-    bao "⚠️ Chourmas: bản mới build lỗi nên đã quay về bản cũ. Website vẫn bán hàng bình thường. Xem nhật ký: $NHAT_KY"
+    bao "⚠️ Thạch Lan: bản mới build lỗi nên đã quay về bản cũ. Website vẫn bán hàng bình thường. Xem nhật ký: $NHAT_KY"
   else
     ghi "NGUY HIỂM: bản cũ cũng build lỗi. Cần kiểm tra ngay."
-    bao "🚨 Chourmas: build lỗi cả bản mới lẫn bản cũ. CẦN KIỂM TRA NGAY máy chủ."
+    bao "🚨 Thạch Lan: build lỗi cả bản mới lẫn bản cũ. CẦN KIỂM TRA NGAY máy chủ."
   fi
   exit 1
 fi

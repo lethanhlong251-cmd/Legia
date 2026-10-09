@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
 /* ============================================================
-   CHOURMAS — HỆ THỐNG THIẾT KẾ
+   THẠCH LAN — HỆ THỐNG THIẾT KẾ
+   Phong cách: tối giản, sang trọng. Góc vuông, đường kẻ mảnh,
+   nhiều khoảng trắng, chữ tiêu đề có chân (Cormorant Garamond).
    Muốn đổi màu toàn bộ website: sửa các giá trị trong khối
    @theme bên dưới. Không cần sửa chỗ nào khác.
    ============================================================ */
@@ -49,19 +51,21 @@
   --color-muc-900: #1a1310;
 
   /* --- Chữ --- */
-  --font-display: var(--font-playfair), "Times New Roman", serif;
+  --font-display: var(--font-cormorant), "Times New Roman", serif;
   --font-sans: var(--font-be-vietnam), system-ui, sans-serif;
 
   /* --- Bo góc --- */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
+  /* Phong cách tối giản: gần như vuông góc */
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
 
   /* --- Đổ bóng ấm, hợp tông kem --- */
-  --shadow-nhe: 0 1px 2px rgba(43, 33, 28, 0.06);
-  --shadow-vua: 0 4px 16px -4px rgba(43, 33, 28, 0.12);
-  --shadow-manh: 0 12px 32px -8px rgba(43, 33, 28, 0.18);
+  /* Bóng rất nhẹ — giao diện dựa vào đường kẻ, không dựa vào bóng */
+  --shadow-nhe: 0 1px 2px rgba(43, 33, 28, 0.04);
+  --shadow-vua: 0 6px 20px -10px rgba(43, 33, 28, 0.14);
+  --shadow-manh: 0 16px 40px -16px rgba(43, 33, 28, 0.2);
 
   /* --- Chuyển động --- */
   --ease-muot: cubic-bezier(0.22, 1, 0.36, 1);
@@ -90,9 +94,18 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    font-weight: 600;
-    letter-spacing: -0.015em;
+    font-weight: 500;
+    letter-spacing: -0.005em;
     color: var(--color-muc-900);
+  }
+
+  /* Cormorant có mắt chữ nhỏ; phóng nhẹ để cùng cỡ chữ vẫn dễ đọc như trước */
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-display {
+    font-size-adjust: 0.47;
   }
 
   /* Bỏ nút tăng/giảm mặc định của ô nhập số */
@@ -128,13 +141,9 @@
 }
 
 @utility duong-vien-dong {
-  /* Đường kẻ mảnh màu vàng đồng, mờ dần hai đầu */
-  background-image: linear-gradient(
-    to right,
-    transparent,
-    var(--color-dong-500),
-    transparent
-  );
+  /* Đường kẻ mảnh, trơn — phong cách tối giản */
+  background-color: var(--color-muc-800);
+  opacity: 0.18;
 }
 
 /* ============================================================
@@ -142,32 +151,42 @@
    ============================================================ */
 
 @layer components {
-  /* Nút chính — đỏ son */
+  /* Nút chính — đỏ son, vuông, chữ giãn */
   .nut-chinh {
-    @apply inline-flex items-center justify-center gap-2 rounded-md bg-son-700 px-6 py-3
-           text-sm font-semibold tracking-wide text-kem-50 transition-all duration-200
-           hover:bg-son-800 active:scale-[0.98]
-           disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 bg-son-700 px-7 py-3
+           text-sm font-medium tracking-[0.06em] text-kem-50 transition-colors duration-200
+           hover:bg-son-800 disabled:cursor-not-allowed disabled:opacity-50;
   }
 
-  /* Nút phụ — viền đỏ, nền trong */
+  /* Nút phụ — viền mảnh màu mực, nền trong */
   .nut-phu {
-    @apply inline-flex items-center justify-center gap-2 rounded-md border border-son-700/30
-           bg-transparent px-6 py-3 text-sm font-semibold tracking-wide text-son-700
-           transition-all duration-200 hover:border-son-700 hover:bg-son-50
-           active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 border border-muc-800
+           bg-transparent px-7 py-3 text-sm font-medium tracking-[0.06em] text-muc-800
+           transition-colors duration-200 hover:border-son-700 hover:text-son-700
+           disabled:cursor-not-allowed disabled:opacity-50;
   }
 
-  /* Nút vàng đồng — dùng cho hành động nổi bật trên nền tối */
+  /* Nút sáng — dùng trên nền đỏ hoặc nền tối */
   .nut-dong {
-    @apply inline-flex items-center justify-center gap-2 rounded-md bg-dong-500 px-6 py-3
-           text-sm font-semibold tracking-wide text-muc-900 transition-all duration-200
-           hover:bg-dong-400 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 bg-kem-50 px-7 py-3
+           text-sm font-medium tracking-[0.06em] text-muc-900 transition-colors duration-200
+           hover:bg-kem-200 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  /* Liên kết gạch chân kiểu tạp chí */
+  .lien-ket-gach {
+    @apply inline-block border-b border-muc-800 pb-0.5 text-sm text-muc-800 transition-colors
+           hover:border-son-700 hover:text-son-700;
+  }
+
+  /* Nhãn nhỏ chữ in hoa phía trên tiêu đề */
+  .nhan-muc {
+    @apply text-xs font-semibold uppercase tracking-[0.24em] text-dong-700;
   }
 
   /* Ô nhập liệu */
   .o-nhap {
-    @apply w-full rounded-md border border-kem-400 bg-white px-4 py-3 text-[15px] text-muc-800
+    @apply w-full border border-kem-400 bg-white px-4 py-3 text-[15px] text-muc-800
            placeholder:text-muc-400 transition-colors
            focus:border-son-700 focus:outline-none focus:ring-1 focus:ring-son-700;
   }
@@ -179,18 +198,18 @@
 
   /* Thẻ (card) nền trắng */
   .the {
-    @apply rounded-lg border border-kem-300 bg-white shadow-nhe;
+    @apply border border-kem-300 bg-white;
   }
 
   /* Huy hiệu nhỏ */
   .huy-hieu {
-    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-semibold
-           uppercase tracking-wider;
+    @apply inline-flex items-center gap-1 px-2.5 py-1 text-[10.5px] font-semibold
+           uppercase tracking-[0.14em];
   }
 
   /* Chiều rộng nội dung tối đa, có lề hai bên trên điện thoại */
   .khung {
-    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-[1240px] px-4 sm:px-6;
   }
 }
 
