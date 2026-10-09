@@ -3,7 +3,7 @@
 Ảnh hiện ra khi dán link website vào Messenger, Zalo hay Facebook nằm ở:
 
 ```
-public/anh-chia-se.jpg      (1200 × 630)
+public/anh-chia-se-thach-lan.jpg      (1200 × 630)
 ```
 
 Ảnh này được dựng sẵn một lần rồi lưu thành file, nên website chạy không tốn
@@ -37,7 +37,7 @@ khối `<div class="bang">`.
 ## Dựng lại file ảnh
 
 Việc này cần chạy trong trình duyệt vì phải dùng đúng font thương hiệu
-(Playfair Display và Be Vietnam Pro, đã tải sẵn trong `public/fonts/`).
+(Cormorant Garamond và Be Vietnam Pro, đã tải sẵn trong `public/fonts/`).
 
 Cách nhanh nhất: nhờ trợ lý lập trình làm lại giúp — chỉ cần nói *"dựng lại ảnh
 chia sẻ"* và chỉ ra chỗ muốn đổi. Quy trình gồm ba bước:
@@ -45,7 +45,7 @@ chia sẻ"* và chỉ ra chỗ muốn đổi. Quy trình gồm ba bước:
 1. Chép `mau.html` vào thư mục `public/`, chạy `npm run dev`
 2. Mở trang đó trong trình duyệt, vẽ nội dung ra thẻ `canvas` kích thước
    1200×630 rồi xuất ra JPEG
-3. Lưu đè lên `public/anh-chia-se.jpg`, sau đó xoá file HTML khỏi `public/`
+3. Lưu đè lên `public/anh-chia-se-thach-lan.jpg`, sau đó xoá file HTML khỏi `public/`
 
 > **Vì sao không để sẵn công cụ tự động?** Việc đó cần một đường dẫn cho phép
 > ghi file lên máy chủ. Để lại trong mã nguồn của một website bán hàng là rủi
@@ -63,3 +63,8 @@ Sau khi website đã chạy trên tên miền thật, dán địa chỉ website 
 
 Facebook và Zalo đều **nhớ ảnh cũ** khá lâu. Đổi ảnh xong mà chưa thấy thay
 đổi thì phải dùng công cụ Scrape Again ở trên, không phải lỗi website.
+
+
+> Mẹo: mỗi lần đổi ảnh, nên đặt tên file mới (và sửa tên trong
+> `src/app/(site)/[lang]/layout.tsx`). Facebook và Zalo nhớ ảnh theo tên file,
+> giữ tên cũ thì chúng có thể vẫn hiện ảnh cũ nhiều ngày.

@@ -48,7 +48,7 @@ trung thu độc quyền do Thạch Lan thiết kế.
 | Giao diện | Tailwind CSS v4 |
 | Cơ sở dữ liệu | SQLite qua Prisma 7 |
 | Xử lý ảnh | sharp |
-| Chữ | Playfair Display + Be Vietnam Pro |
+| Chữ | Cormorant Garamond + Be Vietnam Pro |
 
 Toàn bộ tên hàm, biến và chú thích trong code viết bằng **tiếng Việt** để người
 tiếp quản dự án đọc được ngay.

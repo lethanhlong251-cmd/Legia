@@ -81,7 +81,7 @@ export async function generateMetadata({
       // Ảnh hiện ra khi dán link vào Messenger, Zalo, Facebook
       images: [
         {
-          url: "/anh-chia-se.jpg",
+          url: "/anh-chia-se-thach-lan.jpg",
           width: 1200,
           height: 630,
           alt: laViet
@@ -94,7 +94,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: tieuDe,
       description: moTa,
-      images: ["/anh-chia-se.jpg"],
+      images: ["/anh-chia-se-thach-lan.jpg"],
     },
     robots: { index: true, follow: true },
     manifest: "/manifest.webmanifest",
