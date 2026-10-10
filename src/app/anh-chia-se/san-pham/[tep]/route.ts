@@ -23,13 +23,24 @@ const boNho = new Map<string, Buffer>();
 const TOI_DA_TRONG_BO_NHO = 200;
 
 export async function GET(
-  request: Request,
+  _request: Request,
   ctx: RouteContext<"/anh-chia-se/san-pham/[tep]">,
 ) {
   const { tep } = await ctx.params;
   const slug = tep.replace(/\.jpe?g$/i, "");
-  const veAnhChung = () =>
-    Response.redirect(new URL(ANH_CHIA_SE, request.url), 302);
+  // Không có ảnh thì trả thẳng ảnh chia sẻ chung của shop. Không dùng
+  // chuyển hướng: website chạy sau nginx, địa chỉ tự tính ra sẽ là địa chỉ
+  // nội bộ (localhost:3000) mà khách không mở được.
+  const veAnhChung = async () => {
+    try {
+      const anhChung = await readFile(path.join(THU_MUC_PUBLIC, ANH_CHIA_SE));
+      return new Response(new Uint8Array(anhChung), {
+        headers: { "Content-Type": "image/jpeg", "Cache-Control": "public, max-age=3600" },
+      });
+    } catch {
+      return new Response("Không tìm thấy ảnh", { status: 404 });
+    }
+  };
 
   const sanPham = await laySanPhamTheoSlug(slug);
   const anh = sanPham?.images.find((a) => a.isMain) ?? sanPham?.images[0];
