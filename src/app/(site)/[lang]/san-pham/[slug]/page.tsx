@@ -60,7 +60,16 @@ export async function generateMetadata({
       duongDan: `/san-pham/${slug}`,
       tieuDe: ten,
       moTa,
-      anh: anh ? { url: anh.url, width: 1400, height: 1400, alt: ten } : undefined,
+      // Ảnh dạng .jpg (Zalo không phải lúc nào cũng hiện được .webp).
+      // ?v= đổi theo ảnh, để Facebook/Zalo lấy ảnh mới khi bạn thay ảnh chính.
+      anh: anh
+        ? {
+            url: `/anh-chia-se/san-pham/${slug}.jpg?v=${anh.id.slice(-8)}`,
+            width: 1200,
+            height: 1200,
+            alt: ten,
+          }
+        : undefined,
     }),
   };
 }
