@@ -12,6 +12,17 @@ const nextConfig: NextConfig = {
    */
   allowedDevOrigins: ["*.trycloudflare.com"],
 
+  experimental: {
+    serverActions: {
+      /**
+       * Mặc định Next.js chỉ nhận 1MB mỗi lần gửi lên, ảnh chụp điện thoại
+       * thường nặng hơn thế. Trang admin tải từng ảnh một (tối đa 12MB/ảnh,
+       * xem taiAnhLen), nên để 13MB cho dư phần đóng gói. Nginx đang cho 20MB.
+       */
+      bodySizeLimit: "13mb",
+    },
+  },
+
   images: {
     /**
      * AVIF nhỏ hơn WebP khoảng 20% với cùng chất lượng. Trình duyệt nào

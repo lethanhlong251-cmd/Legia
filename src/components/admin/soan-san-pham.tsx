@@ -36,6 +36,34 @@ type BienThe = {
 
 type Anh = { id: string; url: string; isMain: boolean };
 
+/** Ảnh đã chọn nhưng chưa gửi lên máy chủ (dùng khi tạo sản phẩm mới) */
+type AnhCho = { khoa: string; file: File; url: string };
+
+const DINH_DANG_ANH = ["image/jpeg", "image/png", "image/webp", "image/avif"];
+const DUNG_LUONG_ANH_TOI_DA = 12 * 1024 * 1024; // khớp với taiAnhLen
+
+/**
+ * Gửi từng ảnh một thay vì gộp cả loạt: mỗi lần gửi nhẹ hơn, không vượt giới
+ * hạn dung lượng của máy chủ, và ảnh đầu tiên chắc chắn thành ảnh đại diện.
+ */
+async function guiTungAnh(idSanPham: string, cacFile: File[]) {
+  let soThanhCong = 0;
+  const cacLoi: string[] = [];
+  for (const file of cacFile) {
+    const fd = new FormData();
+    fd.set("productId", idSanPham);
+    fd.append("files", file);
+    try {
+      const kq = await taiAnhLen(fd);
+      if (kq.ok) soThanhCong++;
+      else cacLoi.push(kq.loi ?? `Không tải được "${file.name}".`);
+    } catch {
+      cacLoi.push(`Không tải được "${file.name}" (mất kết nối hoặc ảnh quá nặng).`);
+    }
+  }
+  return { soThanhCong, cacLoi };
+}
+
 export type SanPhamSoan = {
   id?: string;
   sku: string;
@@ -88,9 +116,16 @@ export function SoanSanPham({
   const [thongBao, setThongBao] = useState<{ ok: boolean; chu: string } | null>(
     null,
   );
+  const [anhCho, setAnhCho] = useState<AnhCho[]>([]);
+  const [dangKeoTha, setDangKeoTha] = useState(false);
   const oChonFile = useRef<HTMLInputElement>(null);
 
   const laSanPhamMoi = !sp.id;
+
+  // Ảnh đã lên máy chủ lấy thẳng từ banDau: sau mỗi lần tải / xoá / đổi ảnh
+  // đại diện, router.refresh() mang danh sách mới về mà không đè lên những
+  // ô đang gõ dở trong form.
+  const anhDaLuu = banDau.images;
 
   function sua<K extends keyof SanPhamSoan>(khoa: K, giaTri: SanPhamSoan[K]) {
     setSp((cu) => ({ ...cu, [khoa]: giaTri }));
@@ -123,6 +158,25 @@ export function SoanSanPham({
       });
 
       if (kq.ok) {
+        if (laSanPhamMoi && kq.id && anhCho.length > 0) {
+          setThongBao({
+            ok: true,
+            chu: `Đã tạo sản phẩm. Đang tải ${anhCho.length} ảnh lên…`,
+          });
+          const { cacLoi } = await guiTungAnh(
+            kq.id,
+            anhCho.map((a) => a.file),
+          );
+          if (cacLoi.length > 0) {
+            // Sản phẩm đã có, chuyển sang trang sửa để tải lại ảnh bị lỗi
+            setThongBao({
+              ok: false,
+              chu: `Đã tạo sản phẩm nhưng ${cacLoi.length} ảnh chưa lên được: ${cacLoi.join(" ")}`,
+            });
+            router.push(`/admin/san-pham/${kq.id}`);
+            return;
+          }
+        }
         setThongBao({ ok: true, chu: kq.thongBao ?? "Đã lưu." });
         router.refresh();
         if (laSanPhamMoi) router.push("/admin/san-pham");
@@ -132,21 +186,67 @@ export function SoanSanPham({
     });
   }
 
-  function taiAnh(files: FileList | null) {
-    if (!files || files.length === 0 || !sp.id) return;
-    const fd = new FormData();
-    fd.set("productId", sp.id);
-    for (const f of Array.from(files)) fd.append("files", f);
+  function chonAnh(files: FileList | null) {
+    if (!files || files.length === 0) return;
 
+    const hopLe: File[] = [];
+    const cacLoi: string[] = [];
+    for (const f of Array.from(files)) {
+      if (!DINH_DANG_ANH.includes(f.type)) {
+        cacLoi.push(`"${f.name}" không phải ảnh JPG, PNG, WebP hoặc AVIF.`);
+      } else if (f.size > DUNG_LUONG_ANH_TOI_DA) {
+        cacLoi.push(`"${f.name}" nặng quá 12MB.`);
+      } else {
+        hopLe.push(f);
+      }
+    }
+    if (oChonFile.current) oChonFile.current.value = "";
+    if (cacLoi.length > 0) setThongBao({ ok: false, chu: cacLoi.join(" ") });
+    if (hopLe.length === 0) return;
+
+    // Sản phẩm mới: giữ ảnh lại, gửi lên khi bấm "Tạo sản phẩm"
+    if (!sp.id) {
+      setAnhCho((cu) => [
+        ...cu,
+        ...hopLe.map((file) => ({
+          khoa: `${file.name}-${file.size}-${Math.random().toString(36).slice(2)}`,
+          file,
+          url: URL.createObjectURL(file),
+        })),
+      ]);
+      return;
+    }
+
+    const idSanPham = sp.id;
     batDauTaiAnh(async () => {
-      const kq = await taiAnhLen(fd);
-      setThongBao(
-        kq.ok
-          ? { ok: true, chu: kq.thongBao ?? "Đã tải ảnh." }
-          : { ok: false, chu: kq.loi ?? "Không tải được ảnh." },
+      const { soThanhCong, cacLoi: loiTai } = await guiTungAnh(
+        idSanPham,
+        hopLe,
       );
-      if (oChonFile.current) oChonFile.current.value = "";
+      setThongBao(
+        loiTai.length === 0
+          ? { ok: true, chu: `Đã tải lên ${soThanhCong} ảnh.` }
+          : {
+              ok: false,
+              chu: `Tải được ${soThanhCong}/${hopLe.length} ảnh. ${loiTai.join(" ")}`,
+            },
+      );
       router.refresh();
+    });
+  }
+
+  function boAnhCho(khoa: string) {
+    setAnhCho((cu) => {
+      const anh = cu.find((a) => a.khoa === khoa);
+      if (anh) URL.revokeObjectURL(anh.url);
+      return cu.filter((a) => a.khoa !== khoa);
+    });
+  }
+
+  function datAnhChoLamDaiDien(khoa: string) {
+    setAnhCho((cu) => {
+      const anh = cu.find((a) => a.khoa === khoa);
+      return anh ? [anh, ...cu.filter((a) => a.khoa !== khoa)] : cu;
     });
   }
 
@@ -488,94 +588,156 @@ export function SoanSanPham({
         <section className="rounded-lg border border-kem-300 bg-white p-6">
           <h2 className="font-display text-lg text-muc-900">Ảnh sản phẩm</h2>
 
-          {laSanPhamMoi ? (
-            <p className="mt-4 rounded-md bg-kem-100 p-4 text-[13px] text-muc-600">
-              Hãy lưu sản phẩm trước, sau đó quay lại đây để tải ảnh lên.
-            </p>
-          ) : (
-            <>
-              <p className="mt-1 text-[13px] text-muc-500">
-                Ảnh được tự động cắt vuông và nén lại. Ảnh có ngôi sao là ảnh đại
-                diện hiện ở trang danh sách.
-              </p>
+          <p className="mt-1 text-[13px] text-muc-500">
+            Ảnh được tự động cắt vuông và nén lại. Ảnh có ngôi sao là ảnh đại
+            diện hiện ở trang danh sách.
+            {laSanPhamMoi &&
+              " Ảnh chọn ở đây sẽ được tải lên cùng lúc khi bấm “Tạo sản phẩm”."}
+          </p>
 
-              <div className="mt-5 grid grid-cols-3 gap-3 sm:grid-cols-4">
-                {sp.images.map((a) => (
-                  <div
-                    key={a.id}
-                    className={`group relative aspect-square overflow-hidden rounded-lg border-2 ${
-                      a.isMain ? "border-dong-500" : "border-kem-300"
-                    }`}
+          <div
+            onDragOver={(e) => {
+              e.preventDefault();
+              setDangKeoTha(true);
+            }}
+            onDragLeave={() => setDangKeoTha(false)}
+            onDrop={(e) => {
+              e.preventDefault();
+              setDangKeoTha(false);
+              chonAnh(e.dataTransfer.files);
+            }}
+            className={`mt-5 grid grid-cols-3 gap-3 rounded-lg sm:grid-cols-4 ${
+              dangKeoTha ? "outline-2 outline-offset-4 outline-dashed outline-son-700" : ""
+            }`}
+          >
+            {anhDaLuu.map((a) => (
+              <div
+                key={a.id}
+                className={`group relative aspect-square overflow-hidden rounded-lg border-2 ${
+                  a.isMain ? "border-dong-500" : "border-kem-300"
+                }`}
+              >
+                <Image
+                  src={a.url}
+                  alt=""
+                  fill
+                  sizes="160px"
+                  className="object-cover"
+                />
+
+                {a.isMain && (
+                  <span className="absolute left-1.5 top-1.5 rounded-full bg-dong-500 p-1">
+                    <Star className="h-3 w-3 fill-muc-900 text-muc-900" />
+                  </span>
+                )}
+
+                <div className="absolute inset-x-0 bottom-0 flex gap-1 bg-muc-900/80 p-1.5 opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100">
+                  {!a.isMain && (
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        await datAnhDaiDien(a.id);
+                        router.refresh();
+                      }}
+                      className="flex-1 rounded bg-kem-100 px-1.5 py-1 text-[10px] font-semibold text-muc-800"
+                    >
+                      Đại diện
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      if (!window.confirm("Xoá ảnh này?")) return;
+                      await xoaAnh(a.id);
+                      router.refresh();
+                    }}
+                    className="rounded bg-son-700 px-2 py-1 text-[10px] font-semibold text-kem-50"
                   >
-                    <Image
-                      src={a.url}
-                      alt=""
-                      fill
-                      sizes="160px"
-                      className="object-cover"
-                    />
+                    Xoá
+                  </button>
+                </div>
+              </div>
+            ))}
 
-                    {a.isMain && (
-                      <span className="absolute left-1.5 top-1.5 rounded-full bg-dong-500 p-1">
-                        <Star className="h-3 w-3 fill-muc-900 text-muc-900" />
-                      </span>
-                    )}
+            {anhCho.map((a, i) => (
+              <div
+                key={a.khoa}
+                className={`group relative aspect-square overflow-hidden rounded-lg border-2 ${
+                  i === 0 ? "border-dong-500" : "border-kem-300"
+                }`}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element -- ảnh xem trước từ máy, chưa có trên máy chủ */}
+                <img
+                  src={a.url}
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
 
-                    <div className="absolute inset-x-0 bottom-0 flex gap-1 bg-muc-900/80 p-1.5 opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100">
-                      {!a.isMain && (
-                        <button
-                          type="button"
-                          onClick={async () => {
-                            await datAnhDaiDien(a.id);
-                            router.refresh();
-                          }}
-                          className="flex-1 rounded bg-kem-100 px-1.5 py-1 text-[10px] font-semibold text-muc-800"
-                        >
-                          Đại diện
-                        </button>
-                      )}
+                {i === 0 && (
+                  <span className="absolute left-1.5 top-1.5 rounded-full bg-dong-500 p-1">
+                    <Star className="h-3 w-3 fill-muc-900 text-muc-900" />
+                  </span>
+                )}
+
+                {dangLuu && (
+                  <span className="absolute inset-0 flex items-center justify-center bg-muc-900/40">
+                    <Loader2 className="h-5 w-5 animate-spin text-kem-50" />
+                  </span>
+                )}
+
+                {!dangLuu && (
+                  <div className="absolute inset-x-0 bottom-0 flex gap-1 bg-muc-900/80 p-1.5 opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100">
+                    {i !== 0 && (
                       <button
                         type="button"
-                        onClick={async () => {
-                          if (!window.confirm("Xoá ảnh này?")) return;
-                          await xoaAnh(a.id);
-                          router.refresh();
-                        }}
-                        className="rounded bg-son-700 px-2 py-1 text-[10px] font-semibold text-kem-50"
+                        onClick={() => datAnhChoLamDaiDien(a.khoa)}
+                        className="flex-1 rounded bg-kem-100 px-1.5 py-1 text-[10px] font-semibold text-muc-800"
                       >
-                        Xoá
+                        Đại diện
                       </button>
-                    </div>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => boAnhCho(a.khoa)}
+                      className="rounded bg-son-700 px-2 py-1 text-[10px] font-semibold text-kem-50"
+                    >
+                      Bỏ
+                    </button>
                   </div>
-                ))}
-
-                <button
-                  type="button"
-                  onClick={() => oChonFile.current?.click()}
-                  disabled={dangTaiAnh}
-                  className="flex aspect-square flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed border-kem-400 text-muc-500 transition-colors hover:border-son-700 hover:text-son-700 disabled:opacity-50"
-                >
-                  {dangTaiAnh ? (
-                    <Loader2 className="h-6 w-6 animate-spin" />
-                  ) : (
-                    <ImagePlus className="h-6 w-6" />
-                  )}
-                  <span className="text-[11px] font-medium">
-                    {dangTaiAnh ? "Đang tải…" : "Thêm ảnh"}
-                  </span>
-                </button>
+                )}
               </div>
+            ))}
 
-              <input
-                ref={oChonFile}
-                type="file"
-                accept="image/jpeg,image/png,image/webp,image/avif"
-                multiple
-                onChange={(e) => taiAnh(e.target.files)}
-                className="hidden"
-              />
-            </>
-          )}
+            <button
+              type="button"
+              onClick={() => oChonFile.current?.click()}
+              disabled={dangTaiAnh || dangLuu}
+              className="flex aspect-square flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed border-kem-400 text-muc-500 transition-colors hover:border-son-700 hover:text-son-700 disabled:opacity-50"
+            >
+              {dangTaiAnh ? (
+                <Loader2 className="h-6 w-6 animate-spin" />
+              ) : (
+                <ImagePlus className="h-6 w-6" />
+              )}
+              <span className="px-1 text-center text-[11px] font-medium">
+                {dangTaiAnh ? "Đang tải…" : "Thêm ảnh"}
+              </span>
+              {!dangTaiAnh && (
+                <span className="hidden px-1 text-center text-[10px] sm:block">
+                  hoặc kéo thả vào đây
+                </span>
+              )}
+            </button>
+          </div>
+
+          <input
+            ref={oChonFile}
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/avif"
+            multiple
+            onChange={(e) => chonAnh(e.target.files)}
+            className="hidden"
+          />
         </section>
       </div>
 

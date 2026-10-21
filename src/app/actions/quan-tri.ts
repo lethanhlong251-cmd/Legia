@@ -22,7 +22,7 @@ import type { OrderStatus } from "@/generated/prisma/enums";
  * các hàm này có thể bị gọi thẳng từ bên ngoài, không chỉ từ giao diện.
  */
 
-export type KetQua = { ok: boolean; loi?: string; thongBao?: string };
+export type KetQua = { ok: boolean; loi?: string; thongBao?: string; id?: string };
 
 // =====================================================================
 // ĐĂNG NHẬP
@@ -301,7 +301,7 @@ export async function luuSanPham(duLieuTho: unknown): Promise<KetQua> {
   }
 
   revalidatePath("/", "layout");
-  return { ok: true, thongBao: "Đã lưu sản phẩm." };
+  return { ok: true, thongBao: "Đã lưu sản phẩm.", id: sanPham.id };
 }
 
 export async function batTatSanPham(id: string, hien: boolean): Promise<KetQua> {

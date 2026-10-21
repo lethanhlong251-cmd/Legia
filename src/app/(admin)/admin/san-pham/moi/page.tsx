@@ -16,7 +16,7 @@ export default async function TrangThemSanPham() {
     <KhungQuanTri
       tenNguoiDung={nguoiDung.ten}
       tieuDe="Thêm sản phẩm mới"
-      moTa="Điền tên, mã và ít nhất một cỡ giá là lưu được. Ảnh thêm sau khi lưu."
+      moTa="Điền tên, mã và ít nhất một cỡ giá là lưu được. Ảnh có thể thêm luôn ở đây."
       hanhDong={
         <Link href="/admin/san-pham" className="nut-phu !py-2 !text-[13px]">
           <ArrowLeft className="h-3.5 w-3.5" />
