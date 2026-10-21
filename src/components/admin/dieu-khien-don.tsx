@@ -16,21 +16,32 @@ export function DieuKhienDon({
   ghiChuHienTai: string;
 }) {
   const [dangChay, batDau] = useTransition();
-  const [thongBao, setThongBao] = useState<string | null>(null);
+  const [thongBao, setThongBao] = useState<{ ok: boolean; chu: string } | null>(
+    null,
+  );
   const [ghiChu, setGhiChu] = useState(ghiChuHienTai);
 
   function doiTrangThai(tt: string) {
     batDau(async () => {
       const kq = await doiTrangThaiDon(idDon, tt);
-      setThongBao(kq.ok ? (kq.thongBao ?? "Đã lưu.") : (kq.loi ?? "Có lỗi."));
-      setTimeout(() => setThongBao(null), 2500);
+      setThongBao(
+        kq.ok
+          ? { ok: true, chu: kq.thongBao ?? "Đã lưu." }
+          : { ok: false, chu: kq.loi ?? "Có lỗi." },
+      );
+      // Lỗi (ví dụ thiếu hàng khi mở lại đơn) để nguyên cho đọc kỹ
+      if (kq.ok) setTimeout(() => setThongBao(null), 3000);
     });
   }
 
   function luuGhiChu() {
     batDau(async () => {
       const kq = await luuGhiChuDon(idDon, ghiChu);
-      setThongBao(kq.ok ? (kq.thongBao ?? "Đã lưu.") : (kq.loi ?? "Có lỗi."));
+      setThongBao(
+        kq.ok
+          ? { ok: true, chu: kq.thongBao ?? "Đã lưu." }
+          : { ok: false, chu: kq.loi ?? "Có lỗi." },
+      );
       setTimeout(() => setThongBao(null), 2500);
     });
   }
@@ -62,6 +73,10 @@ export function DieuKhienDon({
             );
           })}
         </div>
+        <p className="mt-2.5 text-[11px] leading-relaxed text-muc-500">
+          Hàng đã được trừ kho ngay lúc khách đặt. Chuyển sang “Đã huỷ” sẽ tự
+          cộng lại vào kho; mở lại đơn đã huỷ sẽ trừ kho lại.
+        </p>
       </div>
 
       <div>
@@ -94,8 +109,14 @@ export function DieuKhienDon({
       </div>
 
       {thongBao && (
-        <p className="rounded-md bg-emerald-50 px-3.5 py-2.5 text-center text-[13px] font-medium text-emerald-800">
-          {thongBao}
+        <p
+          className={`rounded-md px-3.5 py-2.5 text-center text-[13px] font-medium ${
+            thongBao.ok
+              ? "bg-emerald-50 text-emerald-800"
+              : "bg-son-50 text-son-800"
+          }`}
+        >
+          {thongBao.chu}
         </p>
       )}
     </div>

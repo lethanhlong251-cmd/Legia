@@ -19,6 +19,8 @@ type ThongTinDon = {
   note?: string | null;
   total: number;
   items: { productName: string; variantLabel: string; quantity: number }[];
+  /** Các cỡ sắp hết / vừa hết sau đơn này, để shop kịp nhập thêm */
+  canhBaoKho?: string[];
 };
 
 function thoat(chuoi: string) {
@@ -55,6 +57,9 @@ export async function guiThongBaoDonHang(don: ThongTinDon) {
     danhSachMon,
     "",
     `<b>Tổng tiền:</b> ${don.total.toLocaleString("vi-VN")}đ (COD, đã gồm ship)`,
+    don.canhBaoKho && don.canhBaoKho.length > 0
+      ? ["", "⚠️ <b>Kho sắp hết:</b>", ...don.canhBaoKho.map((d) => `• ${thoat(d)}`)].join("\n")
+      : null,
   ]
     .filter(Boolean)
     .join("\n");

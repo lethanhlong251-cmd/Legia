@@ -13,6 +13,7 @@ import { prisma } from "@/lib/prisma";
 import { taoSlug } from "@/lib/dinh-dang";
 import { batBuocDangNhap, taoPhienDangNhap, xoaPhienDangNhap } from "@/lib/xac-thuc";
 import { taoAnhMo } from "@/lib/anh-mo";
+import { dongBoKhoKhiDoiTrangThai, LoiKho } from "@/lib/ton-kho";
 import type { OrderStatus } from "@/generated/prisma/enums";
 
 /**
@@ -22,7 +23,14 @@ import type { OrderStatus } from "@/generated/prisma/enums";
  * các hàm này có thể bị gọi thẳng từ bên ngoài, không chỉ từ giao diện.
  */
 
-export type KetQua = { ok: boolean; loi?: string; thongBao?: string; id?: string };
+export type KetQua = {
+  ok: boolean;
+  loi?: string;
+  thongBao?: string;
+  id?: string;
+  /** Mã các cỡ theo đúng thứ tự trong form, sau khi lưu sản phẩm */
+  idBienThe?: string[];
+};
 
 // =====================================================================
 // ĐĂNG NHẬP
@@ -116,15 +124,38 @@ export async function doiTrangThaiDon(
     return { ok: false, loi: "Trạng thái không hợp lệ." };
   }
 
-  await prisma.order.update({
-    where: { id: idDon },
-    data: { status: trangThai as OrderStatus },
-  });
+  let soCoDoiKho = 0;
+  try {
+    soCoDoiKho = await prisma.$transaction(async (tx) => {
+      const thayDoi = await dongBoKhoKhiDoiTrangThai(
+        tx,
+        idDon,
+        trangThai as OrderStatus,
+      );
+      await tx.order.update({
+        where: { id: idDon },
+        data: { status: trangThai as OrderStatus },
+      });
+      return thayDoi.length;
+    });
+  } catch (loi) {
+    if (loi instanceof LoiKho) return { ok: false, loi: loi.message };
+    throw loi;
+  }
 
   revalidatePath("/admin/don-hang");
   revalidatePath(`/admin/don-hang/${idDon}`);
   revalidatePath("/admin");
-  return { ok: true, thongBao: "Đã cập nhật trạng thái đơn." };
+  if (soCoDoiKho > 0) revalidatePath("/", "layout");
+  return {
+    ok: true,
+    thongBao:
+      soCoDoiKho > 0
+        ? trangThai === "CANCELLED"
+          ? "Đã huỷ đơn và cộng lại hàng vào kho."
+          : "Đã mở lại đơn và trừ kho lại."
+        : "Đã cập nhật trạng thái đơn.",
+  };
 }
 
 /**
@@ -144,14 +175,42 @@ export async function doiTrangThaiNhieuDon(
     return { ok: false, loi: "Chưa chọn đơn nào." };
   }
 
-  const kq = await prisma.order.updateMany({
-    where: { id: { in: cacIdDon } },
-    data: { status: trangThai as OrderStatus },
-  });
+  // Làm trong một giao dịch: một đơn không mở lại được (vì thiếu hàng) thì
+  // cả loạt giữ nguyên, tránh cảnh nửa đã đổi nửa chưa
+  let kq: { soDon: number; soCoDoiKho: number };
+  try {
+    kq = await prisma.$transaction(async (tx) => {
+      let soCoDoiKho = 0;
+      let soDon = 0;
+      for (const idDon of cacIdDon) {
+        const thayDoi = await dongBoKhoKhiDoiTrangThai(
+          tx,
+          idDon,
+          trangThai as OrderStatus,
+        );
+        soCoDoiKho += thayDoi.length;
+        const capNhat = await tx.order.updateMany({
+          where: { id: idDon },
+          data: { status: trangThai as OrderStatus },
+        });
+        soDon += capNhat.count;
+      }
+      return { soDon, soCoDoiKho };
+    });
+  } catch (loi) {
+    if (loi instanceof LoiKho) return { ok: false, loi: loi.message };
+    throw loi;
+  }
 
   revalidatePath("/admin/don-hang");
   revalidatePath("/admin");
-  return { ok: true, thongBao: `Đã cập nhật ${kq.count} đơn.` };
+  if (kq.soCoDoiKho > 0) revalidatePath("/", "layout");
+  return {
+    ok: true,
+    thongBao:
+      `Đã cập nhật ${kq.soDon} đơn.` +
+      (kq.soCoDoiKho > 0 ? " Kho đã được cập nhật theo." : ""),
+  };
 }
 
 export async function luuGhiChuDon(
@@ -181,6 +240,9 @@ const BienTheGui = z.object({
   noteEn: z.string().trim().optional(),
   inStock: z.boolean().default(true),
   isAccessory: z.boolean().default(false),
+  // Chỉ dùng khi TẠO cỡ mới. Cỡ đã có thì số kho đổi ở trang Tồn kho,
+  // không lấy từ form này, để không đè mất số vừa bị đơn hàng trừ.
+  stock: z.number().int().min(0).max(1_000_000).nullable().optional(),
 });
 
 const SanPhamGui = z.object({
@@ -276,6 +338,7 @@ export async function luuSanPham(duLieuTho: unknown): Promise<KetQua> {
     where: { productId: sanPham.id, id: { notIn: idGiuLai } },
   });
 
+  const idBienThe: string[] = [];
   for (let i = 0; i < d.variants.length; i++) {
     const b = d.variants[i];
     const duLieuBienThe = {
@@ -295,13 +358,30 @@ export async function luuSanPham(duLieuTho: unknown): Promise<KetQua> {
         where: { id: b.id },
         data: duLieuBienThe,
       });
+      idBienThe.push(b.id);
     } else {
-      await prisma.productVariant.create({ data: duLieuBienThe });
+      const coBanDau = b.stock !== null && b.stock !== undefined;
+      const moi = await prisma.productVariant.create({
+        data: { ...duLieuBienThe, stock: coBanDau ? b.stock : null },
+      });
+      idBienThe.push(moi.id);
+      if (coBanDau) {
+        await prisma.stockMovement.create({
+          data: {
+            variantId: moi.id,
+            change: b.stock!,
+            stockAfter: b.stock!,
+            reason: "IMPORT",
+            note: "Số lượng ban đầu",
+          },
+        });
+      }
     }
   }
 
   revalidatePath("/", "layout");
-  return { ok: true, thongBao: "Đã lưu sản phẩm.", id: sanPham.id };
+  revalidatePath("/admin/ton-kho");
+  return { ok: true, thongBao: "Đã lưu sản phẩm.", id: sanPham.id, idBienThe };
 }
 
 export async function batTatSanPham(id: string, hien: boolean): Promise<KetQua> {
@@ -330,6 +410,119 @@ export async function xoaSanPham(id: string): Promise<KetQua> {
   await prisma.product.delete({ where: { id } });
   revalidatePath("/", "layout");
   return { ok: true, thongBao: "Đã xoá sản phẩm." };
+}
+
+// =====================================================================
+// TỒN KHO
+// =====================================================================
+
+const SoLuongKho = z.number().int().min(0).max(1_000_000);
+
+function lamMoiSauKhiDoiKho() {
+  revalidatePath("/admin/ton-kho");
+  revalidatePath("/admin/san-pham");
+  revalidatePath("/", "layout");
+}
+
+/**
+ * Nhập thêm hàng: cộng vào số đang có.
+ * Cỡ chưa theo dõi kho thì bắt đầu theo dõi từ con số này.
+ */
+export async function nhapKho(
+  idBienThe: string,
+  soLuong: number,
+  ghiChu?: string,
+): Promise<KetQua> {
+  await batBuocDangNhap();
+
+  const sl = SoLuongKho.safeParse(soLuong);
+  if (!sl.success || sl.data === 0) {
+    return { ok: false, loi: "Số lượng nhập phải là số nguyên lớn hơn 0." };
+  }
+
+  const kq = await prisma.$transaction(async (tx) => {
+    const b = await tx.productVariant.findUnique({ where: { id: idBienThe } });
+    if (!b) return null;
+    const sau = await tx.productVariant.update({
+      where: { id: idBienThe },
+      data:
+        b.stock === null
+          ? { stock: sl.data }
+          : { stock: { increment: sl.data } },
+    });
+    await tx.stockMovement.create({
+      data: {
+        variantId: idBienThe,
+        change: sl.data,
+        stockAfter: sau.stock ?? 0,
+        reason: "IMPORT",
+        note: ghiChu?.trim().slice(0, 300) || null,
+      },
+    });
+    return sau.stock ?? 0;
+  });
+
+  if (kq === null) return { ok: false, loi: "Không tìm thấy cỡ này." };
+  lamMoiSauKhiDoiKho();
+  return { ok: true, thongBao: `Đã nhập ${sl.data}. Kho còn ${kq}.` };
+}
+
+/**
+ * Kiểm kho: đặt lại đúng số thực tế đếm được (hàng hỏng, thất lạc, đếm lại…).
+ */
+export async function kiemKho(
+  idBienThe: string,
+  soThucTe: number,
+  ghiChu?: string,
+): Promise<KetQua> {
+  await batBuocDangNhap();
+
+  const sl = SoLuongKho.safeParse(soThucTe);
+  if (!sl.success) {
+    return { ok: false, loi: "Số lượng phải là số nguyên từ 0 trở lên." };
+  }
+
+  const kq = await prisma.$transaction(async (tx) => {
+    const b = await tx.productVariant.findUnique({ where: { id: idBienThe } });
+    if (!b) return null;
+    const truoc = b.stock ?? 0;
+    if (b.stock !== null && truoc === sl.data) return "khongDoi" as const;
+    await tx.productVariant.update({
+      where: { id: idBienThe },
+      data: { stock: sl.data },
+    });
+    await tx.stockMovement.create({
+      data: {
+        variantId: idBienThe,
+        change: sl.data - truoc,
+        stockAfter: sl.data,
+        reason: "ADJUST",
+        note: ghiChu?.trim().slice(0, 300) || null,
+      },
+    });
+    return sl.data;
+  });
+
+  if (kq === null) return { ok: false, loi: "Không tìm thấy cỡ này." };
+  if (kq === "khongDoi") {
+    return { ok: true, thongBao: "Số trong kho đã đúng, không cần đổi." };
+  }
+  lamMoiSauKhiDoiKho();
+  return { ok: true, thongBao: `Đã đặt kho về ${kq}.` };
+}
+
+/**
+ * Thôi theo dõi kho cho cỡ này: quay về chỉ dùng công tắc "Còn hàng".
+ * Lịch sử cũ vẫn được giữ lại.
+ */
+export async function boTheoDoiKho(idBienThe: string): Promise<KetQua> {
+  await batBuocDangNhap();
+  await prisma.productVariant.update({
+    where: { id: idBienThe },
+    data: { stock: null },
+  });
+  lamMoiSauKhiDoiKho();
+  return { ok: true, thongBao: "Đã thôi theo dõi kho cho cỡ này." };
 }
 
 // =====================================================================

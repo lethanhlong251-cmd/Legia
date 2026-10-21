@@ -1,5 +1,6 @@
 import Link from "next/link";
 import {
+  Boxes,
   FolderTree,
   LayoutDashboard,
   LogOut,
@@ -16,6 +17,7 @@ const MENU = [
   { nhan: "Tổng quan", dich: "/admin", icon: LayoutDashboard },
   { nhan: "Đơn hàng", dich: "/admin/don-hang", icon: ScrollText },
   { nhan: "Sản phẩm", dich: "/admin/san-pham", icon: Package },
+  { nhan: "Tồn kho", dich: "/admin/ton-kho", icon: Boxes },
   { nhan: "Danh mục", dich: "/admin/danh-muc", icon: FolderTree },
   { nhan: "Cài đặt", dich: "/admin/cai-dat", icon: Settings },
 ];

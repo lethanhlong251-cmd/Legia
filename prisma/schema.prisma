@@ -119,6 +119,14 @@ model ProductVariant {
   sku     String? // Mã riêng của biến thể, không bắt buộc
   inStock Boolean @default(true)
 
+  // Số lượng đang có trong kho. Để trống (null) = không theo dõi kho,
+  // khi đó chỉ dựa vào công tắc "Còn hàng" như trước.
+  // Có số thì mỗi đơn khách đặt tự trừ, huỷ đơn tự cộng lại, về 0 thì
+  // website tự hiện "Tạm hết hàng" cho cỡ này.
+  // KHÔNG sửa con số này trong form sửa sản phẩm, chỉ đổi qua trang
+  // /admin/ton-kho để luôn có dòng lịch sử đi kèm.
+  stock Int?
+
   // Món mua lẻ / phụ kiện, ví dụ "Mua lẻ mặt cúc" hay "Chỉ 5 mặt rời".
   // Bật lên thì giá này KHÔNG được lấy làm giá hiển thị ngoài trang danh sách,
   // tránh việc khách thấy giá rẻ rồi bấm vào mới biết đó là món bán lẻ.
@@ -130,7 +138,8 @@ model ProductVariant {
 
   sortOrder Int @default(0)
 
-  orderItems OrderItem[]
+  orderItems     OrderItem[]
+  stockMovements StockMovement[]
 
   @@index([productId, sortOrder])
 }
@@ -213,7 +222,42 @@ model OrderItem {
   quantity     Int
   lineTotal    Int
 
+  // Số lượng thực sự đã trừ khỏi kho cho món này (0 nếu cỡ không theo dõi
+  // kho, hoặc đơn đã huỷ và đã hoàn kho). Huỷ đơn chỉ cộng lại đúng số này,
+  // nên đơn cũ đặt từ trước khi có tính năng tồn kho sẽ không bị cộng nhầm.
+  stockDeducted Int @default(0)
+
   @@index([orderId])
+}
+
+// ------------------------------------------------------------
+// LỊCH SỬ KHO — mỗi lần số lượng thay đổi là một dòng
+// ------------------------------------------------------------
+model StockMovement {
+  id        String         @id @default(cuid())
+  variantId String
+  variant   ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+
+  change     Int // +20 khi nhập hàng, -2 khi khách đặt
+  stockAfter Int // Số còn lại ngay sau thay đổi
+  reason     StockReason
+
+  orderId   String? // Đơn hàng liên quan (nếu có)
+  orderCode String?
+  note      String?
+
+  createdAt DateTime @default(now())
+
+  @@index([variantId, createdAt])
+  @@index([createdAt])
+}
+
+enum StockReason {
+  IMPORT // Nhập thêm hàng
+  ADJUST // Kiểm kho, đặt lại đúng số thực tế
+  ORDER // Khách đặt hàng
+  CANCEL // Huỷ đơn, hoàn lại kho
+  REOPEN // Mở lại đơn đã huỷ, trừ kho lại
 }
 
 // ------------------------------------------------------------

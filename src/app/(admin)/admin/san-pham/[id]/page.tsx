@@ -86,6 +86,7 @@ export default async function TrangSuaSanPham({
             noteEn: b.noteEn ?? "",
             inStock: b.inStock,
             isAccessory: b.isAccessory,
+            stock: b.stock,
           })),
           images: sanPham.images.map((a) => ({
             id: a.id,

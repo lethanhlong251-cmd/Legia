@@ -1,9 +1,13 @@
 import "server-only";
 import { prisma } from "./prisma";
+import { apDungTonKho } from "./ton-kho";
 
 /**
  * Các truy vấn dữ liệu dùng chung cho phần website khách xem.
  * Gom vào một chỗ để sau này muốn đổi cách lấy dữ liệu chỉ sửa ở đây.
+ *
+ * Mọi sản phẩm trả ra đều đi qua apDungTonKho(): cỡ nào kho về 0 thì
+ * inStock = false, và con số tồn kho bị bỏ đi, khách không bao giờ thấy.
  */
 
 const KEM_ANH_VA_GIA = {
@@ -52,7 +56,7 @@ export async function laySanPham(loc: BoLoc = {}) {
     );
   }
 
-  return danhSach;
+  return danhSach.map(apDungTonKho);
 }
 
 /**
@@ -102,7 +106,7 @@ export async function laySanPhamNoiBat(soLuong = 6) {
   });
 
   // Chưa đánh dấu đủ sản phẩm nổi bật thì lấy thêm cho đầy hàng
-  if (noiBat.length >= soLuong) return noiBat;
+  if (noiBat.length >= soLuong) return noiBat.map(apDungTonKho);
 
   const themVao = await prisma.product.findMany({
     where: {
@@ -115,25 +119,27 @@ export async function laySanPhamNoiBat(soLuong = 6) {
     take: soLuong - noiBat.length,
   });
 
-  return [...noiBat, ...themVao];
+  return [...noiBat, ...themVao].map(apDungTonKho);
 }
 
 /** Một sản phẩm theo đường dẫn */
 export async function laySanPhamTheoSlug(slug: string) {
-  return prisma.product.findFirst({
+  const sanPham = await prisma.product.findFirst({
     where: { slug, isActive: true },
     include: KEM_ANH_VA_GIA,
   });
+  return sanPham ? apDungTonKho(sanPham) : null;
 }
 
 /** Vài sản phẩm khác để gợi ý ở cuối trang chi tiết */
 export async function laySanPhamLienQuan(idHienTai: string, soLuong = 4) {
-  return prisma.product.findMany({
+  const danhSach = await prisma.product.findMany({
     where: { isActive: true, id: { not: idHienTai } },
     include: KEM_ANH_VA_GIA,
     orderBy: { sortOrder: "asc" },
     take: soLuong,
   });
+  return danhSach.map(apDungTonKho);
 }
 
 /** Danh mục đang bật, kèm số sản phẩm để hiện trên thanh lọc */

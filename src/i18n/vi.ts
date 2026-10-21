@@ -125,6 +125,10 @@ export const vi = {
     loiSaiSdt: "Số điện thoại không đúng định dạng",
     loiThieuDiaChi: "Vui lòng nhập địa chỉ nhận hàng",
     loiGioTrong: "Giỏ hàng đang trống",
+    loiHetHang:
+      "{ten} vừa hết hàng. Bạn vui lòng bỏ món này khỏi giỏ hoặc chọn cỡ khác, hay nhắn Zalo để shop báo khi có hàng lại.",
+    loiKhongDu:
+      "{ten} không còn đủ số lượng bạn chọn. Bạn vui lòng giảm số lượng, hoặc nhắn Zalo để shop hỗ trợ.",
     loiChung: "Có lỗi xảy ra, vui lòng thử lại hoặc gọi trực tiếp cho shop.",
   },
 

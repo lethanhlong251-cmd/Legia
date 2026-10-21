@@ -138,6 +138,31 @@ Khi tắt "Hiện trên web": sản phẩm **biến mất hoàn toàn** khỏi w
 > **Nên dùng cái nào?** Hết hàng tạm thời thì tắt "Còn hàng" — khách vẫn thấy
 > mẫu đó và có thể nhắn hỏi khi nào có lại. Ngừng bán hẳn thì tắt "Hiện trên web".
 
+### Tồn kho — để website tự báo hết hàng
+
+Vào **Tồn kho** ở thanh bên trái. Mỗi cỡ khuôn là một dòng.
+
+- **Hàng về:** gõ số lượng vào ô, bấm **Nhập thêm**. Số đó được cộng vào kho.
+- **Đếm lại hàng thực tế** (hỏng, thất lạc, đếm sai): gõ đúng số đang có,
+  bấm **Đặt đúng số**.
+- Cỡ nào **chưa nhập số** thì là "Chưa theo dõi": khách đặt không giới hạn,
+  y như trước đây. Nhập số lần đầu là bắt đầu theo dõi.
+
+Từ lúc có số, website **tự làm**:
+- Khách đặt hàng → kho **tự trừ** ngay lúc đặt.
+- Về 0 → cỡ đó **tự hiện "Tạm hết hàng"**, khách không đặt được, cũng không
+  đặt quá số còn lại. Nhập thêm hàng thì tự mở bán lại.
+- Bạn chuyển đơn sang **Đã huỷ** → hàng **tự cộng lại** vào kho. Mở lại đơn đã
+  huỷ thì kho bị trừ lại (thiếu hàng thì website không cho mở lại).
+- Còn từ 5 chiếc trở xuống: tin nhắn Telegram báo đơn mới có thêm dòng
+  **"Kho sắp hết"**, và trang Tổng quan hiện số cỡ sắp hết.
+
+Khách **không bao giờ thấy** con số tồn kho, chỉ thấy "Tạm hết hàng" khi về 0.
+Cuối trang Tồn kho có **lịch sử**: lần nhập nào, đơn nào trừ, đơn nào hoàn.
+
+> Combo (ví dụ "Combo 150g + 75g") có kho riêng, nhập số bộ combo như một cỡ
+> bình thường. Công tắc "Còn hàng" vẫn dùng được khi muốn tạm ngưng bán dù kho còn.
+
 ---
 
 ## 6. Thêm sản phẩm mới

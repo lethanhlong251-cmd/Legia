@@ -127,6 +127,10 @@ export const en: BanDich = {
     loiSaiSdt: "That phone number does not look right",
     loiThieuDiaChi: "Please enter a delivery address",
     loiGioTrong: "Your cart is empty",
+    loiHetHang:
+      "{ten} has just sold out. Please remove it from your cart or pick another size, or message us on Zalo to hear when it is back.",
+    loiKhongDu:
+      "We do not have enough of {ten} for the quantity you chose. Please lower the quantity, or message us on Zalo for help.",
     loiChung: "Something went wrong. Please try again or call the shop directly.",
   },
 

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef, useState, useTransition } from "react";
 import {
@@ -32,6 +33,11 @@ type BienThe = {
   noteEn: string;
   inStock: boolean;
   isAccessory: boolean;
+  /**
+   * Cỡ đã lưu: chỉ để hiển thị, đổi ở trang Tồn kho.
+   * Cỡ mới: số lượng ban đầu, để trống = không theo dõi kho.
+   */
+  stock: number | null;
 };
 
 type Anh = { id: string; url: string; isMain: boolean };
@@ -100,6 +106,7 @@ const BIEN_THE_TRONG: BienThe = {
   noteEn: "",
   inStock: true,
   isAccessory: false,
+  stock: null,
 };
 
 export function SoanSanPham({
@@ -176,6 +183,15 @@ export function SoanSanPham({
             router.push(`/admin/san-pham/${kq.id}`);
             return;
           }
+        }
+        // Gắn mã cho các cỡ vừa tạo, để lần lưu sau là cập nhật chứ không
+        // tạo lại (tạo lại sẽ làm mất số kho và lịch sử của cỡ đó)
+        if (kq.idBienThe) {
+          const cacId = kq.idBienThe;
+          setSp((cu) => ({
+            ...cu,
+            variants: cu.variants.map((b, i) => ({ ...b, id: cacId[i] ?? b.id })),
+          }));
         }
         setThongBao({ ok: true, chu: kq.thongBao ?? "Đã lưu." });
         router.refresh();
@@ -450,6 +466,61 @@ export function SoanSanPham({
                         )}
                         %
                       </p>
+                    )}
+                  </div>
+                  <div className="sm:col-span-2">
+                    {b.id ? (
+                      <div className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-kem-300 bg-white px-3.5 py-2.5">
+                        <span className="text-sm text-muc-700">
+                          Tồn kho:{" "}
+                          {b.stock === null ? (
+                            <span className="text-muc-400">
+                              chưa theo dõi (bán không giới hạn)
+                            </span>
+                          ) : (
+                            <strong
+                              className={`tabular-nums ${
+                                b.stock <= 0 ? "text-son-700" : "text-muc-900"
+                              }`}
+                            >
+                              {b.stock <= 0 ? "Hết hàng" : `${b.stock} chiếc`}
+                            </strong>
+                          )}
+                        </span>
+                        <Link
+                          href={`/admin/ton-kho?sp=${sp.id}`}
+                          className="text-[13px] font-medium text-son-700 hover:underline"
+                        >
+                          Nhập hàng / kiểm kho →
+                        </Link>
+                      </div>
+                    ) : (
+                      <>
+                        <label className="nhan-o-nhap">
+                          Số lượng ban đầu trong kho
+                        </label>
+                        <input
+                          type="number"
+                          min={0}
+                          step={1}
+                          value={b.stock ?? ""}
+                          onChange={(e) =>
+                            suaBienThe(
+                              i,
+                              "stock",
+                              e.target.value === ""
+                                ? null
+                                : Math.max(0, Math.floor(Number(e.target.value))),
+                            )
+                          }
+                          placeholder="Để trống nếu không muốn theo dõi kho"
+                          className="o-nhap"
+                        />
+                        <p className="mt-1 text-[11px] text-muc-500">
+                          Có số thì khách đặt tự trừ, về 0 tự hiện “Tạm hết
+                          hàng”. Sau này nhập thêm ở trang Tồn kho.
+                        </p>
+                      </>
                     )}
                   </div>
                   <div className="sm:col-span-2">
@@ -789,7 +860,7 @@ export function SoanSanPham({
               {
                 khoa: "inStock" as const,
                 nhan: "Còn hàng",
-                moTa: "Tắt khi hết hàng tạm thời",
+                moTa: "Tắt để tạm ngưng bán cả mẫu. Cỡ có theo dõi kho thì về 0 tự hết, không cần tắt",
               },
               {
                 khoa: "isFeatured" as const,

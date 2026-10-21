@@ -10,6 +10,7 @@ import {
 import { prisma } from "@/lib/prisma";
 import { batBuocDangNhap } from "@/lib/xac-thuc";
 import { dinhDangNgay, dinhDangTien } from "@/lib/dinh-dang";
+import { NGUONG_SAP_HET } from "@/lib/ton-kho";
 import { KhungQuanTri } from "@/components/admin/khung-quan-tri";
 import { NHAN_TRANG_THAI } from "@/components/admin/nhan-trang-thai";
 
@@ -22,8 +23,15 @@ export default async function TrangTongQuan() {
   dauThang.setDate(1);
   dauThang.setHours(0, 0, 0, 0);
 
-  const [choXuLy, tongDon, doanhThuThang, sanPhamHien, hetHang, donGanDay] =
-    await Promise.all([
+  const [
+    choXuLy,
+    tongDon,
+    doanhThuThang,
+    sanPhamHien,
+    hetHang,
+    donGanDay,
+    coSapHetKho,
+  ] = await Promise.all([
       prisma.order.count({ where: { status: "PENDING" } }),
       prisma.order.count(),
       prisma.order.aggregate({
@@ -36,6 +44,13 @@ export default async function TrangTongQuan() {
         orderBy: { createdAt: "desc" },
         take: 8,
         include: { _count: { select: { items: true } } },
+      }),
+      // Cỡ đang theo dõi kho mà còn ít hoặc đã hết, của sản phẩm đang bán
+      prisma.productVariant.count({
+        where: {
+          stock: { not: null, lte: NGUONG_SAP_HET },
+          product: { isActive: true },
+        },
       }),
     ]);
 
@@ -63,8 +78,15 @@ export default async function TrangTongQuan() {
       nhan: "Sản phẩm đang bán",
       giaTri: String(sanPhamHien),
       icon: Package,
-      ghiChu: hetHang > 0 ? `${hetHang} mẫu đang hết hàng` : undefined,
-      dich: "/admin/san-pham",
+      ghiChu:
+        [
+          hetHang > 0 ? `${hetHang} mẫu đang tắt bán` : null,
+          coSapHetKho > 0 ? `${coSapHetKho} cỡ sắp hết / hết kho` : null,
+        ]
+          .filter(Boolean)
+          .join(" · ") || undefined,
+      nhanManh: coSapHetKho > 0,
+      dich: coSapHetKho > 0 ? "/admin/ton-kho" : "/admin/san-pham",
     },
   ];
 
