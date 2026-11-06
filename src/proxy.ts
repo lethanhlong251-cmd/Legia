@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { CAC_NGON_NGU, NGON_NGU_MAC_DINH } from "@/i18n";
+import { laQuanTriVien, trangTamDong, webDangTamDong } from "@/lib/tam-dong";
 
 /**
  * Tự động thêm mã ngôn ngữ vào đường dẫn.
@@ -11,10 +12,22 @@ import { CAC_NGON_NGU, NGON_NGU_MAC_DINH } from "@/i18n";
  * của khách đang đặt ngôn ngữ gì — nhiều người Việt dùng điện thoại cài
  * tiếng Anh, trước đây họ vào web lại ra bản tiếng Anh.
  * Muốn xem bản tiếng Anh thì bấm nút EN ở đầu trang, hoặc vào thẳng /en.
+ *
+ * Ngoài ra: khi website đang TẠM ĐÓNG (bật trong /admin → Cài đặt), khách
+ * chỉ thấy trang "Tạm nghỉ". Người đã đăng nhập quản trị vẫn xem bình thường.
+ * Xem src/lib/tam-dong.ts.
  */
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  if (
+    (await webDangTamDong()) &&
+    !(await laQuanTriVien((ten) => request.cookies.get(ten)?.value))
+  ) {
+    const tiengAnh = pathname === "/en" || pathname.startsWith("/en/");
+    return trangTamDong(tiengAnh);
+  }
 
   const daCoNgonNgu = CAC_NGON_NGU.some(
     (ng) => pathname === `/${ng}` || pathname.startsWith(`/${ng}/`),

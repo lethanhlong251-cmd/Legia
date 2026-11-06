@@ -9,6 +9,7 @@ import { laSoDienThoaiVN, taoMaDonHang } from "@/lib/dinh-dang";
 import { guiThongBaoDonHang } from "@/lib/telegram";
 import { guiEmailDonHang } from "@/lib/email";
 import { layBanDich, theoNgonNgu, type NgonNgu } from "@/i18n";
+import { webDangTamDong } from "@/lib/tam-dong";
 
 /**
  * XỬ LÝ ĐẶT HÀNG
@@ -50,6 +51,17 @@ export async function datHang(duLieuTho: unknown): Promise<KetQuaDatHang> {
 
   const duLieu = phanTich.data;
   const t = layBanDich(duLieu.lang as NgonNgu);
+
+  // Website đang tạm đóng thì không nhận đơn
+  if (await webDangTamDong()) {
+    return {
+      thanhCong: false,
+      loi:
+        duLieu.lang === "en"
+          ? "Our shop is temporarily closed. Please come back later."
+          : "Cửa hàng đang tạm nghỉ, chưa nhận đơn. Bạn quay lại sau nhé.",
+    };
+  }
 
   if (!laSoDienThoaiVN(duLieu.phone)) {
     return { thanhCong: false, loi: t.datHang.loiSaiSdt };

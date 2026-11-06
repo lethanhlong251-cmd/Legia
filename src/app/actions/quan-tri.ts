@@ -14,6 +14,7 @@ import { taoSlug } from "@/lib/dinh-dang";
 import { batBuocDangNhap, taoPhienDangNhap, xoaPhienDangNhap } from "@/lib/xac-thuc";
 import { taoAnhMo } from "@/lib/anh-mo";
 import { dongBoKhoKhiDoiTrangThai, LoiKho } from "@/lib/ton-kho";
+import { KHOA_TAM_DONG } from "@/lib/tam-dong";
 import type { OrderStatus } from "@/generated/prisma/enums";
 
 /**
@@ -709,6 +710,25 @@ export async function xoaDanhMuc(id: string): Promise<KetQua> {
 // =====================================================================
 // CÀI ĐẶT WEBSITE
 // =====================================================================
+
+/** Tạm đóng hoặc mở lại website cho khách */
+export async function datTamDongWeb(dong: boolean): Promise<KetQua> {
+  await batBuocDangNhap();
+
+  await prisma.siteSetting.upsert({
+    where: { key: KHOA_TAM_DONG },
+    update: { value: dong ? "true" : "false" },
+    create: { key: KHOA_TAM_DONG, value: dong ? "true" : "false" },
+  });
+
+  revalidatePath("/", "layout");
+  return {
+    ok: true,
+    thongBao: dong
+      ? "Đã tạm đóng website. Khách giờ chỉ thấy trang Tạm nghỉ."
+      : "Đã mở lại website. Khách vào và đặt hàng bình thường.",
+  };
+}
 
 export async function luuCaiDat(formData: FormData): Promise<KetQua> {
   await batBuocDangNhap();

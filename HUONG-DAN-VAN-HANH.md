@@ -289,3 +289,27 @@ Chép hai thứ này về máy là đã sao lưu xong toàn bộ. Nên làm **m�
 và **bắt buộc làm trước khi nâng cấp website**.
 
 Xem lệnh sao lưu tự động trong file `DEPLOY-HOSTINGER.md`, mục 8.
+
+---
+
+## 13. Tạm đóng website / mở lại
+
+Khi muốn nghỉ bán một thời gian (hết mùa, đi vắng, đang sửa sản phẩm…):
+
+1. Vào **Cài đặt** — khung trên cùng là **Website đang mở bình thường**
+2. Bấm **Tạm đóng website**, xác nhận một lần nữa
+
+Từ lúc đó:
+
+- Khách vào bất kỳ trang nào cũng chỉ thấy trang **"Chourmas đang tạm nghỉ"**
+- Khách **không đặt hàng được**
+- Sản phẩm, đơn hàng, cài đặt **giữ nguyên**, không mất gì
+- Google hiểu đây là nghỉ tạm thời, không xoá web khỏi kết quả tìm kiếm
+- Đầu mọi trang quản trị có dải đỏ nhắc **"Website đang tạm đóng"**
+
+**Mở lại:** vào **Cài đặt** (hoặc bấm vào dải đỏ) → bấm **Mở lại website**.
+Có hiệu lực ngay lập tức.
+
+> Trình duyệt nào đang đăng nhập quản trị thì **vẫn xem được web như thường**,
+> để bạn kiểm tra trước khi mở lại. Muốn xem đúng như khách thấy, mở web trong
+> cửa sổ ẩn danh.

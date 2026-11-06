@@ -164,6 +164,9 @@ export async function layCaiDat() {
     gioLamViec: caiDat.gioLamViec || "Nhận đơn 24/7",
     hienGiaGach: caiDat.hienGiaGach !== "false",
 
+    // Website đang tạm đóng (xem src/lib/tam-dong.ts)
+    tamDongWeb: caiDat.tamDongWeb === "true",
+
     // Thông số bưu gửi dùng khi xuất file cho SPX (xem src/lib/xuat-spx.ts)
     spxCanNang: soHoacMacDinh(caiDat.spxCanNang, 0.5),
     spxDai: soHoacMacDinh(caiDat.spxDai, 25),

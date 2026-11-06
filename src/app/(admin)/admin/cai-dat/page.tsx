@@ -4,6 +4,7 @@ import { KhungQuanTri } from "@/components/admin/khung-quan-tri";
 import { MauCaiDat } from "@/components/admin/mau-cai-dat";
 import { MauCaiDatSPX } from "@/components/admin/mau-cai-dat-spx";
 import { MauDoiMatKhau } from "@/components/admin/mau-doi-mat-khau";
+import { MauTamDongWeb } from "@/components/admin/mau-tam-dong-web";
 
 export const dynamic = "force-dynamic";
 
@@ -21,6 +22,10 @@ export default async function TrangCaiDat() {
       tieuDe="Cài đặt"
       moTa="Thông tin liên hệ hiện ở chân trang và trang Liên hệ của website"
     >
+      <div className="mb-6">
+        <MauTamDongWeb dangDong={caiDat.tamDongWeb} />
+      </div>
+
       <div className="grid gap-6 lg:grid-cols-2">
         <MauCaiDat banDau={caiDat} />
 

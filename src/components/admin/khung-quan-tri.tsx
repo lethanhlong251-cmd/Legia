@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {
   Boxes,
+  Lock,
   FolderTree,
   LayoutDashboard,
   LogOut,
@@ -12,6 +13,7 @@ import {
 
 import { dangXuat } from "@/app/actions/quan-tri";
 import { BieuTuongKhuon } from "@/components/logo";
+import { webDangTamDong } from "@/lib/tam-dong";
 
 const MENU = [
   { nhan: "Tổng quan", dich: "/admin", icon: LayoutDashboard },
@@ -22,7 +24,7 @@ const MENU = [
   { nhan: "Cài đặt", dich: "/admin/cai-dat", icon: Settings },
 ];
 
-export function KhungQuanTri({
+export async function KhungQuanTri({
   tenNguoiDung,
   tieuDe,
   moTa,
@@ -35,6 +37,8 @@ export function KhungQuanTri({
   hanhDong?: React.ReactNode;
   children: React.ReactNode;
 }) {
+  const dangTamDong = await webDangTamDong();
+
   return (
     <div className="flex min-h-dvh flex-col lg:flex-row">
       {/* ---------- Thanh bên ---------- */}
@@ -92,6 +96,16 @@ export function KhungQuanTri({
 
       {/* ---------- Nội dung ---------- */}
       <div className="flex-1 bg-kem-200">
+        {/* Nhắc để khỏi quên mở lại web */}
+        {dangTamDong && (
+          <Link
+            href="/admin/cai-dat"
+            className="flex items-center justify-center gap-2 bg-son-700 px-5 py-2 text-center text-[13px] font-medium text-kem-50 hover:bg-son-800"
+          >
+            <Lock className="h-3.5 w-3.5 shrink-0" />
+            Website đang tạm đóng, khách không vào được. Bấm vào đây để mở lại.
+          </Link>
+        )}
         <header className="border-b border-kem-300 bg-kem-100">
           <div className="flex flex-wrap items-center justify-between gap-4 px-5 py-5 sm:px-8">
             <div>
