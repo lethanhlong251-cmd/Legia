@@ -23,7 +23,6 @@ export default async function TrangChu({ params }: PageProps<"/[lang]">) {
     laySanPhamNoiBat(8),
     layCaiDat(),
   ]);
-  const zaloSach = caiDat.zalo.replace(/\D/g, "");
 
   const anhCua = (slug: string) => {
     const sp = sanPhamNoiBat.find((s) => s.slug === slug);
@@ -72,7 +71,7 @@ export default async function TrangChu({ params }: PageProps<"/[lang]">) {
               {t.trangChu.heroNutChinh}
             </Link>
             <a
-              href={`https://zalo.me/${zaloSach}`}
+              href={caiDat.facebook}
               target="_blank"
               rel="noopener noreferrer"
               className="nut-phu"
@@ -273,24 +272,18 @@ export default async function TrangChu({ params }: PageProps<"/[lang]">) {
           </h2>
           <p className="mt-5 max-w-lg text-base leading-[1.75] text-dong-200">
             {vi
-              ? "Gửi ảnh khay bánh bạn đang dùng qua Zalo, Thach Lan tư vấn đúng cỡ trong vài phút."
-              : "Send us a photo of the tray you use on Zalo and we will tell you the right mold size within minutes."}
+              ? "Gửi ảnh khay bánh bạn đang dùng qua Facebook, Thach Lan tư vấn đúng cỡ trong vài phút."
+              : "Send us a photo of the tray you use on Facebook and we will tell you the right mold size within minutes."}
           </p>
           <div className="mt-9 flex flex-wrap justify-center gap-3">
             <a
-              href={`https://zalo.me/${zaloSach}`}
+              href={caiDat.facebook}
               target="_blank"
               rel="noopener noreferrer"
               className="nut-dong"
             >
               <MessageCircle className="h-4 w-4" strokeWidth={1.5} />
-              {vi ? "Nhắn Zalo" : "Message on Zalo"}
-            </a>
-            <a
-              href={`tel:${caiDat.hotline}`}
-              className="inline-flex min-h-12 items-center justify-center border border-kem-50/70 px-7 py-3 text-sm font-medium tracking-[0.06em] text-kem-50 transition-colors hover:bg-kem-50/10"
-            >
-              {vi ? "Gọi" : "Call"} {caiDat.hotline}
+              {vi ? "Nhắn tin qua Facebook" : "Message us on Facebook"}
             </a>
           </div>
         </div>

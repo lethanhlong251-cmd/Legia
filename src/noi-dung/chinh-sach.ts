@@ -134,7 +134,7 @@ export const CHINH_SACH: Record<
         {
           tieuDe: "Cách thực hiện",
           cacY: [
-            "Gọi hoặc nhắn Zalo cho Thach Lan kèm mã đơn hàng và ảnh hoặc video phần lỗi.",
+            "Nhắn tin cho Thach Lan qua trang Facebook kèm mã đơn hàng và ảnh hoặc video phần lỗi.",
             "Shop xác nhận và hướng dẫn bạn gửi hàng về trong vòng 24 giờ.",
             "Hàng đổi được gửi đi ngay khi shop nhận được hàng trả.",
           ],
@@ -177,7 +177,7 @@ export const CHINH_SACH: Record<
         {
           tieuDe: "How to proceed",
           cacY: [
-            "Call or message us on Zalo with your order code and a photo or video of the problem.",
+            "Message us on our Facebook page with your order code and a photo or video of the problem.",
             "We confirm and send return instructions within 24 hours.",
             "The replacement is dispatched as soon as we receive the returned item.",
           ],
@@ -218,7 +218,7 @@ export const CHINH_SACH: Record<
           tieuDe: "Quyền của bạn",
           cacY: [
             "Bạn có quyền yêu cầu Thach Lan cung cấp, sửa hoặc xoá thông tin cá nhân của bạn trong hệ thống.",
-            "Chỉ cần gọi hoặc nhắn Zalo tới số hotline của shop kèm mã đơn hàng.",
+            "Chỉ cần nhắn tin cho shop qua trang Facebook kèm mã đơn hàng.",
           ],
         },
       ],
@@ -253,7 +253,7 @@ export const CHINH_SACH: Record<
           tieuDe: "Your rights",
           cacY: [
             "You may ask us to show, correct or delete your personal information held in our system.",
-            "Simply call or message our hotline on Zalo with your order code.",
+            "Simply message us on our Facebook page with your order code.",
           ],
         },
       ],

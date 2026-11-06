@@ -72,15 +72,17 @@ export default async function TrangChinhSach({
       <div className="mt-12 rounded-lg border border-kem-300 bg-kem-50 p-6">
         <p className="text-sm leading-relaxed text-muc-600">
           {lang === "vi"
-            ? "Mọi thắc mắc liên quan đến chính sách này, vui lòng liên hệ Thach Lan qua số"
-            : "For any question about this policy, please contact Thach Lan at"}{" "}
+            ? "Mọi thắc mắc liên quan đến chính sách này, vui lòng nhắn tin cho Thach Lan qua"
+            : "For any question about this policy, please message Thach Lan on"}{" "}
           <a
-            href={`tel:${caiDat.hotline}`}
+            href={caiDat.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
             className="font-semibold text-son-700 hover:underline"
           >
-            {caiDat.hotline}
-          </a>{" "}
-          {lang === "vi" ? "(gọi hoặc Zalo)." : "(call or Zalo)."}
+            {lang === "vi" ? "trang Facebook" : "our Facebook page"}
+          </a>
+          .
         </p>
       </div>
 

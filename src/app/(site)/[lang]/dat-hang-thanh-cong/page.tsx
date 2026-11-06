@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CheckCircle2, Phone } from "lucide-react";
+import { CheckCircle2, MessageCircle } from "lucide-react";
 
 import { layBanDich, laNgonNguHopLe } from "@/i18n";
 import { layCaiDat } from "@/lib/du-lieu";
@@ -58,15 +58,17 @@ export default async function TrangDatHangThanhCong({
       </div>
 
       <p className="mt-10 flex flex-wrap items-center justify-center gap-2 text-sm text-muc-500">
-        <Phone className="h-4 w-4" />
+        <MessageCircle className="h-4 w-4" />
         {lang === "vi"
-          ? "Cần thay đổi đơn hàng? Gọi ngay"
-          : "Need to change your order? Call us"}
+          ? "Cần thay đổi đơn hàng?"
+          : "Need to change your order?"}
         <a
-          href={`tel:${caiDat.hotline}`}
+          href={caiDat.facebook}
+          target="_blank"
+          rel="noopener noreferrer"
           className="font-semibold text-son-700 hover:underline"
         >
-          {caiDat.hotline}
+          {lang === "vi" ? "Nhắn tin qua Facebook" : "Message us on Facebook"}
         </a>
       </p>
     </div>

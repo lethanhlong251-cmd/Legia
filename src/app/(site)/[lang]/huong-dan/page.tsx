@@ -166,12 +166,12 @@ export default async function TrangHuongDan({
         </p>
         <p className="mt-1.5 text-sm leading-relaxed text-muc-600">
           {lang === "vi"
-            ? "Nhắn Zalo cho shop kèm ảnh chiếc bánh bạn vừa đóng, shop xem và chỉ chỗ cần sửa."
-            : "Send us a photo of the cake you just pressed on Zalo and we will tell you what to adjust."}
+            ? "Nhắn tin cho shop qua Facebook kèm ảnh chiếc bánh bạn vừa đóng, shop xem và chỉ chỗ cần sửa."
+            : "Send us a photo of the cake you just pressed on Facebook and we will tell you what to adjust."}
         </p>
         <div className="mt-5 flex flex-wrap gap-3">
           <a
-            href={`https://zalo.me/${caiDat.zalo.replace(/\D/g, "")}`}
+            href={caiDat.facebook}
             target="_blank"
             rel="noopener noreferrer"
             className="nut-chinh"

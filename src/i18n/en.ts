@@ -55,7 +55,7 @@ export const en: BanDich = {
     heroMoTa:
       "Spring-loaded mooncake molds whose patterns Thach Lan designs and sells directly. Every design is our own, cut sharp enough to print each petal clearly.",
     heroNutChinh: "Browse the collection",
-    heroNutPhu: "Chat on Zalo",
+    heroNutPhu: "Message us",
     noiBatTieuDe: "Most loved this season",
     noiBatMoTa: "The molds our customers order most",
     tatCaSanPham: "See every mold",
@@ -128,10 +128,10 @@ export const en: BanDich = {
     loiThieuDiaChi: "Please enter a delivery address",
     loiGioTrong: "Your cart is empty",
     loiHetHang:
-      "{ten} has just sold out. Please remove it from your cart or pick another size, or message us on Zalo to hear when it is back.",
+      "{ten} has just sold out. Please remove it from your cart or pick another size, or message us on Facebook to hear when it is back.",
     loiKhongDu:
-      "We do not have enough of {ten} for the quantity you chose. Please lower the quantity, or message us on Zalo for help.",
-    loiChung: "Something went wrong. Please try again or call the shop directly.",
+      "We do not have enough of {ten} for the quantity you chose. Please lower the quantity, or message us on Facebook for help.",
+    loiChung: "Something went wrong. Please try again or message us on Facebook.",
   },
 
   thanhCong: {
@@ -150,7 +150,7 @@ export const en: BanDich = {
     hoTro: "Support",
     lienHe: "Contact",
     banQuyen: "All rights reserved, Thach Lan",
-    hotline: "Hotline / Zalo",
+    hotline: "Facebook",
     facebook: "Facebook",
     gioLamViec: "Orders taken 24/7",
     banOnline: "Online nationwide delivery",

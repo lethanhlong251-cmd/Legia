@@ -100,8 +100,8 @@ export default async function TrangDanhSachSanPham({
             </h2>
             <p className="mt-2 max-w-sm text-sm text-muc-500">
               {vi
-                ? "Bạn thử bỏ bớt một điều kiện, hoặc nhắn Zalo để shop tư vấn mẫu phù hợp."
-                : "Try removing a filter, or message us on Zalo and we will suggest one."}
+                ? "Bạn thử bỏ bớt một điều kiện, hoặc nhắn tin qua Facebook để shop tư vấn mẫu phù hợp."
+                : "Try removing a filter, or message us on Facebook and we will suggest one."}
             </p>
             <Link href={`/${lang}/san-pham`} className="nut-chinh mt-7">
               {vi ? "Xem tất cả mẫu khuôn" : "See every mold"}

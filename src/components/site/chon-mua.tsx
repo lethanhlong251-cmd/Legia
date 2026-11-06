@@ -305,8 +305,8 @@ export function ChonMua({
         {!conBan && (
           <p className="mt-3 text-center text-sm text-muc-500">
             {ngonNgu === "vi"
-              ? "Mẫu này đang tạm hết. Nhắn Zalo để shop báo khi có hàng lại."
-              : "This design is out of stock. Message us on Zalo and we will let you know when it returns."}
+              ? "Mẫu này đang tạm hết. Nhắn tin qua Facebook để shop báo khi có hàng lại."
+              : "This design is out of stock. Message us on Facebook and we will let you know when it returns."}
           </p>
         )}
       </div>

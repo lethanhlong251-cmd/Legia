@@ -9,7 +9,6 @@ import { layCaiDat } from "@/lib/du-lieu";
 import { NhaCungCapGioHang } from "@/lib/gio-hang";
 import { DauTrang } from "@/components/site/dau-trang";
 import { ChanTrang } from "@/components/site/chan-trang";
-import { NutZaloNoi } from "@/components/site/nut-zalo-noi";
 import { NganGioHang } from "@/components/site/ngan-gio-hang";
 
 const cormorant = Cormorant_Garamond({
@@ -122,7 +121,6 @@ export default async function BoCucTrangChinh({
           <DauTrang ngonNgu={lang} t={t} caiDat={caiDat} />
           <main className="flex-1">{children}</main>
           <ChanTrang ngonNgu={lang} t={t} caiDat={caiDat} />
-          <NutZaloNoi zalo={caiDat.zalo} />
           <NganGioHang ngonNgu={lang} t={t} />
         </NhaCungCapGioHang>
       </body>

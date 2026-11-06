@@ -53,7 +53,7 @@ export const vi = {
     heroMoTa:
       "Khuôn bánh trung thu lò xo do Thach Lan tự thiết kế hoa văn và trực tiếp bán ra. Mỗi mẫu là thiết kế riêng, đường nét sắc, bánh in ra rõ từng cánh hoa.",
     heroNutChinh: "Xem bộ sưu tập",
-    heroNutPhu: "Nhắn Zalo tư vấn",
+    heroNutPhu: "Nhắn tin tư vấn",
     noiBatTieuDe: "Được chọn nhiều nhất mùa này",
     noiBatMoTa: "Những bộ khuôn khách đặt nhiều nhất mùa này",
     tatCaSanPham: "Xem tất cả sản phẩm",
@@ -126,10 +126,10 @@ export const vi = {
     loiThieuDiaChi: "Vui lòng nhập địa chỉ nhận hàng",
     loiGioTrong: "Giỏ hàng đang trống",
     loiHetHang:
-      "{ten} vừa hết hàng. Bạn vui lòng bỏ món này khỏi giỏ hoặc chọn cỡ khác, hay nhắn Zalo để shop báo khi có hàng lại.",
+      "{ten} vừa hết hàng. Bạn vui lòng bỏ món này khỏi giỏ hoặc chọn cỡ khác, hay nhắn tin qua Facebook để shop báo khi có hàng lại.",
     loiKhongDu:
-      "{ten} không còn đủ số lượng bạn chọn. Bạn vui lòng giảm số lượng, hoặc nhắn Zalo để shop hỗ trợ.",
-    loiChung: "Có lỗi xảy ra, vui lòng thử lại hoặc gọi trực tiếp cho shop.",
+      "{ten} không còn đủ số lượng bạn chọn. Bạn vui lòng giảm số lượng, hoặc nhắn tin qua Facebook để shop hỗ trợ.",
+    loiChung: "Có lỗi xảy ra, vui lòng thử lại hoặc nhắn tin cho shop qua Facebook.",
   },
 
   thanhCong: {
@@ -148,7 +148,7 @@ export const vi = {
     hoTro: "Hỗ trợ",
     lienHe: "Liên hệ",
     banQuyen: "Bản quyền thuộc về Thach Lan",
-    hotline: "Hotline / Zalo",
+    hotline: "Facebook",
     facebook: "Facebook",
     gioLamViec: "Nhận đơn 24/7",
     banOnline: "Bán hàng online toàn quốc",

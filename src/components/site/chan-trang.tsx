@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MapPin, MessageCircle, Phone } from "lucide-react";
+import { MapPin } from "lucide-react";
 
 import { Logo } from "@/components/logo";
 import type { BanDich, NgonNgu } from "@/i18n";
@@ -24,7 +24,6 @@ export function ChanTrang({
   caiDat: CaiDat;
 }) {
   const g = (dich: string) => `/${ngonNgu}${dich}`;
-  const zaloSach = caiDat.zalo.replace(/\D/g, "");
 
   const cotLienKet = [
     {
@@ -67,22 +66,6 @@ export function ChanTrang({
             </p>
 
             <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm">
-              <a
-                href={`tel:${caiDat.hotline}`}
-                className="inline-flex items-center gap-2 text-kem-100 transition-colors hover:text-dong-400"
-              >
-                <Phone className="h-4 w-4" strokeWidth={1.5} />
-                {caiDat.hotline}
-              </a>
-              <a
-                href={`https://zalo.me/${zaloSach}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-kem-100 transition-colors hover:text-dong-400"
-              >
-                <MessageCircle className="h-4 w-4" strokeWidth={1.5} />
-                Zalo
-              </a>
               {caiDat.facebook && (
                 <a
                   href={caiDat.facebook}

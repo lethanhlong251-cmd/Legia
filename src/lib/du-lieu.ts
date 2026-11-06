@@ -157,8 +157,8 @@ export async function layCaiDat() {
   const caiDat = Object.fromEntries(cacMuc.map((m) => [m.key, m.value]));
 
   return {
-    hotline: caiDat.hotline || "0377497286",
-    zalo: caiDat.zalo || caiDat.hotline || "0377497286",
+    hotline: caiDat.hotline || "",
+    zalo: caiDat.zalo || caiDat.hotline || "",
     facebook: caiDat.facebook || "https://www.facebook.com/Khuonbanhredep",
     email: caiDat.email || "",
     diaChi: caiDat.diaChi || "Bán hàng online, giao toàn quốc",

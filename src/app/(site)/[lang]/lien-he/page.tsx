@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { thongTinChiaSe } from "@/lib/chia-se";
 import { notFound } from "next/navigation";
-import { Clock, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Clock, MapPin, MessageCircle } from "lucide-react";
 
 import { layBanDich, laNgonNguHopLe } from "@/i18n";
 import { layCaiDat } from "@/lib/du-lieu";
@@ -31,23 +31,13 @@ export default async function TrangLienHe({
   const t = layBanDich(lang);
   const caiDat = await layCaiDat();
   const vi = lang === "vi";
-  const zaloSach = caiDat.zalo.replace(/\D/g, "");
 
   const cachLienHe = [
     {
-      icon: Phone,
-      nhan: t.chanTrang.hotline,
-      giaTri: caiDat.hotline,
-      dich: `tel:${caiDat.hotline}`,
-      moTa: vi
-        ? "Gọi trực tiếp, shop nghe máy cả ngoài giờ hành chính"
-        : "Call us directly, we answer outside office hours too",
-    },
-    {
       icon: MessageCircle,
-      nhan: "Zalo",
-      giaTri: caiDat.zalo,
-      dich: `https://zalo.me/${zaloSach}`,
+      nhan: "Facebook",
+      giaTri: vi ? "Nhắn tin cho shop" : "Message us",
+      dich: caiDat.facebook,
       moTa: vi
         ? "Nhắn tin, gửi ảnh khay bánh để được tư vấn đúng cỡ khuôn"
         : "Message us a photo of your tray and we will match the mold size",
@@ -77,8 +67,8 @@ export default async function TrangLienHe({
       </h1>
       <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-muc-600">
         {vi
-          ? "Có câu hỏi về khuôn, về cỡ bánh hay về đơn hàng? Gọi hoặc nhắn Zalo, shop trả lời nhanh nhất qua Zalo."
-          : "Questions about a mold, a size, or an order? Call or message us — Zalo gets the fastest reply."}
+          ? "Có câu hỏi về khuôn, về cỡ bánh hay về đơn hàng? Nhắn tin cho shop qua trang Facebook."
+          : "Questions about a mold, a size, or an order? Message us on our Facebook page."}
       </p>
 
       <div className="duong-vien-dong mt-6 h-px w-full" />

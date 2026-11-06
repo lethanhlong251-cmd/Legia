@@ -11,7 +11,7 @@
  * Vì vậy mọi màu sắc ở đây viết thẳng, không qua lớp thiết kế chung.
  */
 
-const HOTLINE = process.env.NEXT_PUBLIC_HOTLINE || "0377497286";
+const FACEBOOK = "https://www.facebook.com/Khuonbanhredep";
 
 export default function LoiToanTrang({
   error,
@@ -64,12 +64,14 @@ export default function LoiToanTrang({
               color: "#5A4C43",
             }}
           >
-            Xin lỗi bạn. Bạn vẫn đặt hàng được bình thường bằng cách gọi hoặc
-            nhắn Zalo cho shop.
+            Xin lỗi bạn. Bạn vẫn đặt hàng được bình thường bằng cách nhắn tin
+            cho shop qua Facebook.
           </p>
 
           <a
-            href={`tel:${HOTLINE}`}
+            href={FACEBOOK}
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               display: "inline-block",
               margin: "22px 0 0",
@@ -79,7 +81,7 @@ export default function LoiToanTrang({
               textDecoration: "none",
             }}
           >
-            {HOTLINE}
+            Nhắn tin qua Facebook
           </a>
 
           <div style={{ marginTop: "26px" }}>

@@ -312,14 +312,16 @@ export default async function TrangChiTietSanPham({
               </p>
               <p className="mt-1.5 text-[13px] leading-relaxed text-muc-600">
                 {lang === "vi"
-                  ? "Gọi hoặc nhắn Zalo, shop tư vấn theo khay bánh bạn đang dùng."
-                  : "Call or message us on Zalo and we will match the mold to your tray."}
+                  ? "Nhắn tin qua Facebook, shop tư vấn theo khay bánh bạn đang dùng."
+                  : "Message us on Facebook and we will match the mold to your tray."}
               </p>
               <a
-                href={`tel:${caiDat.hotline}`}
+                href={caiDat.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-4 inline-flex font-display text-lg font-semibold text-son-700 hover:underline"
               >
-                {caiDat.hotline}
+                {lang === "vi" ? "Nhắn tin cho shop" : "Message us"}
               </a>
             </div>
           </div>

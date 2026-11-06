@@ -14,11 +14,11 @@ import type { BanDich, NgonNgu } from "@/i18n";
 export function MauThanhToan({
   ngonNgu,
   t,
-  hotline,
+  facebook,
 }: {
   ngonNgu: NgonNgu;
   t: BanDich;
-  hotline: string;
+  facebook: string;
 }) {
   const router = useRouter();
   const { danhSach, tongTien, daNapXong, xoaHet } = useGioHang();
@@ -278,12 +278,14 @@ export function MauThanhToan({
           </button>
 
           <p className="mt-4 text-center text-xs text-muc-500">
-            {ngonNgu === "vi" ? "Cần hỗ trợ? Gọi " : "Need help? Call "}
+            {ngonNgu === "vi" ? "Cần hỗ trợ? " : "Need help? "}
             <a
-              href={`tel:${hotline}`}
+              href={facebook}
+              target="_blank"
+              rel="noopener noreferrer"
               className="font-semibold text-son-700 hover:underline"
             >
-              {hotline}
+              {ngonNgu === "vi" ? "Nhắn tin qua Facebook" : "Message us on Facebook"}
             </a>
           </p>
         </div>

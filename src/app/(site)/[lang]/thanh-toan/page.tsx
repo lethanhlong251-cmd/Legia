@@ -22,7 +22,7 @@ export default async function TrangThanhToan({
         {t.gioHang.datHang}
       </h1>
       <div className="duong-vien-dong mt-4 h-px w-full" />
-      <MauThanhToan ngonNgu={lang} t={t} hotline={caiDat.hotline} />
+      <MauThanhToan ngonNgu={lang} t={t} facebook={caiDat.facebook} />
     </div>
   );
 }

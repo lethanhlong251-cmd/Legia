@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, Phone, ShoppingBag, X } from "lucide-react";
+import { Menu, ShoppingBag, X } from "lucide-react";
 
 import { Logo } from "@/components/logo";
 import { useGioHang } from "@/lib/gio-hang";
@@ -13,7 +13,6 @@ import type { CaiDat } from "@/lib/du-lieu";
 export function DauTrang({
   ngonNgu,
   t,
-  caiDat,
 }: {
   ngonNgu: NgonNgu;
   t: BanDich;
@@ -79,15 +78,6 @@ export function DauTrang({
           </nav>
 
           <div className="flex items-center gap-1 sm:gap-3">
-            {/* Hotline — chỉ hiện trên máy tính */}
-            <a
-              href={`tel:${caiDat.hotline}`}
-              className="hidden items-center gap-2 px-2 py-2 text-sm text-muc-700 transition-colors hover:text-son-700 xl:flex"
-            >
-              <Phone className="h-4 w-4" strokeWidth={1.5} />
-              {caiDat.hotline}
-            </a>
-
             {/* Đổi ngôn ngữ */}
             <Link
               href={duongDanNgonNguKhac}
@@ -96,15 +86,6 @@ export function DauTrang({
             >
               {ngonNgu === "vi" ? "EN" : "VI"}
             </Link>
-
-            {/* Gọi điện — chỉ hiện trên điện thoại */}
-            <a
-              href={`tel:${caiDat.hotline}`}
-              className="flex h-11 w-11 items-center justify-center text-muc-700 transition-colors hover:text-son-700 sm:hidden"
-              aria-label={t.chanTrang.hotline}
-            >
-              <Phone className="h-5 w-5" strokeWidth={1.5} />
-            </a>
 
             {/* Giỏ hàng */}
             <Link
