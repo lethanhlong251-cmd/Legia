@@ -54,9 +54,9 @@ export async function generateMetadata({
           "khuôn bánh 150g",
           "khuôn bánh 200g",
           "đồ làm bánh",
-          "Thach Lan",
+          "Chourmas",
         ]
-      : ["mooncake mold", "vietnamese mooncake mold", "baking tools", "Thach Lan"],
+      : ["mooncake mold", "vietnamese mooncake mold", "baking tools", "Chourmas"],
     alternates: {
       canonical: `/${lang}`,
       languages: {
@@ -72,7 +72,7 @@ export async function generateMetadata({
     // Màu thanh trạng thái điện thoại, cho khớp với dải đỏ trên đầu trang
     appleWebApp: {
       capable: true,
-      title: "Thach Lan",
+      title: "Chourmas",
       statusBarStyle: "black-translucent",
     },
   };

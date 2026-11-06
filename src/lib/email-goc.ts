@@ -165,7 +165,7 @@ export async function guiEmail(
   const ketNoi = taoKetNoiEmail(guiTu, matKhau);
 
   await ketNoi.sendMail({
-    from: `"Thach Lan — Đơn hàng" <${guiTu}>`,
+    from: `"Chourmas — Đơn hàng" <${guiTu}>`,
     to: nhan,
     subject: tieuDe,
     text: chuThuan,

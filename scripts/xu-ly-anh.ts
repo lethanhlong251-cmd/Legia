@@ -50,7 +50,7 @@ export const BAN_DO_ANH: Record<string, string[]> = {
   "vuong-sen": ["LX 05:5 1.jpg", "LX 05:5 .jpg", "LX 05:5 2.jpg"],
   "mau-don-sen-cuc": ["LX 06:3 1.jpg", "LX 06:3 3 mặt 300g .jpg"],
   "lx-007-4": ["LX007:4.jpg"],
-  "thach-lan": ["LX 08:5.jpg"],
+  "chourmas": ["LX 08:5.jpg"],
   "lx-009-5": ["LX 09:5.jpg"],
   "bo-than-tai": ["LX 10:4.jpg"],
   "lx-011-7": ["LX 11:7.jpg"],

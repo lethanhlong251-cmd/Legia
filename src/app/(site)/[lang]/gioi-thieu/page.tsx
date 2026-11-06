@@ -67,7 +67,7 @@ export default async function TrangGioiThieu({
           {vi ? (
             <>
               <p className="font-display text-xl leading-relaxed text-muc-900">
-                Thach Lan bắt đầu từ một điều rất giản dị: một chiếc bánh trung
+                Chourmas bắt đầu từ một điều rất giản dị: một chiếc bánh trung
                 thu đẹp phải bắt đầu từ một chiếc khuôn đủ sắc nét.
               </p>
               <p>
@@ -79,7 +79,7 @@ export default async function TrangGioiThieu({
               </p>
               <p>
                 Vì vậy{" "}
-                <strong className="text-muc-900">Thach Lan</strong> tự tay thiết
+                <strong className="text-muc-900">Chourmas</strong> tự tay thiết
                 kế từng bộ hoa văn — sen tứ quý, mẫu đơn, cúc, cá đôi, thần tài —
                 và bán trực tiếp tới bạn,{" "}
                 <strong className="text-muc-900">không qua trung gian</strong>.
@@ -89,7 +89,7 @@ export default async function TrangGioiThieu({
               <p>
                 Chúng tôi cũng biết chuyện mua hàng qua mạng không phải lúc nào
                 cũng dễ chịu. Đã có quá nhiều người chuyển khoản rồi nhận về một
-                thứ khác hẳn với ảnh. Nên Thach Lan làm ngược lại:{" "}
+                thứ khác hẳn với ảnh. Nên Chourmas làm ngược lại:{" "}
                 <strong className="text-muc-900">
                   chúng tôi không bao giờ yêu cầu bạn chuyển khoản trước
                 </strong>
@@ -99,7 +99,7 @@ export default async function TrangGioiThieu({
                 nào.
               </p>
               <p>
-                Trước mắt Thach Lan tập trung vào khuôn bánh trung thu. Nhưng
+                Trước mắt Chourmas tập trung vào khuôn bánh trung thu. Nhưng
                 chúng tôi đang chuẩn bị để mang thêm về những dụng cụ và nguyên
                 liệu làm bánh khác — vẫn với đúng cách làm này: chọn kỹ, nói
                 thật, và để bạn kiểm tra trước khi trả tiền.
@@ -108,7 +108,7 @@ export default async function TrangGioiThieu({
           ) : (
             <>
               <p className="font-display text-xl leading-relaxed text-muc-900">
-                Thach Lan began with something very simple: a beautiful mooncake
+                Chourmas began with something very simple: a beautiful mooncake
                 has to start with a mold sharp enough to make one.
               </p>
               <p>
@@ -120,7 +120,7 @@ export default async function TrangGioiThieu({
               </p>
               <p>
                 That is why{" "}
-                <strong className="text-muc-900">Thach Lan</strong> designs every
+                <strong className="text-muc-900">Chourmas</strong> designs every
                 pattern set by hand — lotus, peony, chrysanthemum, twin fish,
                 fortune — and sells it to you directly,{" "}
                 <strong className="text-muc-900">with no middlemen</strong>. Each
@@ -130,7 +130,7 @@ export default async function TrangGioiThieu({
               <p>
                 We also know that buying online is not always comfortable. Too
                 many people have transferred money and received something quite
-                unlike the photo. So Thach Lan does it the other way round:{" "}
+                unlike the photo. So Chourmas does it the other way round:{" "}
                 <strong className="text-muc-900">
                   we never ask you to pay in advance
                 </strong>
@@ -140,7 +140,7 @@ export default async function TrangGioiThieu({
                 included in the listed price.
               </p>
               <p>
-                For now Thach Lan focuses on mooncake molds. But we are preparing
+                For now Chourmas focuses on mooncake molds. But we are preparing
                 to bring in other baking tools and ingredients — in exactly the
                 same way: chosen carefully, described honestly, and yours to
                 inspect before you pay.

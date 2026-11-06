@@ -120,7 +120,7 @@ export default async function TrangChiTietSanPham({
     name: ten,
     description: theoNgonNgu(lang, sanPham.shortDescVi, sanPham.shortDescEn),
     sku: sanPham.sku,
-    brand: { "@type": "Brand", name: "Thach Lan" },
+    brand: { "@type": "Brand", name: "Chourmas" },
     image: sanPham.images.map((a) => a.url),
     offers: {
       "@type": "AggregateOffer",

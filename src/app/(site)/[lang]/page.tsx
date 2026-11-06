@@ -10,7 +10,7 @@ import { HienDan } from "@/components/site/hien-dan";
 
 /**
  * TRANG CHỦ — phong cách tối giản, sang trọng.
- * Thứ tự: mở đầu → 4 cam kết → sản phẩm nổi bật → về Thach Lan →
+ * Thứ tự: mở đầu → 4 cam kết → sản phẩm nổi bật → về Chourmas →
  * danh mục.
  */
 export default async function TrangChu({ params }: PageProps<"/[lang]">) {
@@ -148,7 +148,7 @@ export default async function TrangChu({ params }: PageProps<"/[lang]">) {
         </div>
       </section>
 
-      {/* ============ VỀ THACH LAN ============ */}
+      {/* ============ VỀ CHOURMAS ============ */}
       <section className="bg-kem-200">
         <div className="khung grid items-center gap-12 py-20 sm:py-24 lg:grid-cols-2 lg:gap-16">
           {cauChuyen && (
@@ -174,14 +174,14 @@ export default async function TrangChu({ params }: PageProps<"/[lang]">) {
               {vi ? (
                 <>
                   <p>
-                    Thach Lan tự tay thiết kế từng bộ hoa văn — sen tứ quý, mẫu
+                    Chourmas tự tay thiết kế từng bộ hoa văn — sen tứ quý, mẫu
                     đơn, cúc, cá đôi, thần tài — để mâm cỗ trung thu của gia
                     đình Việt có những chiếc bánh không lẫn với ai.
                   </p>
                   <p>
                     Không qua trung gian: bạn mua khuôn trực tiếp từ người làm
-                    ra hoa văn. Và vì lòng tin phải đến trước đồng tiền, Thach
-                    Lan{" "}
+                    ra hoa văn. Và vì lòng tin phải đến trước đồng tiền,
+                    Chourmas{" "}
                     <strong className="font-semibold text-muc-800">
                       không bao giờ yêu cầu chuyển khoản trước
                     </strong>
@@ -191,14 +191,14 @@ export default async function TrangChu({ params }: PageProps<"/[lang]">) {
               ) : (
                 <>
                   <p>
-                    Thach Lan designs every pattern set by hand — four-season
+                    Chourmas designs every pattern set by hand — four-season
                     lotus, peony, chrysanthemum, twin fish, the god of fortune —
                     so a Vietnamese family&apos;s Mid-Autumn table has cakes
                     that look like no one else&apos;s.
                   </p>
                   <p>
                     No middlemen: you buy straight from the people who draw the
-                    patterns. And because trust comes before money, Thach Lan{" "}
+                    patterns. And because trust comes before money, Chourmas{" "}
                     <strong className="font-semibold text-muc-800">
                       never asks for a bank transfer up front
                     </strong>

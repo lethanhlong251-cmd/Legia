@@ -94,7 +94,7 @@ export default async function TrangTongQuan() {
     <KhungQuanTri
       tenNguoiDung={nguoiDung.ten}
       tieuDe="Tổng quan"
-      moTa="Tình hình bán hàng của Thach Lan"
+      moTa="Tình hình bán hàng của Chourmas"
     >
       {/* Ô thống kê */}
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">

@@ -58,7 +58,7 @@ export default async function TrangLienHe({
       </h1>
       <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-muc-600">
         {vi
-          ? "Thời gian nhận đơn và khu vực giao hàng của Thach Lan."
+          ? "Thời gian nhận đơn và khu vực giao hàng của Chourmas."
           : "When we take orders and where we deliver."}
       </p>
 

@@ -44,13 +44,13 @@ const gach = (gia: number) => Math.round((gia * 1.25) / 10000) * 10000;
 
 const MO_TA_CHUNG_VI = `Khuôn lò xo nhấn tay, thao tác nhẹ và dứt khoát, hoa văn nổi rõ từng chi tiết ngay ở lần nhấn đầu tiên.
 
-Mẫu hoa văn do Thach Lan tự thiết kế và bán trực tiếp — bạn sẽ không tìm thấy bộ hoa văn này ở nơi nào khác.
+Mẫu hoa văn do Chourmas tự thiết kế và bán trực tiếp — bạn sẽ không tìm thấy bộ hoa văn này ở nơi nào khác.
 
 Ngoài bánh trung thu, khuôn còn dùng được cho bánh dẻo, xôi đậu, bánh in và rau câu.`;
 
 const MO_TA_CHUNG_EN = `A hand-press spring mold: one firm push and the pattern comes out sharp on the very first try.
 
-The patterns are designed and sold directly by Thach Lan — you will not find this set anywhere else.
+The patterns are designed and sold directly by Chourmas — you will not find this set anywhere else.
 
 Beyond baked mooncakes, the mold also works for snow-skin mooncakes, sticky rice cakes, pressed cakes and jelly.`;
 
@@ -62,10 +62,10 @@ export const SAN_PHAM: SanPhamNap[] = [
     nameEn: "Four Seasons Lotus",
     shortDescVi: "Khuôn lò xo 1 nhấn 4 mặt hoa",
     shortDescEn: "Spring mold, one press, four floral faces",
-    descVi: `Bộ Sen tứ quý gồm một thân khuôn lò xo và bốn mặt hoa văn hoa sen — mẫu bán chạy nhất của Thach Lan.
+    descVi: `Bộ Sen tứ quý gồm một thân khuôn lò xo và bốn mặt hoa văn hoa sen — mẫu bán chạy nhất của Chourmas.
 
 ${MO_TA_CHUNG_VI}`,
-    descEn: `The Four Seasons Lotus set pairs one spring-loaded body with four lotus pattern faces — the best seller at Thach Lan.
+    descEn: `The Four Seasons Lotus set pairs one spring-loaded body with four lotus pattern faces — the best seller at Chourmas.
 
 ${MO_TA_CHUNG_EN}`,
     faceCount: 4,
@@ -279,15 +279,15 @@ ${MO_TA_CHUNG_EN}`,
 
   {
     sku: "LX-08/5",
-    slug: "thach-lan",
-    nameVi: "Thach Lan",
-    nameEn: "Thach Lan",
+    slug: "chourmas",
+    nameVi: "Chourmas",
+    nameEn: "Chourmas",
     shortDescVi: "Bộ 5 mặt mang tên thương hiệu",
     shortDescEn: "The five-face set that carries our name",
-    descVi: `Bộ khuôn năm mặt mang chính tên thương hiệu Thach Lan — mẫu được xem là đại diện cho phong cách hoa văn của xưởng.
+    descVi: `Bộ khuôn năm mặt mang chính tên thương hiệu Chourmas — mẫu được xem là đại diện cho phong cách hoa văn của xưởng.
 
 ${MO_TA_CHUNG_VI}`,
-    descEn: `A five-face set carrying the Thach Lan name itself — the design regarded as the signature of the workshop's style.
+    descEn: `A five-face set carrying the Chourmas name itself — the design regarded as the signature of the workshop's style.
 
 ${MO_TA_CHUNG_EN}`,
     faceCount: 5,
@@ -346,12 +346,12 @@ ${MO_TA_CHUNG_EN}`,
     chuaDatTen: true,
     shortDescVi: "Bộ nhiều mặt nhất — 7 mặt hoa văn",
     shortDescEn: "The largest set — seven pattern faces",
-    descVi: `Bộ khuôn có nhiều mặt nhất tại Thach Lan: bảy mặt hoa văn khác nhau trên cùng một thân khuôn, từ hoa cúc, hoa sen, mẫu đơn, chữ Thọ, tre trúc, mặt cười cho tới chim công.
+    descVi: `Bộ khuôn có nhiều mặt nhất tại Chourmas: bảy mặt hoa văn khác nhau trên cùng một thân khuôn, từ hoa cúc, hoa sen, mẫu đơn, chữ Thọ, tre trúc, mặt cười cho tới chim công.
 
 Nếu bạn làm bánh bán hoặc muốn một mâm bánh mỗi chiếc một kiểu, đây là bộ đáng đầu tư nhất.
 
 ${MO_TA_CHUNG_VI}`,
-    descEn: `The largest set at Thach Lan: seven different pattern faces on one body — chrysanthemum, lotus, peony, the Longevity character, bamboo, a smiling face, and a peacock.
+    descEn: `The largest set at Chourmas: seven different pattern faces on one body — chrysanthemum, lotus, peony, the Longevity character, bamboo, a smiling face, and a peacock.
 
 If you bake to sell, or want a tray where no two cakes look alike, this is the set worth investing in.
 

@@ -9,8 +9,8 @@ import type { BanDich } from "./vi";
 
 export const en: BanDich = {
   chung: {
-    tenShop: "Thach Lan",
-    tenDayDu: "Thach Lan Mooncake Molds",
+    tenShop: "Chourmas",
+    tenDayDu: "Chourmas Mooncake Molds",
     slogan: "Exclusive Vietnamese patterns",
     doiTac: "Free delivery nationwide · Inspect your parcel before you pay",
     dangTai: "Loading…",
@@ -30,7 +30,7 @@ export const en: BanDich = {
   },
 
   camKet: {
-    tieuDe: "The Thach Lan promise",
+    tieuDe: "The Chourmas promise",
     khongChuyenKhoan: {
       tieuDe: "No prepayment",
       moTa: "Pay only after your order arrives and you have checked it",
@@ -45,7 +45,7 @@ export const en: BanDich = {
     },
     docQuyen: {
       tieuDe: "Exclusive designs",
-      moTa: "Patterns designed by Thach Lan — available nowhere else",
+      moTa: "Patterns designed by Chourmas — available nowhere else",
     },
   },
 
@@ -53,19 +53,19 @@ export const en: BanDich = {
     heroNhan: "Mid-Autumn 2026",
     heroTieuDe: "Vietnamese patterns,\npressed into every cake",
     heroMoTa:
-      "Spring-loaded mooncake molds whose patterns Thach Lan designs and sells directly. Every design is our own, cut sharp enough to print each petal clearly.",
+      "Spring-loaded mooncake molds whose patterns Chourmas designs and sells directly. Every design is our own, cut sharp enough to print each petal clearly.",
     heroNutChinh: "Browse the collection",
     heroNutPhu: "Message us",
     noiBatTieuDe: "Most loved this season",
     noiBatMoTa: "The molds our customers order most",
     tatCaSanPham: "See every mold",
-    vaySaoTieuDe: "Why Thach Lan",
+    vaySaoTieuDe: "Why Chourmas",
     cauChuyenTieuDe: "Our story",
   },
 
   sanPham: {
     tieuDeTrang: "The mold collection",
-    moTaTrang: "Every exclusive mold currently available from Thach Lan",
+    moTaTrang: "Every exclusive mold currently available from Chourmas",
     maSanPham: "Product code",
     soMat: "Pattern faces",
     duongKinh: "Diameter",
@@ -136,7 +136,7 @@ export const en: BanDich = {
 
   thanhCong: {
     tieuDe: "Order placed",
-    moTa: "Thank you for trusting Thach Lan. We will call you shortly to confirm.",
+    moTa: "Thank you for trusting Chourmas. We will call you shortly to confirm.",
     maDon: "Your order code",
     luuMa: "Please keep this code so you can check on your order later.",
     veTrangChu: "Back to home",
@@ -145,11 +145,11 @@ export const en: BanDich = {
 
   chanTrang: {
     gioiThieuNgan:
-      "Vietnamese-pattern mooncake molds, designed and sold directly by Thach Lan. Inspect your parcel first, pay afterwards.",
+      "Vietnamese-pattern mooncake molds, designed and sold directly by Chourmas. Inspect your parcel first, pay afterwards.",
     lienKet: "Links",
     hoTro: "Support",
     lienHe: "Contact",
-    banQuyen: "All rights reserved, Thach Lan",
+    banQuyen: "All rights reserved, Chourmas",
     gioLamViec: "Orders taken 24/7",
     banOnline: "Online nationwide delivery",
   },

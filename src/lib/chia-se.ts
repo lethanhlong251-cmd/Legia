@@ -10,16 +10,16 @@ import type { Metadata } from "next";
  * hiện tiêu đề trang chủ.
  */
 
-export const ANH_CHIA_SE = "/anh-chia-se-thachlan.jpg";
+export const ANH_CHIA_SE = "/anh-chia-se-chourmas.jpg";
 
 export const TIEU_DE_CHUNG = {
-  vi: "Khuôn bánh trung thu Thach Lan — Độc quyền hoa văn Việt",
-  en: "Thach Lan Mooncake Molds — Exclusive Vietnamese patterns",
+  vi: "Khuôn bánh trung thu Chourmas — Độc quyền hoa văn Việt",
+  en: "Chourmas Mooncake Molds — Exclusive Vietnamese patterns",
 } as const;
 
 export const MO_TA_CHUNG = {
-  vi: "Khuôn bánh trung thu lò xo hoa văn độc quyền. Miễn phí vận chuyển toàn quốc, nhận hàng kiểm tra rồi mới thanh toán. Thach Lan tự thiết kế hoa văn và bán trực tiếp.",
-  en: "Spring-loaded mooncake molds with exclusive Vietnamese patterns. Free nationwide delivery, inspect before you pay. Designed and sold directly by Thach Lan.",
+  vi: "Khuôn bánh trung thu lò xo hoa văn độc quyền. Miễn phí vận chuyển toàn quốc, nhận hàng kiểm tra rồi mới thanh toán. Chourmas tự thiết kế hoa văn và bán trực tiếp.",
+  en: "Spring-loaded mooncake molds with exclusive Vietnamese patterns. Free nationwide delivery, inspect before you pay. Designed and sold directly by Chourmas.",
 } as const;
 
 export function thongTinChiaSe({
@@ -39,7 +39,7 @@ export function thongTinChiaSe({
   anh?: { url: string; width: number; height: number; alt?: string };
 }): Pick<Metadata, "openGraph" | "twitter"> {
   const ngonNgu = lang === "en" ? "en" : "vi";
-  const tieuDeDayDu = tieuDe ? `${tieuDe} — Thach Lan` : TIEU_DE_CHUNG[ngonNgu];
+  const tieuDeDayDu = tieuDe ? `${tieuDe} — Chourmas` : TIEU_DE_CHUNG[ngonNgu];
   const moTaDayDu = moTa || MO_TA_CHUNG[ngonNgu];
   const anhDung = anh ?? {
     url: ANH_CHIA_SE,
@@ -53,7 +53,7 @@ export function thongTinChiaSe({
       type: "website",
       url: `/${ngonNgu}${duongDan}`,
       locale: ngonNgu === "vi" ? "vi_VN" : "en_US",
-      siteName: "Thach Lan",
+      siteName: "Chourmas",
       title: tieuDeDayDu,
       description: moTaDayDu,
       images: [{ ...anhDung, alt: anhDung.alt ?? tieuDeDayDu }],
