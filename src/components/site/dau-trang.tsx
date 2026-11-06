@@ -8,7 +8,6 @@ import { Menu, ShoppingBag, X } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { useGioHang } from "@/lib/gio-hang";
 import type { BanDich, NgonNgu } from "@/i18n";
-import type { CaiDat } from "@/lib/du-lieu";
 
 export function DauTrang({
   ngonNgu,
@@ -16,7 +15,6 @@ export function DauTrang({
 }: {
   ngonNgu: NgonNgu;
   t: BanDich;
-  caiDat: CaiDat;
 }) {
   const [moMenu, setMoMenu] = useState(false);
   const { soMon, daNapXong } = useGioHang();

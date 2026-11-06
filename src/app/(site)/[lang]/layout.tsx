@@ -118,7 +118,7 @@ export default async function BoCucTrangChinh({
       </head>
       <body className="flex min-h-dvh flex-col antialiased">
         <NhaCungCapGioHang>
-          <DauTrang ngonNgu={lang} t={t} caiDat={caiDat} />
+          <DauTrang ngonNgu={lang} t={t} />
           <main className="flex-1">{children}</main>
           <ChanTrang ngonNgu={lang} t={t} caiDat={caiDat} />
           <NganGioHang ngonNgu={lang} t={t} />
