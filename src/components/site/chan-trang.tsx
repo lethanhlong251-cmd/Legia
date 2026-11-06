@@ -5,15 +5,6 @@ import { Logo } from "@/components/logo";
 import type { BanDich, NgonNgu } from "@/i18n";
 import type { CaiDat } from "@/lib/du-lieu";
 
-/** Bộ icon lucide-react không có logo thương hiệu, nên vẽ riêng */
-function IconFacebook({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
-      <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.52 1.5-3.91 3.77-3.91 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.45 2.9h-2.33V22C18.34 21.24 22 17.08 22 12.06Z" />
-    </svg>
-  );
-}
-
 export function ChanTrang({
   ngonNgu,
   t,
@@ -64,20 +55,6 @@ export function ChanTrang({
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-kem-400">
               {t.chanTrang.gioiThieuNgan}
             </p>
-
-            <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm">
-              {caiDat.facebook && (
-                <a
-                  href={caiDat.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-kem-100 transition-colors hover:text-dong-400"
-                >
-                  <IconFacebook className="h-4 w-4" />
-                  Facebook
-                </a>
-              )}
-            </div>
           </div>
 
           {/* Các cột liên kết */}

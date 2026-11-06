@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { thongTinChiaSe } from "@/lib/chia-se";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { layBanDich, laNgonNguHopLe } from "@/i18n";
-import { layCaiDat } from "@/lib/du-lieu";
 
 export async function generateMetadata({
   params,
@@ -116,7 +114,6 @@ export default async function TrangHuongDan({
   if (!laNgonNguHopLe(lang)) notFound();
 
   const t = layBanDich(lang);
-  const caiDat = await layCaiDat();
   const noiDung = NOI_DUNG[lang];
   const cacPhan = [
     noiDung.chonCo,
@@ -158,30 +155,6 @@ export default async function TrangHuongDan({
             </ul>
           </section>
         ))}
-      </div>
-
-      <div className="mt-14 rounded-lg border border-dong-300 bg-dong-50 p-6">
-        <p className="font-display text-lg text-muc-900">
-          {lang === "vi" ? "Vẫn chưa rõ chỗ nào?" : "Still not sure?"}
-        </p>
-        <p className="mt-1.5 text-sm leading-relaxed text-muc-600">
-          {lang === "vi"
-            ? "Nhắn tin cho shop qua Facebook kèm ảnh chiếc bánh bạn vừa đóng, shop xem và chỉ chỗ cần sửa."
-            : "Send us a photo of the cake you just pressed on Facebook and we will tell you what to adjust."}
-        </p>
-        <div className="mt-5 flex flex-wrap gap-3">
-          <a
-            href={caiDat.facebook}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="nut-chinh"
-          >
-            {t.trangChu.heroNutPhu}
-          </a>
-          <Link href={`/${lang}/san-pham`} className="nut-phu">
-            {t.trangChu.tatCaSanPham}
-          </Link>
-        </div>
       </div>
     </div>
   );

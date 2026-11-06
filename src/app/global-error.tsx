@@ -11,8 +11,6 @@
  * Vì vậy mọi màu sắc ở đây viết thẳng, không qua lớp thiết kế chung.
  */
 
-const FACEBOOK = "https://www.facebook.com/Khuonbanhredep";
-
 export default function LoiToanTrang({
   error,
   reset,
@@ -64,25 +62,8 @@ export default function LoiToanTrang({
               color: "#5A4C43",
             }}
           >
-            Xin lỗi bạn. Bạn vẫn đặt hàng được bình thường bằng cách nhắn tin
-            cho shop qua Facebook.
+            Xin lỗi bạn. Bạn vui lòng thử lại sau ít phút.
           </p>
-
-          <a
-            href={FACEBOOK}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-block",
-              margin: "22px 0 0",
-              fontSize: "26px",
-              fontWeight: 700,
-              color: "#9E2B25",
-              textDecoration: "none",
-            }}
-          >
-            Nhắn tin qua Facebook
-          </a>
 
           <div style={{ marginTop: "26px" }}>
             <button

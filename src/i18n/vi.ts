@@ -126,10 +126,10 @@ export const vi = {
     loiThieuDiaChi: "Vui lòng nhập địa chỉ nhận hàng",
     loiGioTrong: "Giỏ hàng đang trống",
     loiHetHang:
-      "{ten} vừa hết hàng. Bạn vui lòng bỏ món này khỏi giỏ hoặc chọn cỡ khác, hay nhắn tin qua Facebook để shop báo khi có hàng lại.",
+      "{ten} vừa hết hàng. Bạn vui lòng bỏ món này khỏi giỏ hoặc chọn cỡ khác.",
     loiKhongDu:
-      "{ten} không còn đủ số lượng bạn chọn. Bạn vui lòng giảm số lượng, hoặc nhắn tin qua Facebook để shop hỗ trợ.",
-    loiChung: "Có lỗi xảy ra, vui lòng thử lại hoặc nhắn tin cho shop qua Facebook.",
+      "{ten} không còn đủ số lượng bạn chọn. Bạn vui lòng giảm số lượng.",
+    loiChung: "Có lỗi xảy ra, vui lòng thử lại.",
   },
 
   thanhCong: {
@@ -148,8 +148,6 @@ export const vi = {
     hoTro: "Hỗ trợ",
     lienHe: "Liên hệ",
     banQuyen: "Bản quyền thuộc về Thach Lan",
-    hotline: "Facebook",
-    facebook: "Facebook",
     gioLamViec: "Nhận đơn 24/7",
     banOnline: "Bán hàng online toàn quốc",
   },

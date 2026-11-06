@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { thongTinChiaSe } from "@/lib/chia-se";
 import { notFound } from "next/navigation";
-import { Clock, MapPin, MessageCircle } from "lucide-react";
+import { Clock, MapPin } from "lucide-react";
 
 import { layBanDich, laNgonNguHopLe } from "@/i18n";
 import { layCaiDat } from "@/lib/du-lieu";
@@ -34,15 +34,6 @@ export default async function TrangLienHe({
 
   const cachLienHe = [
     {
-      icon: MessageCircle,
-      nhan: "Facebook",
-      giaTri: vi ? "Nhắn tin cho shop" : "Message us",
-      dich: caiDat.facebook,
-      moTa: vi
-        ? "Nhắn tin, gửi ảnh khay bánh để được tư vấn đúng cỡ khuôn"
-        : "Message us a photo of your tray and we will match the mold size",
-    },
-    {
       icon: Clock,
       nhan: vi ? "Thời gian nhận đơn" : "Order hours",
       giaTri: caiDat.gioLamViec,
@@ -67,75 +58,33 @@ export default async function TrangLienHe({
       </h1>
       <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-muc-600">
         {vi
-          ? "Có câu hỏi về khuôn, về cỡ bánh hay về đơn hàng? Nhắn tin cho shop qua trang Facebook."
-          : "Questions about a mold, a size, or an order? Message us on our Facebook page."}
+          ? "Thời gian nhận đơn và khu vực giao hàng của Thach Lan."
+          : "When we take orders and where we deliver."}
       </p>
 
       <div className="duong-vien-dong mt-6 h-px w-full" />
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        {cachLienHe.map(({ icon: Icon, nhan, giaTri, dich, moTa }) => {
-          const noiDung = (
-            <>
-              <Icon
-                className="h-5 w-5 shrink-0 text-son-700"
-                strokeWidth={1.7}
-              />
-              <div className="min-w-0">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dong-700">
-                  {nhan}
-                </p>
-                <p className="mt-1.5 font-display text-lg text-muc-900">
-                  {giaTri}
-                </p>
-                <p className="mt-1 text-[13px] leading-relaxed text-muc-600">
-                  {moTa}
-                </p>
-              </div>
-            </>
-          );
-
-          return dich ? (
-            <a
-              key={nhan}
-              href={dich}
-              target={dich.startsWith("http") ? "_blank" : undefined}
-              rel={dich.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="flex gap-4 rounded-lg border border-kem-300 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-dong-400 hover:shadow-vua"
-            >
-              {noiDung}
-            </a>
-          ) : (
-            <div
-              key={nhan}
-              className="flex gap-4 rounded-lg border border-kem-300 bg-white p-5"
-            >
-              {noiDung}
-            </div>
-          );
-        })}
-      </div>
-
-      {caiDat.facebook && (
-        <div className="mt-8 rounded-lg border border-kem-300 bg-kem-50 p-6">
-          <p className="font-display text-lg text-muc-900">
-            {vi ? "Xem thêm mẫu mới trên Facebook" : "See new designs on Facebook"}
-          </p>
-          <p className="mt-1.5 text-sm leading-relaxed text-muc-600">
-            {vi
-              ? "Shop đăng mẫu mới, ảnh bánh khách gửi về và video hướng dẫn đóng bánh trên trang Facebook."
-              : "We post new designs, customer photos and pressing tutorials on our Facebook page."}
-          </p>
-          <a
-            href={caiDat.facebook}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="nut-phu mt-5"
+        {cachLienHe.map(({ icon: Icon, nhan, giaTri, moTa }) => (
+          <div
+            key={nhan}
+            className="flex gap-4 rounded-lg border border-kem-300 bg-white p-5"
           >
-            {vi ? "Mở trang Facebook" : "Open our Facebook page"}
-          </a>
-        </div>
-      )}
+            <Icon className="h-5 w-5 shrink-0 text-son-700" strokeWidth={1.7} />
+            <div className="min-w-0">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dong-700">
+                {nhan}
+              </p>
+              <p className="mt-1.5 font-display text-lg text-muc-900">
+                {giaTri}
+              </p>
+              <p className="mt-1 text-[13px] leading-relaxed text-muc-600">
+                {moTa}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

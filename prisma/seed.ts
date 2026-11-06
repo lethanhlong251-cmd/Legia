@@ -77,7 +77,6 @@ const DANH_MUC = [
 const CAI_DAT: Record<string, string> = {
   hotline: "0377497286",
   zalo: "0377497286",
-  facebook: "https://www.facebook.com/Khuonbanhredep",
   email: "",
   diaChi: "Bán hàng online, giao toàn quốc",
   gioLamViec: "Nhận đơn 24/7",

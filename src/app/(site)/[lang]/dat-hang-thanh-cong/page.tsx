@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CheckCircle2, MessageCircle } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 
 import { layBanDich, laNgonNguHopLe } from "@/i18n";
-import { layCaiDat } from "@/lib/du-lieu";
 import { BieuTuongKhuon } from "@/components/logo";
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
@@ -20,7 +19,6 @@ export default async function TrangDatHangThanhCong({
   const maDon = typeof ma === "string" ? ma : null;
 
   const t = layBanDich(lang);
-  const caiDat = await layCaiDat();
 
   return (
     <div className="khung flex flex-col items-center py-16 text-center sm:py-24">
@@ -56,21 +54,6 @@ export default async function TrangDatHangThanhCong({
           {t.thanhCong.veTrangChu}
         </Link>
       </div>
-
-      <p className="mt-10 flex flex-wrap items-center justify-center gap-2 text-sm text-muc-500">
-        <MessageCircle className="h-4 w-4" />
-        {lang === "vi"
-          ? "Cần thay đổi đơn hàng?"
-          : "Need to change your order?"}
-        <a
-          href={caiDat.facebook}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-semibold text-son-700 hover:underline"
-        >
-          {lang === "vi" ? "Nhắn tin qua Facebook" : "Message us on Facebook"}
-        </a>
-      </p>
     </div>
   );
 }

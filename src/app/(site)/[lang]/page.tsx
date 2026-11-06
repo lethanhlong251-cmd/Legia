@@ -1,17 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { notFound } from "next/navigation";
 
 import { layBanDich, laNgonNguHopLe, theoNgonNgu } from "@/i18n";
-import { layCaiDat, laySanPhamNoiBat } from "@/lib/du-lieu";
+import { laySanPhamNoiBat } from "@/lib/du-lieu";
 import { TheSanPham } from "@/components/site/the-san-pham";
 import { HienDan } from "@/components/site/hien-dan";
 
 /**
  * TRANG CHỦ — phong cách tối giản, sang trọng.
  * Thứ tự: mở đầu → 4 cam kết → sản phẩm nổi bật → về Thach Lan →
- * danh mục → lời mời tư vấn.
+ * danh mục.
  */
 export default async function TrangChu({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -19,10 +19,7 @@ export default async function TrangChu({ params }: PageProps<"/[lang]">) {
 
   const t = layBanDich(lang);
   const vi = lang === "vi";
-  const [sanPhamNoiBat, caiDat] = await Promise.all([
-    laySanPhamNoiBat(8),
-    layCaiDat(),
-  ]);
+  const sanPhamNoiBat = await laySanPhamNoiBat(8);
 
   const anhCua = (slug: string) => {
     const sp = sanPhamNoiBat.find((s) => s.slug === slug);
@@ -70,14 +67,6 @@ export default async function TrangChu({ params }: PageProps<"/[lang]">) {
             <Link href={`/${lang}/san-pham`} className="nut-chinh">
               {t.trangChu.heroNutChinh}
             </Link>
-            <a
-              href={caiDat.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="nut-phu"
-            >
-              {t.trangChu.heroNutPhu}
-            </a>
           </div>
         </div>
 
@@ -259,32 +248,6 @@ export default async function TrangChu({ params }: PageProps<"/[lang]">) {
                 {vi ? "Sắp ra mắt" : "Coming soon"}
               </span>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ============ LỜI MỜI TƯ VẤN ============ */}
-      {/* -mb-20 để dải đỏ nằm sát chân trang (chân trang có mt-20) */}
-      <section className="-mb-20 bg-son-700 text-kem-50">
-        <div className="mx-auto flex max-w-3xl flex-col items-center px-4 py-20 text-center sm:py-24">
-          <h2 className="font-display text-[2rem] leading-tight text-kem-50 sm:text-[2.6rem]">
-            {vi ? "Chưa biết chọn cỡ khuôn nào?" : "Not sure which size to pick?"}
-          </h2>
-          <p className="mt-5 max-w-lg text-base leading-[1.75] text-dong-200">
-            {vi
-              ? "Gửi ảnh khay bánh bạn đang dùng qua Facebook, Thach Lan tư vấn đúng cỡ trong vài phút."
-              : "Send us a photo of the tray you use on Facebook and we will tell you the right mold size within minutes."}
-          </p>
-          <div className="mt-9 flex flex-wrap justify-center gap-3">
-            <a
-              href={caiDat.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="nut-dong"
-            >
-              <MessageCircle className="h-4 w-4" strokeWidth={1.5} />
-              {vi ? "Nhắn tin qua Facebook" : "Message us on Facebook"}
-            </a>
           </div>
         </div>
       </section>

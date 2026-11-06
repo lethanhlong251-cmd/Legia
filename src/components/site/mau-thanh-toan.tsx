@@ -14,11 +14,9 @@ import type { BanDich, NgonNgu } from "@/i18n";
 export function MauThanhToan({
   ngonNgu,
   t,
-  facebook,
 }: {
   ngonNgu: NgonNgu;
   t: BanDich;
-  facebook: string;
 }) {
   const router = useRouter();
   const { danhSach, tongTien, daNapXong, xoaHet } = useGioHang();
@@ -276,18 +274,6 @@ export function MauThanhToan({
               t.datHang.xacNhanDatHang
             )}
           </button>
-
-          <p className="mt-4 text-center text-xs text-muc-500">
-            {ngonNgu === "vi" ? "Cần hỗ trợ? " : "Need help? "}
-            <a
-              href={facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold text-son-700 hover:underline"
-            >
-              {ngonNgu === "vi" ? "Nhắn tin qua Facebook" : "Message us on Facebook"}
-            </a>
-          </p>
         </div>
       </div>
 

@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { AlertTriangle } from "lucide-react";
 
 import { laNgonNguHopLe, type NgonNgu } from "@/i18n";
-import { layCaiDat } from "@/lib/du-lieu";
 import { CHINH_SACH, type MaChinhSach } from "@/noi-dung/chinh-sach";
 
 export async function generateStaticParams() {
@@ -40,7 +39,6 @@ export default async function TrangChinhSach({
   if (!trang) notFound();
 
   const noiDung = trang[lang];
-  const caiDat = await layCaiDat();
 
   return (
     <div className="khung max-w-3xl py-12 sm:py-16">
@@ -66,24 +64,6 @@ export default async function TrangChinhSach({
             </ul>
           </section>
         ))}
-      </div>
-
-      {/* Liên hệ khi cần hỗ trợ */}
-      <div className="mt-12 rounded-lg border border-kem-300 bg-kem-50 p-6">
-        <p className="text-sm leading-relaxed text-muc-600">
-          {lang === "vi"
-            ? "Mọi thắc mắc liên quan đến chính sách này, vui lòng nhắn tin cho Thach Lan qua"
-            : "For any question about this policy, please message Thach Lan on"}{" "}
-          <a
-            href={caiDat.facebook}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-semibold text-son-700 hover:underline"
-          >
-            {lang === "vi" ? "trang Facebook" : "our Facebook page"}
-          </a>
-          .
-        </p>
       </div>
 
       {/* Nhắc chủ shop duyệt nội dung — chỉ hiện khi chạy trên máy tính lập trình */}

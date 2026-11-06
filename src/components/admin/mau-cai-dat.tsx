@@ -40,13 +40,6 @@ export function MauCaiDat({ banDau }: { banDau: CaiDat }) {
       moTa: "Dùng cho nút Zalo nổi ở góc màn hình",
     },
     {
-      khoa: "facebook",
-      nhan: "Link Facebook",
-      giaTri: banDau.facebook,
-      goiY: "https://www.facebook.com/...",
-      moTa: "Để trống thì website ẩn nút Facebook",
-    },
-    {
       khoa: "email",
       nhan: "Email",
       giaTri: banDau.email,

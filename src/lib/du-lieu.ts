@@ -159,7 +159,6 @@ export async function layCaiDat() {
   return {
     hotline: caiDat.hotline || "",
     zalo: caiDat.zalo || caiDat.hotline || "",
-    facebook: caiDat.facebook || "https://www.facebook.com/Khuonbanhredep",
     email: caiDat.email || "",
     diaChi: caiDat.diaChi || "Bán hàng online, giao toàn quốc",
     gioLamViec: caiDat.gioLamViec || "Nhận đơn 24/7",

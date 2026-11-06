@@ -716,7 +716,6 @@ export async function luuCaiDat(formData: FormData): Promise<KetQua> {
   const cacKhoa = [
     "hotline",
     "zalo",
-    "facebook",
     "email",
     "diaChi",
     "gioLamViec",

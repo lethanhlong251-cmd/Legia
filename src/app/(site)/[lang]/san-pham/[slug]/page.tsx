@@ -13,7 +13,6 @@ import {
 
 import { layBanDich, laNgonNguHopLe, theoNgonNgu } from "@/i18n";
 import {
-  layCaiDat,
   laySanPhamLienQuan,
   laySanPhamTheoSlug,
 } from "@/lib/du-lieu";
@@ -84,10 +83,7 @@ export default async function TrangChiTietSanPham({
   if (!sanPham) notFound();
 
   const t = layBanDich(lang);
-  const [lienQuan, caiDat] = await Promise.all([
-    laySanPhamLienQuan(sanPham.id, 4),
-    layCaiDat(),
-  ]);
+  const lienQuan = await laySanPhamLienQuan(sanPham.id, 4);
 
   const ten = theoNgonNgu(lang, sanPham.nameVi, sanPham.nameEn);
   const moTa = theoNgonNgu(lang, sanPham.descVi, sanPham.descEn);
@@ -304,26 +300,6 @@ export default async function TrangChiTietSanPham({
                 </dd>
               </div>
             </dl>
-
-            {/* Hộp liên hệ tư vấn */}
-            <div className="mt-5 rounded-lg border border-kem-300 bg-kem-50 p-5">
-              <p className="text-sm font-semibold text-muc-800">
-                {lang === "vi" ? "Cần tư vấn chọn cỡ?" : "Need help choosing?"}
-              </p>
-              <p className="mt-1.5 text-[13px] leading-relaxed text-muc-600">
-                {lang === "vi"
-                  ? "Nhắn tin qua Facebook, shop tư vấn theo khay bánh bạn đang dùng."
-                  : "Message us on Facebook and we will match the mold to your tray."}
-              </p>
-              <a
-                href={caiDat.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex font-display text-lg font-semibold text-son-700 hover:underline"
-              >
-                {lang === "vi" ? "Nhắn tin cho shop" : "Message us"}
-              </a>
-            </div>
           </div>
         </div>
       </div>

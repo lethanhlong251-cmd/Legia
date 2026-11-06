@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { layBanDich, laNgonNguHopLe } from "@/i18n";
-import { layCaiDat } from "@/lib/du-lieu";
 import { MauThanhToan } from "@/components/site/mau-thanh-toan";
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
@@ -14,7 +13,6 @@ export default async function TrangThanhToan({
   if (!laNgonNguHopLe(lang)) notFound();
 
   const t = layBanDich(lang);
-  const caiDat = await layCaiDat();
 
   return (
     <div className="khung py-10 sm:py-14">
@@ -22,7 +20,7 @@ export default async function TrangThanhToan({
         {t.gioHang.datHang}
       </h1>
       <div className="duong-vien-dong mt-4 h-px w-full" />
-      <MauThanhToan ngonNgu={lang} t={t} facebook={caiDat.facebook} />
+      <MauThanhToan ngonNgu={lang} t={t} />
     </div>
   );
 }

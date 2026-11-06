@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect } from "react";
-import { MessageCircle, RotateCw } from "lucide-react";
+import { RotateCw } from "lucide-react";
 
 import { BieuTuongKhuon } from "@/components/logo";
 
@@ -12,11 +12,8 @@ import { BieuTuongKhuon } from "@/components/logo";
  * Hiện ra khi có sự cố khiến trang không dựng được.
  *
  * Điều quan trọng nhất ở đây KHÔNG phải là báo lỗi, mà là **giữ khách lại**:
- * cho họ một nút thử lại và một đường nhắn tin để đặt hàng ngay cả khi
- * website đang trục trặc.
+ * cho họ một nút thử lại và đường về trang chủ.
  */
-
-const FACEBOOK = "https://www.facebook.com/Khuonbanhredep";
 
 export default function TrangLoi({
   error,
@@ -53,23 +50,6 @@ export default function TrangLoi({
         <Link href="/vi" className="nut-phu">
           Về trang chủ
         </Link>
-      </div>
-
-      {/* Lối thoát quan trọng nhất: khách vẫn đặt hàng được qua Facebook */}
-      <div className="mt-12 w-full max-w-md rounded-lg border border-dong-300 bg-dong-50 p-6">
-        <p className="text-sm leading-relaxed text-muc-700">
-          Bạn vẫn đặt hàng được bình thường. Nhắn tin cho shop qua Facebook,
-          chúng tôi chốt đơn giúp bạn ngay.
-        </p>
-        <a
-          href={FACEBOOK}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-4 inline-flex items-center gap-2 font-display text-2xl font-semibold text-son-700 hover:underline"
-        >
-          <MessageCircle className="h-5 w-5" />
-          Nhắn tin qua Facebook
-        </a>
       </div>
 
       {error.digest && (

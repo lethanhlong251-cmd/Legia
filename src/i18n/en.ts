@@ -128,10 +128,10 @@ export const en: BanDich = {
     loiThieuDiaChi: "Please enter a delivery address",
     loiGioTrong: "Your cart is empty",
     loiHetHang:
-      "{ten} has just sold out. Please remove it from your cart or pick another size, or message us on Facebook to hear when it is back.",
+      "{ten} has just sold out. Please remove it from your cart or pick another size.",
     loiKhongDu:
-      "We do not have enough of {ten} for the quantity you chose. Please lower the quantity, or message us on Facebook for help.",
-    loiChung: "Something went wrong. Please try again or message us on Facebook.",
+      "We do not have enough of {ten} for the quantity you chose. Please lower the quantity.",
+    loiChung: "Something went wrong. Please try again.",
   },
 
   thanhCong: {
@@ -150,8 +150,6 @@ export const en: BanDich = {
     hoTro: "Support",
     lienHe: "Contact",
     banQuyen: "All rights reserved, Thach Lan",
-    hotline: "Facebook",
-    facebook: "Facebook",
     gioLamViec: "Orders taken 24/7",
     banOnline: "Online nationwide delivery",
   },
